@@ -16,21 +16,19 @@
 
 package com.graphaware.module.algo.path;
 
-import com.graphaware.test.api.ApiTest;
+import com.graphaware.test.integration.GraphAwareApiTest;
 import com.graphaware.test.util.TestUtils;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Test;
-import org.neo4j.graphdb.Label;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.RelationshipType;
-import org.neo4j.graphdb.Transaction;
+import org.neo4j.graphdb.*;
 
-import static com.graphaware.test.util.TestUtils.*;
+import static com.graphaware.test.util.TestUtils.assertJsonEquals;
+import static com.graphaware.test.util.TestUtils.jsonAsString;
 
 /**
  * Integration test for {@link NumberOfShortestPathsFinderApi}.
  */
-public class NumberOfShortestPathsFinderApiTest extends ApiTest {
+public class NumberOfShortestPathsFinderApiTest extends GraphAwareApiTest {
 
     private static final String NAME = "name";
     private static final String COST = "cost";
@@ -41,6 +39,54 @@ public class NumberOfShortestPathsFinderApiTest extends ApiTest {
 
     private enum Labels implements Label {
         L1, L2
+    }
+
+    @Override
+    protected void populateDatabase(GraphDatabaseService database) {
+        try (Transaction tx = database.beginTx()) {
+            Node one = database.createNode();
+            Node two = database.createNode();
+            Node three = database.createNode();
+            Node four = database.createNode();
+            Node five = database.createNode();
+            Node six = database.createNode();
+            Node seven = database.createNode();
+
+            one.setProperty(NAME, "one");
+            one.addLabel(Labels.L1);
+            one.addLabel(Labels.L2);
+
+            two.setProperty(NAME, "two");
+            two.addLabel(Labels.L2);
+
+            three.setProperty(NAME, "three");
+            three.addLabel(Labels.L1);
+            three.addLabel(Labels.L2);
+
+            four.setProperty(NAME, "four");
+            four.addLabel(Labels.L2);
+
+            five.setProperty(NAME, "five");
+            five.addLabel(Labels.L1);
+
+            six.setProperty(NAME, "six");
+            six.addLabel(Labels.L1);
+
+            seven.setProperty(NAME, "seven");
+            seven.addLabel(Labels.L1);
+
+            one.createRelationshipTo(two, RelTypes.R1).setProperty(COST, 5);
+            two.createRelationshipTo(three, RelTypes.R2).setProperty(COST, 1);
+            one.createRelationshipTo(four, RelTypes.R2).setProperty(COST, 1);
+            four.createRelationshipTo(five, RelTypes.R1).setProperty(COST, 2);
+            five.createRelationshipTo(three, RelTypes.R1).setProperty(COST, 1);
+            two.createRelationshipTo(four, RelTypes.R2).setProperty(COST, 1);
+            one.createRelationshipTo(six, RelTypes.R1).setProperty(COST, 1);
+            six.createRelationshipTo(seven, RelTypes.R1);
+            three.createRelationshipTo(seven, RelTypes.R1).setProperty(COST, 1);
+
+            tx.success();
+        }
     }
 
     @Test
@@ -120,53 +166,6 @@ public class NumberOfShortestPathsFinderApiTest extends ApiTest {
         post(jsonAsString("invalidInput4"), HttpStatus.NOT_FOUND_404);
     }
 
-    protected void populateDatabase() {
-        try (Transaction tx = getDatabase().beginTx()) {
-            Node one = getDatabase().createNode();
-            Node two = getDatabase().createNode();
-            Node three = getDatabase().createNode();
-            Node four = getDatabase().createNode();
-            Node five = getDatabase().createNode();
-            Node six = getDatabase().createNode();
-            Node seven = getDatabase().createNode();
-
-            one.setProperty(NAME, "one");
-            one.addLabel(Labels.L1);
-            one.addLabel(Labels.L2);
-
-            two.setProperty(NAME, "two");
-            two.addLabel(Labels.L2);
-
-            three.setProperty(NAME, "three");
-            three.addLabel(Labels.L1);
-            three.addLabel(Labels.L2);
-
-            four.setProperty(NAME, "four");
-            four.addLabel(Labels.L2);
-
-            five.setProperty(NAME, "five");
-            five.addLabel(Labels.L1);
-
-            six.setProperty(NAME, "six");
-            six.addLabel(Labels.L1);
-
-            seven.setProperty(NAME, "seven");
-            seven.addLabel(Labels.L1);
-
-            one.createRelationshipTo(two, RelTypes.R1).setProperty(COST, 5);
-            two.createRelationshipTo(three, RelTypes.R2).setProperty(COST, 1);
-            one.createRelationshipTo(four, RelTypes.R2).setProperty(COST, 1);
-            four.createRelationshipTo(five, RelTypes.R1).setProperty(COST, 2);
-            five.createRelationshipTo(three, RelTypes.R1).setProperty(COST, 1);
-            two.createRelationshipTo(four, RelTypes.R2).setProperty(COST, 1);
-            one.createRelationshipTo(six, RelTypes.R1).setProperty(COST, 1);
-            six.createRelationshipTo(seven, RelTypes.R1);
-            three.createRelationshipTo(seven, RelTypes.R1).setProperty(COST, 1);
-
-            tx.success();
-        }
-    }
-
     protected final String post(String json) {
         return post(json, HttpStatus.OK_200);
     }
@@ -176,6 +175,6 @@ public class NumberOfShortestPathsFinderApiTest extends ApiTest {
     }
 
     private String getUrl() {
-        return "http://localhost:" + getPort() + "/graphaware/algorithm/path/increasinglyLongerShortestPath";
+        return baseUrl() + "/algorithm/path/increasinglyLongerShortestPath";
     }
 }

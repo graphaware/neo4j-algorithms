@@ -16,14 +16,13 @@
 
 package com.graphaware.module.algo.path;
 
-import com.graphaware.api.GraphAwareController;
-import com.graphaware.module.algo.path.NumberOfShortestPathsFinder;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.NotFoundException;
 import org.neo4j.graphdb.Path;
 import org.neo4j.graphdb.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedList;
@@ -32,7 +31,7 @@ import java.util.List;
 /**
  * REST API for {@link com.graphaware.module.algo.path.NumberOfShortestPathsFinder}.
  */
-@GraphAwareController
+@Controller
 @RequestMapping("/algorithm/path")
 public class NumberOfShortestPathsFinderApi {
 
@@ -48,17 +47,17 @@ public class NumberOfShortestPathsFinderApi {
     @RequestMapping(value = "increasinglyLongerShortestPath", method = RequestMethod.POST)
     @ResponseBody
     public List<JsonPath> numberOfShortestPaths(@RequestBody JsonPathFinderInput jsonInput) {
-        List<JsonPath> result = new LinkedList<>();
+            List<JsonPath> result = new LinkedList<>();
 
-        try (Transaction tx = database.beginTx()) {
-            for (Path path : pathFinder.findPaths(jsonInput.produceInput(database))) {
-                result.add(new JsonPath(path, jsonInput));
+            try (Transaction tx = database.beginTx()) {
+                for (Path path : pathFinder.findPaths(jsonInput.produceInput(database))) {
+                    result.add(new JsonPath(path, jsonInput));
+                }
+                tx.success();
             }
-            tx.success();
-        }
 
-        return result;
-    }
+            return result;
+        }
 
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

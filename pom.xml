@@ -17,14 +17,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.graphaware.neo4j</groupId>
     <artifactId>algorithms</artifactId>
-    <version>2.0.3.2.2-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <version>2.1.2.10.2-SNAPSHOT</version>
 
     <parent>
-        <groupId>com.graphaware.neo4j</groupId>
-        <artifactId>framework-parent</artifactId>
-        <version>2.0.3.2</version>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
     </parent>
 
     <name>GraphAware Algorithms Module</name>
@@ -53,56 +53,112 @@
         </developer>
     </developers>
 
+    <ciManagement>
+        <url>https://travis-ci.org/graphaware/neo4j-algorithms</url>
+        <system>Travis CI</system>
+    </ciManagement>
+
+    <inceptionYear>2013</inceptionYear>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/graphaware/neo4j-algorithms/issues</url>
+    </issueManagement>
+
+    <organization>
+        <name>Graph Aware Limited</name>
+        <url>http://graphaware.com</url>
+    </organization>
+
+    <properties>
+        <java.version>1.7</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <neo4j.version>2.1.2</neo4j.version>
+        <spring.version>4.0.0.RELEASE</spring.version>
+        <graphaware.version>2.1.2.10-SNAPSHOT</graphaware.version>
+    </properties>
+
     <dependencies>
 
         <!-- GraphAware Framework -->
         <dependency>
             <groupId>com.graphaware.neo4j</groupId>
             <artifactId>common</artifactId>
+            <version>${graphaware.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.graphaware.neo4j</groupId>
             <artifactId>api</artifactId>
+            <version>${graphaware.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.graphaware.neo4j</groupId>
+            <artifactId>tx-executor</artifactId>
+            <version>${graphaware.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Spring Framework -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Neo4j -->
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j</artifactId>
+            <version>${neo4j.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Testing -->
         <dependency>
             <groupId>com.graphaware.neo4j</groupId>
             <artifactId>server-community</artifactId>
+            <version>${graphaware.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.graphaware.neo4j</groupId>
             <artifactId>tests</artifactId>
+            <version>${graphaware.version}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Jackson -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
+            <version>2.2.3</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
+            <version>2.2.3</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <version>2.2.3</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>

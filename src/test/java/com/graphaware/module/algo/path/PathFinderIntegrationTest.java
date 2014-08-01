@@ -16,7 +16,7 @@
 
 package com.graphaware.module.algo.path;
 
-import com.graphaware.test.integration.IntegrationTest;
+import com.graphaware.test.integration.NeoServerIntegrationTest;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Test;
 
@@ -27,27 +27,24 @@ import static com.graphaware.test.util.TestUtils.*;
 /**
  *
  */
-public class PathFinderIntegrationTest extends IntegrationTest {
+public class PathFinderIntegrationTest extends NeoServerIntegrationTest {
 
     @Test
     public void graphAwareApisAreMountedWhenPresentOnClasspath() throws InterruptedException, IOException {
-        post("http://localhost:7474/db/data/cypher",
-                "{\"query\" : \"" +
-                        "CREATE (one:L1:L2 { name:\\\"one\\\" }) " +
-                        "CREATE (two:L2 { name:\\\"two\\\" }) " +
-                        "CREATE (three:L1:L2 { name:\\\"three\\\" }) " +
-                        "CREATE (four:L2 { name:\\\"four\\\" }) " +
-                        "CREATE (five:L1 { name:\\\"five\\\" }) " +
-                        "CREATE (six:L1 { name:\\\"six\\\" }) " +
-                        "CREATE (seven:L1 { name:\\\"seven\\\" }) " +
-                        "CREATE (one)-[:R1 {cost:5}]->(two)-[:R2 {cost:1}]->(three) " +
-                        "CREATE (one)-[:R2 {cost:1}]->(four)-[:R1 {cost:2}]->(five)-[:R1 {cost:1}]->(three) " +
-                        "CREATE (two)-[:R2 {cost:1}]->(four) " +
-                        "CREATE (one)-[:R1 {cost:1}]->(six)-[:R1]->(seven)<-[:R1 {cost:1}]-(three)" +
-                        "\"}",
-                HttpStatus.OK_200);
+        executeCypher(baseUrl(),
+                "CREATE (one:L1:L2 {name:'one'}), " +
+                        "(two:L2 {name:'two'}), " +
+                        "(three:L1:L2 {name:'three'}), " +
+                        "(four:L2 {name:'four'}), " +
+                        "(five:L1 {name:'five'}), " +
+                        "(six:L1 {name:'six'}), " +
+                        "(seven:L1 {name:'seven'}), " +
+                        "(one)-[:R1 {cost:5}]->(two)-[:R2 {cost:1}]->(three), " +
+                        "(one)-[:R2 {cost:1}]->(four)-[:R1 {cost:2}]->(five)-[:R1 {cost:1}]->(three), " +
+                        "(two)-[:R2 {cost:1}]->(four), " +
+                        "(one)-[:R1 {cost:1}]->(six)-[:R1]->(seven)<-[:R1 {cost:1}]-(three)");
 
-        assertJsonEquals(post("http://localhost:7474/graphaware/algorithm/path/increasinglyLongerShortestPath",
+        assertJsonEquals(post(baseUrl() + "/graphaware/algorithm/path/increasinglyLongerShortestPath",
                 jsonAsString("minimalInput"), HttpStatus.OK_200),
                 jsonAsString("minimalOutput"));
     }

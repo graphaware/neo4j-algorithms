@@ -40,7 +40,7 @@ public class PathFinderInput {
     private final Node end;
     private int maxDepth = 3;
     private int maxResults = Integer.MAX_VALUE;
-    private final List<Object> relationshipsAndDirections = new ArrayList<>();
+    private final List<Object> typesAndDirections = new ArrayList<>();
     private Direction direction;
     private SortOrder sortOrder = SortOrder.LENGTH_ASC;
     private String costProperty;
@@ -101,8 +101,8 @@ public class PathFinderInput {
      * @return self.
      */
     public PathFinderInput addTypeAndDirection(RelationshipType type, Direction direction) {
-        relationshipsAndDirections.add(type);
-        relationshipsAndDirections.add(direction);
+        typesAndDirections.add(type);
+        typesAndDirections.add(direction);
         return this;
     }
 
@@ -154,24 +154,24 @@ public class PathFinderInput {
      * @return path expander.
      */
     public PathExpander getExpander() {
-        if (relationshipsAndDirections.isEmpty()) {
+        if (typesAndDirections.isEmpty()) {
             return PathExpanders.forDirection(direction == null ? Direction.BOTH : direction);
         }
 
         //Maybe there's a less ugly way of doing this using Neo4j APIs, who knows:
-        if (relationshipsAndDirections.size() == 2) {
+        if (typesAndDirections.size() == 2) {
             return PathExpanders.forTypeAndDirection(
-                    (RelationshipType) relationshipsAndDirections.get(0),
-                    (Direction) relationshipsAndDirections.get(1)
+                    (RelationshipType) typesAndDirections.get(0),
+                    (Direction) typesAndDirections.get(1)
             );
         }
 
         return PathExpanders.forTypesAndDirections(
-                (RelationshipType) relationshipsAndDirections.get(0),
-                (Direction) relationshipsAndDirections.get(1),
-                (RelationshipType) relationshipsAndDirections.get(2),
-                (Direction) relationshipsAndDirections.get(3),
-                relationshipsAndDirections.size() > 3 ? relationshipsAndDirections.subList(4, relationshipsAndDirections.size()).toArray() : new Object[0]
+                (RelationshipType) typesAndDirections.get(0),
+                (Direction) typesAndDirections.get(1),
+                (RelationshipType) typesAndDirections.get(2),
+                (Direction) typesAndDirections.get(3),
+                typesAndDirections.size() > 3 ? typesAndDirections.subList(4, typesAndDirections.size()).toArray() : new Object[0]
         );
     }
 

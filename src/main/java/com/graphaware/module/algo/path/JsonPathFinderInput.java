@@ -18,8 +18,6 @@ package com.graphaware.module.algo.path;
 
 import com.graphaware.api.JsonInput;
 import com.graphaware.api.JsonRelationshipTypeAndDirection;
-import com.graphaware.module.algo.path.PathFinderInput;
-import com.graphaware.module.algo.path.SortOrder;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -82,8 +80,8 @@ public class JsonPathFinderInput extends JsonInput {
             if (getDirection() != null) {
                 throw new IllegalArgumentException("Must specify either global direction, or specific types and directions, not both!");
             }
-            for (JsonRelationshipTypeAndDirection jsonRelationshipTypeAndDirection : getTypesAndDirections()) {
-                input.addTypeAndDirection(DynamicRelationshipType.withName(jsonRelationshipTypeAndDirection.getType()), jsonRelationshipTypeAndDirection.getDirection());
+            for (JsonRelationshipTypeAndDirection typeAndDirection : getTypesAndDirections()) {
+                input.addTypeAndDirection(DynamicRelationshipType.withName(typeAndDirection.getType()), typeAndDirection.getDirection());
             }
         }
         return input;
