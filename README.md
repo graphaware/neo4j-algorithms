@@ -1,5 +1,5 @@
-GraphAware Neo4j Algorithms
-===========================
+GraphAware Neo4j Algorithms (WIP - not ready for production!)
+============================================================
 
 [![Build Status](https://travis-ci.org/graphaware/neo4j-algorithms.png)](https://travis-ci.org/graphaware/neo4j-algorithms)
 
