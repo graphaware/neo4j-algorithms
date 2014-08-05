@@ -23,13 +23,10 @@ public class BarabasiAlbertConfig extends NumberOfNodes {
     }
 
     /**
-     * Returns true iff the config is valid. Checks if number of edges is integer and the beta control parameter is valid.
-     *
-     * @return true if the parameter set is valid.
+     * {@inheritDoc}
      */
+    @Override
     public boolean isValid() {
-        // Necessary conditions.
-        // TODO: Check thoroughly if these are sufficient as well.
-        return !(edgesPerNewNode < 2 || edgesPerNewNode + 1 > getNumberOfNodes());
+        return super.isValid() && !(edgesPerNewNode < 2 || edgesPerNewNode + 1 > getNumberOfNodes());
     }
 }

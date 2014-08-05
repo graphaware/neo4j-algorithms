@@ -21,11 +21,9 @@ public class NumberOfNodes implements RelationshipGeneratorConfig {
     }
 
     /**
-     * Tests if the config is valid.
-     * TODO: Check if sufficient
-     *
-     * @return true iff the config is valid.
+     * {@inheritDoc}
      */
+    @Override
     public boolean isValid() {
         return numberOfNodes >= 2;
     }

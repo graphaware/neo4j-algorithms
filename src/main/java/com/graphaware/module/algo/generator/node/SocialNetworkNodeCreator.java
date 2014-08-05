@@ -6,6 +6,7 @@ import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
+import org.neo4j.unsafe.batchinsert.BatchInserter;
 
 import java.util.*;
 
@@ -47,6 +48,16 @@ public class SocialNetworkNodeCreator implements NodeCreator {
         node.setProperty(NAME, genderAndName.second());
 
         return node;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public long createNode(BatchInserter batchInserter) {
+        Pair<Label, String> genderAndName = getGenderAndName();
+
+        return batchInserter.createNode(Collections.<String, Object>singletonMap(NAME, genderAndName.second()), genderAndName.first());
     }
 
     protected Pair<Label, String> getGenderAndName() {

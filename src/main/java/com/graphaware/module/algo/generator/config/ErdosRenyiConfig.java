@@ -1,5 +1,7 @@
 package com.graphaware.module.algo.generator.config;
 
+import java.math.BigInteger;
+
 /**
  * Erdos Renyi graph generator configuration
  */
@@ -23,12 +25,14 @@ public class ErdosRenyiConfig extends NumberOfNodes {
     }
 
     /**
-     * Tests if the config is valid
-     *
-     * @return true if the configuration is valid.
+     * {@inheritDoc}
      */
     @Override
     public boolean isValid() {
-        return super.isValid() && numberOfEdges <= 0.5 * getNumberOfNodes() * (getNumberOfNodes() - 1);
+        BigInteger maxNumberOfEdges = BigInteger.valueOf(getNumberOfNodes());
+        maxNumberOfEdges = maxNumberOfEdges.multiply(maxNumberOfEdges.subtract(BigInteger.ONE));
+        maxNumberOfEdges = maxNumberOfEdges.divide(BigInteger.valueOf(2));
+
+        return super.isValid() && numberOfEdges > 0 && BigInteger.valueOf(numberOfEdges).compareTo(maxNumberOfEdges) < 1;
     }
 }
