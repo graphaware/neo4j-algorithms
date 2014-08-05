@@ -1,7 +1,7 @@
 package com.graphaware.module.algo.generator.config;
 
 /**
- * {@link RelationshipGeneratorConfig} for {@link com.graphaware.module.algo.generator.relationship.BarabasiAlbertGraphRelationshipGenerator}.
+ * {@link RelationshipGeneratorConfig} for {@link com.graphaware.module.algo.generator.relationship.BarabasiAlbertRelationshipGenerator}.
  */
 public class BarabasiAlbertConfig extends NumberOfNodes {
 

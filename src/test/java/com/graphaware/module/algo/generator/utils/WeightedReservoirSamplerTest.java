@@ -1,4 +1,4 @@
-package com.graphaware.module.algo.generator;
+package com.graphaware.module.algo.generator.utils;
 
 import com.graphaware.module.algo.generator.utils.WeightedReservoirSampler;
 import junit.framework.TestCase;

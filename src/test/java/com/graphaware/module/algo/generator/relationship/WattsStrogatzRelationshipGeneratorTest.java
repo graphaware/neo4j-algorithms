@@ -1,10 +1,10 @@
-package com.graphaware.module.algo.generator;
+package com.graphaware.module.algo.generator.relationship;
 
 import com.graphaware.module.algo.generator.config.WattsStrogatzConfig;
 import com.graphaware.module.algo.generator.relationship.WattsStrogatzRelationshipGenerator;
 import junit.framework.TestCase;
 
-public class WattsStrogatzGraphGeneratorTest extends TestCase {
+public class WattsStrogatzRelationshipGeneratorTest extends TestCase {
 
     public void testDoGenerateEdges() throws Exception {
         WattsStrogatzRelationshipGenerator generator = new WattsStrogatzRelationshipGenerator(new WattsStrogatzConfig(100, 4, 0.5));

@@ -1,4 +1,4 @@
-package com.graphaware.module.algo.generator;
+package com.graphaware.module.algo.generator.relationship;
 
 import com.graphaware.module.algo.generator.config.NumberOfNodes;
 import com.graphaware.module.algo.generator.relationship.CompleteGraphRelationshipGenerator;

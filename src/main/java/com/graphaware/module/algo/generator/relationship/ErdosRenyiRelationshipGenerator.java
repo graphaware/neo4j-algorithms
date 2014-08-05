@@ -13,9 +13,9 @@ import java.util.*;
  * random graphs with exponential cut-off. A phase transition from many
  * components graph to a completely connected graph is present.
  */
-public class ErdosRenyiGraphRelationshipGenerator extends BaseRelationshipGenerator<ErdosRenyiConfig> {
+public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<ErdosRenyiConfig> {
 
-    public ErdosRenyiGraphRelationshipGenerator(ErdosRenyiConfig configuration) {
+    public ErdosRenyiRelationshipGenerator(ErdosRenyiConfig configuration) {
         super(configuration);
     }
 

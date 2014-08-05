@@ -18,14 +18,17 @@ public class ErdosRenyiConfig extends NumberOfNodes {
         this.numberOfEdges = numberOfEdges;
     }
 
-    public int getNumberOfEdges() { return numberOfEdges;}
+    public int getNumberOfEdges() {
+        return numberOfEdges;
+    }
 
     /**
      * Tests if the config is valid
+     *
      * @return true if the configuration is valid.
      */
     @Override
     public boolean isValid() {
-        return super.isValid() && numberOfEdges <= 0.5 * getNumberOfNodes() * (getNumberOfNodes() -1);
+        return super.isValid() && numberOfEdges <= 0.5 * getNumberOfNodes() * (getNumberOfNodes() - 1);
     }
 }

@@ -16,9 +16,9 @@ import java.util.Set;
  * appropriate for networks reflecting cummulative
  * advantage (rich get richer).
  */
-public class BarabasiAlbertGraphRelationshipGenerator extends BaseRelationshipGenerator<BarabasiAlbertConfig> {
+public class BarabasiAlbertRelationshipGenerator extends BaseRelationshipGenerator<BarabasiAlbertConfig> {
 
-    public BarabasiAlbertGraphRelationshipGenerator(BarabasiAlbertConfig configuration) {
+    public BarabasiAlbertRelationshipGenerator(BarabasiAlbertConfig configuration) {
         super(configuration);
     }
 
