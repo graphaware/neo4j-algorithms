@@ -1,11 +1,9 @@
 package com.graphaware.module.algo.generator;
 
-import com.graphaware.module.algo.generator.config.BarabasiAlbertConfig;
 import com.graphaware.module.algo.generator.config.BasicGeneratorConfiguration;
 import com.graphaware.module.algo.generator.config.ErdosRenyiConfig;
 import com.graphaware.module.algo.generator.config.GeneratorConfiguration;
 import com.graphaware.module.algo.generator.node.SocialNetworkNodeCreator;
-import com.graphaware.module.algo.generator.relationship.BarabasiAlbertRelationshipGenerator;
 import com.graphaware.module.algo.generator.relationship.ErdosRenyiRelationshipGenerator;
 import com.graphaware.module.algo.generator.relationship.SocialNetworkRelationshipCreator;
 import org.junit.Ignore;
@@ -37,6 +35,7 @@ public class ErdosRenyiGeneratorTest {
         assertUsingDatabase(100, 1000);
         assertUsingDatabase(100, 5);
         assertUsingDatabase(10, 11);
+        assertUsingDatabase(20, 190);
 
         assertUsingBatchInserter(100, 1000);
     }
