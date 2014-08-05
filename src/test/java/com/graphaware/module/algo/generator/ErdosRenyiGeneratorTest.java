@@ -41,11 +41,13 @@ public class ErdosRenyiGeneratorTest {
     }
 
     @Test(timeout = 60 * 1000)
+    @Ignore
     public void shouldGenerateRelationshipsForLargeGraphInAReasonableAmountOfTime() {
         new ErdosRenyiRelationshipGenerator(new ErdosRenyiConfig(500_000, 10_000_000)).generateEdges();
     }
 
     @Test(timeout = 60 * 1000)
+    @Ignore
     public void shouldGenerateRelationshipsForLargeGraphInAReasonableAmountOfTime2() {
         new ErdosRenyiRelationshipGenerator(new ErdosRenyiConfig(1000, 400_000)).generateEdges();
     }
