@@ -41,9 +41,13 @@ public class ErdosRenyiGeneratorTest {
     }
 
     @Test(timeout = 60 * 1000)
-    @Ignore //todo fix this, hotspot is RandomIndexChoice.randomIndexChoice
     public void shouldGenerateRelationshipsForLargeGraphInAReasonableAmountOfTime() {
-        new ErdosRenyiRelationshipGenerator(new ErdosRenyiConfig(1_000_000, 50_000_000)).generateEdges();
+        new ErdosRenyiRelationshipGenerator(new ErdosRenyiConfig(500_000, 10_000_000)).generateEdges();
+    }
+
+    @Test(timeout = 60 * 1000)
+    public void shouldGenerateRelationshipsForLargeGraphInAReasonableAmountOfTime2() {
+        new ErdosRenyiRelationshipGenerator(new ErdosRenyiConfig(1000, 400_000)).generateEdges();
     }
 
     @Test(timeout = 5 * 60 * 1000)   //5 mins

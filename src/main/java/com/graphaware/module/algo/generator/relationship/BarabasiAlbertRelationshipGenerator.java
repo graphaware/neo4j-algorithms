@@ -13,7 +13,7 @@ import java.util.*;
  * <p/>
  * Each newly added node has a probability weighted by the node degree to be attached. Since BA references
  * (Newmann, Barabasi-Albert) do not define strict conditions on initial state of the model, completely connected network
- * is used to start up the algorithm.
+ * is used to start up the algorithm.  //todo is this OK? Will it not cause the initial nodes to be the very rich ones always?
  */
 public class BarabasiAlbertRelationshipGenerator extends BaseRelationshipGenerator<BarabasiAlbertConfig> {
 
