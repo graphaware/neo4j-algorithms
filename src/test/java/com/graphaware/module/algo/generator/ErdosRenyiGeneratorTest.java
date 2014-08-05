@@ -1,6 +1,6 @@
 package com.graphaware.module.algo.generator;
 
-import com.graphaware.module.algo.generator.config.BasicGeneratorConfiguration;
+import com.graphaware.module.algo.generator.config.BasicGeneratorConfig;
 import com.graphaware.module.algo.generator.config.ErdosRenyiConfig;
 import com.graphaware.module.algo.generator.config.GeneratorConfiguration;
 import com.graphaware.module.algo.generator.node.SocialNetworkNodeCreator;
@@ -96,7 +96,7 @@ public class ErdosRenyiGeneratorTest {
     }
 
     private GeneratorConfiguration getGeneratorConfiguration(int numberOfNodes, int numberOfEdges) {
-        return new BasicGeneratorConfiguration(
+        return new BasicGeneratorConfig(
                 new ErdosRenyiRelationshipGenerator(new ErdosRenyiConfig(numberOfNodes, numberOfEdges)),
                 SocialNetworkNodeCreator.getInstance(),
                 SocialNetworkRelationshipCreator.getInstance()

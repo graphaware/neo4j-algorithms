@@ -1,6 +1,6 @@
 package com.graphaware.module.algo.generator;
 
-import com.graphaware.module.algo.generator.config.BasicGeneratorConfiguration;
+import com.graphaware.module.algo.generator.config.BasicGeneratorConfig;
 import com.graphaware.module.algo.generator.config.GeneratorConfiguration;
 import com.graphaware.module.algo.generator.config.WattsStrogatzConfig;
 import com.graphaware.module.algo.generator.node.SocialNetworkNodeCreator;
@@ -95,7 +95,7 @@ public class WattsStrogatzGeneratorTest {
     }
 
     private GeneratorConfiguration getGeneratorConfiguration(int numberOfNodes, int meanDegree, double beta) {
-        return new BasicGeneratorConfiguration(
+        return new BasicGeneratorConfig(
                 new WattsStrogatzRelationshipGenerator(new WattsStrogatzConfig(numberOfNodes, meanDegree, beta)),
                 SocialNetworkNodeCreator.getInstance(),
                 SocialNetworkRelationshipCreator.getInstance()

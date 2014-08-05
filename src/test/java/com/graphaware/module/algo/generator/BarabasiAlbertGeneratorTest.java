@@ -1,7 +1,7 @@
 package com.graphaware.module.algo.generator;
 
 import com.graphaware.module.algo.generator.config.BarabasiAlbertConfig;
-import com.graphaware.module.algo.generator.config.BasicGeneratorConfiguration;
+import com.graphaware.module.algo.generator.config.BasicGeneratorConfig;
 import com.graphaware.module.algo.generator.config.GeneratorConfiguration;
 import com.graphaware.module.algo.generator.node.SocialNetworkNodeCreator;
 import com.graphaware.module.algo.generator.relationship.BarabasiAlbertRelationshipGenerator;
@@ -95,7 +95,7 @@ public class BarabasiAlbertGeneratorTest {
     }
 
     private GeneratorConfiguration getGeneratorConfiguration(int numberOfNodes, int edgesPerNewNode) {
-        return new BasicGeneratorConfiguration(
+        return new BasicGeneratorConfig(
                 new BarabasiAlbertRelationshipGenerator(new BarabasiAlbertConfig(numberOfNodes, edgesPerNewNode)),
                 SocialNetworkNodeCreator.getInstance(),
                 SocialNetworkRelationshipCreator.getInstance()

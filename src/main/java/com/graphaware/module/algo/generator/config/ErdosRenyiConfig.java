@@ -3,7 +3,9 @@ package com.graphaware.module.algo.generator.config;
 import java.math.BigInteger;
 
 /**
- * Erdos Renyi graph generator configuration
+ * {@link RelationshipGeneratorConfig} for {@link com.graphaware.module.algo.generator.relationship.ErdosRenyiRelationshipGenerator}.
+ *
+ * TODO: Document exactly what the values mean, what are their permitted values, and what their recommended values are.
  */
 public class ErdosRenyiConfig extends NumberOfNodesBasedConfig {
 
@@ -12,14 +14,19 @@ public class ErdosRenyiConfig extends NumberOfNodesBasedConfig {
     /**
      * Constructs a new config.
      *
-     * @param numberOfNodes number of nodes present in the network
-     * @param numberOfEdges number of edges present in the network
+     * @param numberOfNodes number of nodes present in the network.
+     * @param numberOfEdges number of edges present in the network.
      */
     public ErdosRenyiConfig(int numberOfNodes, int numberOfEdges) {
         super(numberOfNodes);
         this.numberOfEdges = numberOfEdges;
     }
 
+    /**
+     * Get the number of edges present in the network.
+     *
+     * @return number of edges.
+     */
     public int getNumberOfEdges() {
         return numberOfEdges;
     }

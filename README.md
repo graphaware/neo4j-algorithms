@@ -50,7 +50,13 @@ Using the Software
 --------------------
 
 ### Graph Generators
- WIP
+WIP
+
+TODO:
+* get rid of todos in the code
+* make sure the database doesn't have to be empty
+* create a decent library of distributions and pre-configured generators
+
 
 <a name="algos"/>
 ### Path Finding
