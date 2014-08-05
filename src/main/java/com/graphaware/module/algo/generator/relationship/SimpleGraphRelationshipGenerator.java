@@ -17,14 +17,14 @@ package com.graphaware.module.algo.generator.relationship;
 
 import com.graphaware.common.util.SameTypePair;
 import com.graphaware.common.util.UnorderedPair;
-import com.graphaware.module.algo.generator.config.DegreeDistribution;
-import com.graphaware.module.algo.generator.config.SimpleDegreeDistribution;
+import com.graphaware.module.algo.generator.config.DistributionBasedConfig;
+import com.graphaware.module.algo.generator.distribution.DegreeDistribution;
+import com.graphaware.module.algo.generator.distribution.MutableDegreeDistribution;
+import com.graphaware.module.algo.generator.distribution.MutableSimpleDegreeDistribution;
 import com.graphaware.module.algo.generator.utils.WeightedReservoirSampler;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.Math.min;
 
 /**
  * A simple minded {@link RelationshipGenerator} based on a {@link DegreeDistribution}
@@ -36,9 +36,9 @@ import static java.lang.Math.min;
  * A SEQUENTIAL IMPORTANCE SAMPLING ALGORITHM FOR GENERATING RANDOM GRAPHS WITH PRESCRIBED DEGREES
  * By Joseph Blitzstein and Persi Diaconis (Stanford University). (Harvard, June 2006)
  */
-public class SimpleGraphRelationshipGenerator extends BaseRelationshipGenerator<SimpleDegreeDistribution> {
+public class SimpleGraphRelationshipGenerator extends BaseRelationshipGenerator<DistributionBasedConfig> {
 
-    public SimpleGraphRelationshipGenerator(SimpleDegreeDistribution configuration) {
+    public SimpleGraphRelationshipGenerator(DistributionBasedConfig configuration) {
         super(configuration);
     }
 
@@ -50,7 +50,7 @@ public class SimpleGraphRelationshipGenerator extends BaseRelationshipGenerator<
     @Override
     protected List<SameTypePair<Integer>> doGenerateEdges() {
         List<SameTypePair<Integer>> edges = new ArrayList<>();
-        SimpleDegreeDistribution distribution = getConfiguration();
+        MutableDegreeDistribution distribution = new MutableSimpleDegreeDistribution(getConfiguration().getDegrees());
 
         while (!distribution.isZeroList()) {
             // int length = distribution.size();
@@ -70,7 +70,7 @@ public class SimpleGraphRelationshipGenerator extends BaseRelationshipGenerator<
 
             // Obtain a candidate list:
             while (true) {
-                SimpleDegreeDistribution temp = distribution.duplicate();
+                MutableDegreeDistribution temp = new MutableSimpleDegreeDistribution(distribution.getDegrees());
                 int candidateIndex = sampler.randomIndexChoice(temp.getDegrees(), index);
 
                 // int rnd =  (int) Math.floor(Math.random() * (length - 1)); // choose an rank from one elem. less range. OK

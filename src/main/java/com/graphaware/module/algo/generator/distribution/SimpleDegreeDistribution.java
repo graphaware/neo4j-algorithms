@@ -1,29 +1,20 @@
-package com.graphaware.module.algo.generator.config;
+package com.graphaware.module.algo.generator.distribution;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import static java.lang.Math.min;
 
 /**
- * Simple {@link DegreeDistribution} where the distribution can be directly passed into the constructor.
+ * Simple {@link com.graphaware.module.algo.generator.distribution.DegreeDistribution} where the distribution can be directly passed into the constructor.
  */
 public class SimpleDegreeDistribution implements DegreeDistribution {
 
-    private final List<Integer> degrees = new ArrayList<>();
+    protected final List<Integer> degrees = new ArrayList<>();
 
     public SimpleDegreeDistribution(List<Integer> degrees) {
         this.degrees.addAll(degrees);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getNumberOfNodes() {
-        return degrees.size();
     }
 
     /**
@@ -59,22 +50,6 @@ public class SimpleDegreeDistribution implements DegreeDistribution {
      * {@inheritDoc}
      */
     @Override
-    public void set(int index, int value) {
-        degrees.set(index, value);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void decrease(int index) {
-        degrees.set(index, degrees.get(index) - 1);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public int size() {
         return degrees.size();
     }
@@ -83,24 +58,15 @@ public class SimpleDegreeDistribution implements DegreeDistribution {
      * {@inheritDoc}
      */
     @Override
-    public SimpleDegreeDistribution duplicate() {
-        return new SimpleDegreeDistribution(degrees);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void sort(Comparator<Integer> comparator) {
-        Collections.sort(degrees, comparator);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean isValid() {
-        return passesErdosGallaiTest(); //can be swapped for Havel-Hakimi (todo should we do both?)
+        int degreeSum = 0;
+        for (int degree : getDegrees()) {
+            degreeSum += degree;
+        }
+
+        //Total has to be even by the handshaking lemma
+        return (degreeSum % 2) == 0
+                && passesErdosGallaiTest();
     }
 
     /**
@@ -111,7 +77,7 @@ public class SimpleDegreeDistribution implements DegreeDistribution {
      */
     protected final boolean passesErdosGallaiTest() {
         // Do this in-place instead?
-        DegreeDistribution copy = duplicate();
+        MutableDegreeDistribution copy = new MutableSimpleDegreeDistribution(getDegrees());
 
         int L = copy.size();
         int degreeSum = 0;           // Has to be even by the handshaking lemma
@@ -160,7 +126,7 @@ public class SimpleDegreeDistribution implements DegreeDistribution {
          * gest node.
          */
 
-        DegreeDistribution copy = duplicate();
+        MutableDegreeDistribution copy = new MutableSimpleDegreeDistribution(getDegrees());
 
         int i = 0;
         int first;

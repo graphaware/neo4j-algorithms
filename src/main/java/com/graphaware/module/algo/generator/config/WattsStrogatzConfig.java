@@ -3,7 +3,7 @@ package com.graphaware.module.algo.generator.config;
 /**
  * {@link RelationshipGeneratorConfig} for {@link com.graphaware.module.algo.generator.relationship.WattsStrogatzRelationshipGenerator}.
  */
-public class WattsStrogatzConfig extends NumberOfNodes {
+public class WattsStrogatzConfig extends NumberOfNodesBasedConfig {
 
     private final int meanDegree;
     private final double beta;

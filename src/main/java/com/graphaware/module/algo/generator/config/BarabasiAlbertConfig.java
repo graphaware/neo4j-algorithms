@@ -2,8 +2,10 @@ package com.graphaware.module.algo.generator.config;
 
 /**
  * {@link RelationshipGeneratorConfig} for {@link com.graphaware.module.algo.generator.relationship.BarabasiAlbertRelationshipGenerator}.
+ * <p/>
+ * TODO: Document exactly what the values mean, what are their permitted values, and what their recommended values are.
  */
-public class BarabasiAlbertConfig extends NumberOfNodes {
+public class BarabasiAlbertConfig extends NumberOfNodesBasedConfig {
 
     private final int edgesPerNewNode;
 
@@ -18,6 +20,11 @@ public class BarabasiAlbertConfig extends NumberOfNodes {
         this.edgesPerNewNode = edgesPerNewNode;
     }
 
+    /**
+     * Get the number of edges per newly added node.
+     *
+     * @return number of edges.
+     */
     public int getEdgesPerNewNode() {
         return edgesPerNewNode;
     }

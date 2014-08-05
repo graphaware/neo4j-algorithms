@@ -2,9 +2,9 @@ package com.graphaware.module.algo.generator.relationship;
 
 import com.graphaware.common.util.SameTypePair;
 import com.graphaware.common.util.UnorderedPair;
-import com.graphaware.module.algo.generator.utils.RandomIndexChoice;
 import com.graphaware.module.algo.generator.config.BarabasiAlbertConfig;
-import com.graphaware.module.algo.generator.config.NumberOfNodes;
+import com.graphaware.module.algo.generator.config.NumberOfNodesBasedConfig;
+import com.graphaware.module.algo.generator.utils.RandomIndexChoice;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,7 +36,7 @@ public class BarabasiAlbertRelationshipGenerator extends BaseRelationshipGenerat
         int edgesPerNewNode = getConfiguration().getEdgesPerNewNode();
 
         // Create a completely connected network
-        CompleteGraphRelationshipGenerator coreGenerator = new CompleteGraphRelationshipGenerator(new NumberOfNodes(edgesPerNewNode + 1));
+        CompleteGraphRelationshipGenerator coreGenerator = new CompleteGraphRelationshipGenerator(new NumberOfNodesBasedConfig(edgesPerNewNode + 1));
         List<SameTypePair<Integer>> edges = coreGenerator.doGenerateEdges();
 
 

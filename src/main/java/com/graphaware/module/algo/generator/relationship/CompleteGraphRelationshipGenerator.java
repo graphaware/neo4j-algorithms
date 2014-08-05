@@ -2,7 +2,7 @@ package com.graphaware.module.algo.generator.relationship;
 
 import com.graphaware.common.util.SameTypePair;
 import com.graphaware.common.util.UnorderedPair;
-import com.graphaware.module.algo.generator.config.NumberOfNodes;
+import com.graphaware.module.algo.generator.config.NumberOfNodesBasedConfig;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +13,13 @@ import java.util.List;
  * <p/>
  * TODO: change the base-class such that it reflects the different parameter sets needed for the network
  */
-public class CompleteGraphRelationshipGenerator extends BaseRelationshipGenerator<NumberOfNodes> {
+public class CompleteGraphRelationshipGenerator extends BaseRelationshipGenerator<NumberOfNodesBasedConfig> {
 
     /**
      *
      * @param configuration number of nodes present in the completely connected network
      */
-    public CompleteGraphRelationshipGenerator(NumberOfNodes configuration) {
+    public CompleteGraphRelationshipGenerator(NumberOfNodesBasedConfig configuration) {
         super(configuration);
     }
 

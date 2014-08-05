@@ -7,9 +7,9 @@
 package com.graphaware.module.algo.generator;
 
 import com.graphaware.module.algo.generator.config.BasicGeneratorConfiguration;
+import com.graphaware.module.algo.generator.config.DistributionBasedConfig;
 import com.graphaware.module.algo.generator.config.GeneratorConfiguration;
 import com.graphaware.module.algo.generator.config.InvalidConfigException;
-import com.graphaware.module.algo.generator.config.SimpleDegreeDistribution;
 import com.graphaware.module.algo.generator.node.NodeCreator;
 import com.graphaware.module.algo.generator.node.SocialNetworkNodeCreator;
 import com.graphaware.module.algo.generator.relationship.RelationshipCreator;
@@ -35,7 +35,7 @@ public class Neo4jGraphGeneratorTest extends DatabaseIntegrationTest {
     public void validDistributionShouldGenerateGraph() {
         NodeCreator nodeCreator = SocialNetworkNodeCreator.getInstance();
         RelationshipCreator relationshipCreator = SocialNetworkRelationshipCreator.getInstance();
-        SimpleDegreeDistribution distribution = new SimpleDegreeDistribution(Arrays.asList(2, 2, 2, 2));
+        DistributionBasedConfig distribution = new DistributionBasedConfig(Arrays.asList(2, 2, 2, 2));
         SimpleGraphRelationshipGenerator relationshipGenerator = new SimpleGraphRelationshipGenerator(distribution);
 
         GeneratorConfiguration config = new BasicGeneratorConfiguration(relationshipGenerator, nodeCreator, relationshipCreator);
@@ -58,7 +58,7 @@ public class Neo4jGraphGeneratorTest extends DatabaseIntegrationTest {
     public void invalidDistributionShouldThrowException() {
         NodeCreator nodeCreator = SocialNetworkNodeCreator.getInstance();
         RelationshipCreator relationshipCreator = SocialNetworkRelationshipCreator.getInstance();
-        SimpleDegreeDistribution distribution = new SimpleDegreeDistribution(Arrays.asList(3, 2, 2, 2));
+        DistributionBasedConfig distribution = new DistributionBasedConfig(Arrays.asList(3, 2, 2, 2));
         SimpleGraphRelationshipGenerator relationshipGenerator = new SimpleGraphRelationshipGenerator(distribution);
 
         GeneratorConfiguration config = new BasicGeneratorConfiguration(relationshipGenerator, nodeCreator, relationshipCreator);

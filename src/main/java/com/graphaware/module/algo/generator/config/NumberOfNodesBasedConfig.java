@@ -1,9 +1,9 @@
 package com.graphaware.module.algo.generator.config;
 
 /**
- *
+ * {@link RelationshipGeneratorConfig} that is based on an explicitly defined number of nodes in the network.
  */
-public class NumberOfNodes implements RelationshipGeneratorConfig {
+public class NumberOfNodesBasedConfig implements RelationshipGeneratorConfig {
 
     private final int numberOfNodes;
 
@@ -12,10 +12,14 @@ public class NumberOfNodes implements RelationshipGeneratorConfig {
      *
      * @param numberOfNodes number of nodes present in the network.
      */
-    public NumberOfNodes(int numberOfNodes) {
+    public NumberOfNodesBasedConfig(int numberOfNodes) {
         this.numberOfNodes = numberOfNodes;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public int getNumberOfNodes() {
         return numberOfNodes;
     }

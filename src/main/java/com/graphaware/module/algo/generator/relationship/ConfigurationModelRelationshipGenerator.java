@@ -21,8 +21,8 @@
 package com.graphaware.module.algo.generator.relationship;
 
 import com.graphaware.common.util.SameTypePair;
-import com.graphaware.module.algo.generator.config.ConfigurationModelConfig;
-import com.graphaware.module.algo.generator.config.DegreeDistribution;
+import com.graphaware.module.algo.generator.config.DistributionBasedConfig;
+import com.graphaware.module.algo.generator.distribution.DegreeDistribution;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +37,9 @@ import static java.util.Collections.shuffle;
  *
  * @see {@link SimpleGraphRelationshipGenerator}.
  */
-public class ConfigurationModelRelationshipGenerator extends BaseRelationshipGenerator<ConfigurationModelConfig> {
+public class ConfigurationModelRelationshipGenerator extends BaseRelationshipGenerator<DistributionBasedConfig> {
 
-    public ConfigurationModelRelationshipGenerator(ConfigurationModelConfig configuration) {
+    public ConfigurationModelRelationshipGenerator(DistributionBasedConfig configuration) {
         super(configuration);
     }
 

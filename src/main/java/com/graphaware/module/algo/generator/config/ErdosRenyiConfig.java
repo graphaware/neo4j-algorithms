@@ -5,7 +5,7 @@ import java.math.BigInteger;
 /**
  * Erdos Renyi graph generator configuration
  */
-public class ErdosRenyiConfig extends NumberOfNodes {
+public class ErdosRenyiConfig extends NumberOfNodesBasedConfig {
 
     private final int numberOfEdges;
 
