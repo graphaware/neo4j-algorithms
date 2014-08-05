@@ -4,20 +4,26 @@ import com.graphaware.common.util.SameTypePair;
 import com.graphaware.common.util.UnorderedPair;
 import com.graphaware.module.algo.generator.config.BarabasiAlbertConfig;
 import com.graphaware.module.algo.generator.config.NumberOfNodesBasedConfig;
-import com.graphaware.module.algo.generator.utils.RandomIndexChoice;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
- * Barabasi-Albert model implementation. The model is
- * appropriate for networks reflecting cummulative
- * advantage (rich get richer).
+ * {@link RelationshipGenerator} implemented according to the Barabasi-Albert preferential attachment model, which is
+ * appropriate for networks reflecting cumulative advantage (rich get richer).
+ * <p/>
+ * Each newly added node has a probability weighted by the node degree to be attached. Since BA references
+ * (Newmann, Barabasi-Albert) do not define strict conditions on initial state of the model, completely connected network
+ * is used to start up the algorithm.
  */
 public class BarabasiAlbertRelationshipGenerator extends BaseRelationshipGenerator<BarabasiAlbertConfig> {
 
+    private final Random random = new Random();
+
+    /**
+     * Create a new generator.
+     *
+     * @param configuration of the generator.
+     */
     public BarabasiAlbertRelationshipGenerator(BarabasiAlbertConfig configuration) {
         super(configuration);
     }
@@ -25,51 +31,43 @@ public class BarabasiAlbertRelationshipGenerator extends BaseRelationshipGenerat
     /**
      * {@inheritDoc}
      * <p/>
-     * Generates a network according to Barabasi-Albert preferential attachment model.
-     * Each newly added node has a probability weighted by the node degree to be attached.
-     * <p/>
-     * Since BA references (Newmann, Barabasi-Albert) do not define strict conditions on initial state of the
-     * model, completelly connected network is used to start up the algorithm
      */
     @Override
     protected List<SameTypePair<Integer>> doGenerateEdges() {
         int edgesPerNewNode = getConfiguration().getEdgesPerNewNode();
+        int numberOfNodes = getConfiguration().getNumberOfNodes();
 
         // Create a completely connected network
-        CompleteGraphRelationshipGenerator coreGenerator = new CompleteGraphRelationshipGenerator(new NumberOfNodesBasedConfig(edgesPerNewNode + 1));
-        List<SameTypePair<Integer>> edges = coreGenerator.doGenerateEdges();
-
-
-        System.out.println(edges);
+        List<SameTypePair<Integer>> edges
+                = new CompleteGraphRelationshipGenerator(new NumberOfNodesBasedConfig(edgesPerNewNode + 1)).doGenerateEdges();
 
         // Degree list of the network
-        ArrayList<Integer> degrees = new ArrayList<>();
+        List<Integer> degrees = new ArrayList<>(2 * (numberOfNodes * edgesPerNewNode - (edgesPerNewNode * (edgesPerNewNode - 1)) / 2));
 
-        for (int k = 0; k < edgesPerNewNode + 1; ++k) {
-            for (int l = 0; l < edgesPerNewNode; ++l) {
+        for (int k = 0; k < edgesPerNewNode + 1; k++) {
+            for (int l = 0; l < edgesPerNewNode; l++) {
                 degrees.add(k);
-                //degrees.set(k, degrees.get(k) + 1);
             }
         }
 
-       // WeightedReservoirSampler reservoirSampler = new WeightedReservoirSampler();
-        RandomIndexChoice randomIndexChoice = new RandomIndexChoice();
-
         // Preferentially attach other nodes
-        for (int node = edgesPerNewNode + 1; node < getConfiguration().getNumberOfNodes(); ++node) {
-            Set<Integer> omit = new HashSet<>();
+        Set<Integer> omit = new HashSet<>(edgesPerNewNode);
+        for (int source = edgesPerNewNode + 1; source < numberOfNodes; source++) {
+            omit.clear();
 
-            for (int edge = 0; edge < edgesPerNewNode; ++edge) {
-                while(true)
-                {
-                    int target = randomIndexChoice.randomIndexChoice(degrees.size());//reservoirSampler.randomIndexChoice(degrees, omit); // find a target
-                    if( omit.contains(degrees.get(target)))
+            for (int edge = 0; edge < edgesPerNewNode; edge++) {
+                while (true) {
+                    int target = degrees.get(random.nextInt(degrees.size()));
+
+                    if (omit.contains(target)) {
                         continue;
+                    }
 
-//                    degrees.set(target, degrees.get(target) + 1); // Any better way of incrementing an index in ArrayList?
-                    omit.add(degrees.get(target)); // Add the target to omit list (and avoid multiedges)
-                    edges.add(new UnorderedPair<>(degrees.get(target), node)); // Add the edge
-                    degrees.add(node);
+                    omit.add(target); // to avoid multi-edges
+                    edges.add(new UnorderedPair<>(target, source)); // Add the edge
+                    degrees.add(source);
+                    degrees.add(target); //todo Michal added this, please review
+
                     break;
                 }
             }

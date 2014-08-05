@@ -40,7 +40,8 @@ public class BarabasiAlbertGeneratorTest {
         assertUsingBatchInserter(100, 2);
     }
 
-    @Test(timeout = 10 * 1000)
+    @Test(timeout = 20 * 1000)
+//    @Ignore
     public void shouldGenerateRelationshipsForLargeGraphInAReasonableAmountOfTime() {
         new BarabasiAlbertRelationshipGenerator(new BarabasiAlbertConfig(1_000_000, 3)).generateEdges();
     }
