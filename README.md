@@ -79,7 +79,7 @@ returned will be (1)->(4)->(5)->(3) with a length of 3. Note that there is anoth
 When deployed in server mode, issue a POST request to `http://your-server-address:7474/graphaware/algorithm/path/increasinglyLongerShortestPath`
 with the following JSON minimal payload
 
-```
+```json
 {
      "startNode": 0,
      "endNode": 2
@@ -105,7 +105,7 @@ You can also optionally specify the following:
 
 An example input with most of these parameters would look like this:
 
-```
+```json
 {
     "startNode": 0,
     "endNode": 2,
@@ -135,7 +135,7 @@ An example input with most of these parameters would look like this:
 
 The output depends on the specification, but could look something like this:
 
-```
+```json
 [
     {
         "nodes": [
