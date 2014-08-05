@@ -20,15 +20,34 @@ public class RandomIndexChoice {
      * @param omitIndices indices to be omited from the selection
      * @return rank from the range specified
      */
-    public int randomIndexChoice(int length, Set<Integer> omitIndices) {
+    public long randomIndexChoice(long length, Set<Long> omitIndices) {
         while (true) {
-            int choice = random.nextInt(length);
+            long choice = (long) (random.nextDouble()*length);
             if (!omitIndices.contains(choice)) {
                 return choice;
             }
         }
     }
 
+    /**
+     * Random rank choice with indices omitted.
+     * <p/>
+     * Warning: this algorithm does not terminate if omitIndices contains
+     * all indices from 0 to length-1. Use this only if number
+     * of entries in omitIndices is much less than length.
+     *
+     * @param length      range to pick indices from
+     * @param omitIndices indices to be omited from the selection
+     * @return rank from the range specified
+     */
+    public int randomIndexChoice(int length, Set<Integer> omitIndices) {
+        while (true) {
+            int choice = (int) (random.nextDouble()*length);
+            if (!omitIndices.contains(choice)) {
+                return choice;
+            }
+        }
+    }
 
     /**
      * Random rank choice with indices omitted (long)

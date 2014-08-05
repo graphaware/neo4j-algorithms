@@ -4,9 +4,7 @@ import com.graphaware.common.util.SameTypePair;
 import com.graphaware.common.util.UnorderedPair;
 import com.graphaware.module.algo.generator.config.ErdosRenyiConfig;
 import com.graphaware.module.algo.generator.utils.RandomIndexChoice;
-import com.graphaware.module.algo.generator.utils.ReservoirSampler;
 
-import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -120,7 +118,7 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
         long maxEdges = numberOfNodes * (numberOfNodes - 1) / 2;
 
         List<SameTypePair<Integer>> edges = new LinkedList<>();
-        PriorityQueue<Long> omitList = new PriorityQueue<>(); // edges to be omited. TODO: Isn't it more efficient to implement this with HashSet?
+        HashSet<Long> omitList = new HashSet<>(); // edges to be omited.
         RandomIndexChoice indexChoice = new RandomIndexChoice(); // Index choices with omits
 
         for (int e = 0; e < numberOfEdges; ++e) {
@@ -149,13 +147,13 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
     private UnorderedPair<Integer> indexToEdgeBijection(long index, int numberOfNodes) {
 
         // Bijection from edge label to realisation seems to be the bottleneck!
-        long cummulative = 0;
+        long cumulative = 0;
         int remainder = 0;
         int j;
         for (j = 0; j < numberOfNodes - 1; ++j) { // how to avoid this loop ?
-            cummulative += numberOfNodes - j - 1;
-            if (cummulative > index) {
-                remainder = (int) (index - cummulative + numberOfNodes - j);
+            cumulative += numberOfNodes - j - 1;
+            if (cumulative > index) {
+                remainder = (int) (index - cumulative + numberOfNodes - j);
                 break; // found the correct j
             }
         }
