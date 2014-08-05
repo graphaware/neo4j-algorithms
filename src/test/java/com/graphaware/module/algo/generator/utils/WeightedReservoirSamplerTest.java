@@ -1,13 +1,12 @@
 package com.graphaware.module.algo.generator.utils;
 
-import com.graphaware.module.algo.generator.utils.WeightedReservoirSampler;
-import junit.framework.TestCase;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
 import org.junit.Test;
 
-public class WeightedReservoirSamplerTest extends TestCase {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class WeightedReservoirSamplerTest {
 
     /**
      * Tests the weighted reservoir sampling
