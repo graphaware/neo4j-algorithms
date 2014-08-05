@@ -27,7 +27,6 @@ public class WattsStrogatzRelationshipGenerator extends BaseRelationshipGenerato
      * scales as ln(N)). Good choice for modelling simple social network
      * relationships (although hubs are not present).
      * <p/>
-     * TODO: find a way to control the strength of rewiring in the model
      *
      * @return ring - edge list as a list of unordered integer pairs
      */
@@ -42,7 +41,6 @@ public class WattsStrogatzRelationshipGenerator extends BaseRelationshipGenerato
         ArrayList<SameTypePair<Integer>> ring = new ArrayList<>(numberOfNodes);
 
         // Create a ring network
-        // TODO: is it worth to replace the hardcoded integer loops with iterators?
         for (int i = 0; i < numberOfNodes; ++i) {
             for (int j = i + 1; j <= i + meanDegree / 2; ++j) {
                 int friend = j % numberOfNodes;
@@ -50,7 +48,7 @@ public class WattsStrogatzRelationshipGenerator extends BaseRelationshipGenerato
             }
         }
 
-        /* Rewire edges with probability beta.
+        /** Rewire edges with probability beta.
 
            TODO: is it possible to somehow avoid the false rewirings withouth the algorithm being stuck?
                  The false rewirings change the desired probability distribution a little bit, but for
@@ -63,7 +61,7 @@ public class WattsStrogatzRelationshipGenerator extends BaseRelationshipGenerato
            Also, the wiring stops when the algorithm rewires to a non-graphical set of
            edges. Unconnected components may appear in the graph due to rewiring.
 
-           Works, but slow and hacked.
+           Works, but could be faster.
         */
         for (ListIterator<SameTypePair<Integer>> it = ring.listIterator(); it.hasNext(); ) {
             int index = it.nextIndex(); // index

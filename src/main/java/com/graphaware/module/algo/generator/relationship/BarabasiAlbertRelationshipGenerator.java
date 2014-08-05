@@ -14,6 +14,10 @@ import java.util.*;
  * Each newly added node has a probability weighted by the node degree to be attached. Since BA references
  * (Newmann, Barabasi-Albert) do not define strict conditions on initial state of the model, completely connected network
  * is used to start up the algorithm.  //todo is this OK? Will it not cause the initial nodes to be the very rich ones always?
+ *                                     //Vojta: No, it will not. The nodes in completely connected net to start with have degrees
+ *                                     //       m, which is exactly the number of edges added with every new node. Hence they have
+ *                                     //       no significant advantage (it is actually more fair to start this way than from
+ *                                     //       disconnected graph as it is done sometimes)
  */
 public class BarabasiAlbertRelationshipGenerator extends BaseRelationshipGenerator<BarabasiAlbertConfig> {
 
@@ -66,7 +70,7 @@ public class BarabasiAlbertRelationshipGenerator extends BaseRelationshipGenerat
                     omit.add(target); // to avoid multi-edges
                     edges.add(new UnorderedPair<>(target, source)); // Add the edge
                     degrees.add(source);
-                    degrees.add(target); //todo Michal added this, please review
+                    //degrees.add(target); //todo Michal added this, please review - Vojta: target is already in degrees, add only the source
 
                     break;
                 }

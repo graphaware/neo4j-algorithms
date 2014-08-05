@@ -23,6 +23,22 @@ import java.util.*;
  * that could be generated.
  *
  * TODO: The "faster" way should be made faster, or deleted.
+ * Vojta: I agree, this is partially an artifact (refractored).
+ *        I was hoping to find a
+ *        mathematical formula for effectively calculating the
+ *        mapping from edge index to unordered pairs  - if I succeeded,
+ *        it would be way more faster than the HashSet approach.
+ *        The mapping is not trivial though and I was not able
+ *        to find the formula yet.
+ *
+ *        HOWEVER!:
+ *        The switch in goGenerateEdges() has its purpose.
+ *        Even at the present stage, the second approach is faster
+ *        for nets which are almost complete. As a check, try
+ *        to generate (20, 190) using both methods.
+ *
+ *        I will change the test method from PQ to Hash, as you
+ *        suggest, that is absolutely true, thanks.
  */
 public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<ErdosRenyiConfig> {
 
@@ -47,7 +63,7 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
 
         //disabled for now - very slow
 //        if (threshold > potentialEdges) {
-//            return doGenerateEdgesFaster(); // Make sure to avoid edges (this takes reasonable time only up till ~ 100k)
+//            return doGenerateEdgesWithOmitList(); // Make sure to avoid edges (this takes reasonable time only up till ~ 100k)
 //        }
 
         return doGenerateEdgesSimpler(); // Be more heuristic (pajek implementation using HashSet).
@@ -91,12 +107,13 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
      * but is slow with increasing number of edges. Best for denser networks, with
      * a clear giant component.
      * <p/>
+     *
      * TODO: Remove the bijection iteration and optimise duplicity test?
      * (effectivelly hashing)
      *
      * @return edge list
      */
-    protected List<SameTypePair<Integer>> doGenerateEdgesFaster() {
+    protected List<SameTypePair<Integer>> doGenerateEdgesWithOmitList() {
         int numberOfNodes = getConfiguration().getNumberOfNodes();
         int numberOfEdges = getConfiguration().getNumberOfEdges();
 
