@@ -30,8 +30,7 @@ import java.util.List;
 import static java.util.Collections.shuffle;
 
 /**
- * A simple-minded {@link RelationshipGenerator} based on a {@link DegreeDistribution}.
- * Allows multiple edges and self-loops.
+ * A simple-minded {@link RelationshipGenerator} based on a {@link DegreeDistribution}. Allows multiple edges and self-loops.
  * <p/>
  * For a simple graph generator, see {@link SimpleGraphRelationshipGenerator}.
  *
@@ -70,8 +69,8 @@ public class ConfigurationModelRelationshipGenerator extends BaseRelationshipGen
         List<Integer> spread = new ArrayList<>();
 
         int L = distribution.size();
-        for (int k = 0; k < L; ++k) {
-            for (int j = 0; j < distribution.get(k); ++j) {
+        for (int k = 0; k < L; k++) {
+            for (int j = 0; j < distribution.get(k); j++) {
                 spread.add(k);
             }
         }
