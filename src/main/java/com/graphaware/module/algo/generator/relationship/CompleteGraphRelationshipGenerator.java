@@ -30,9 +30,11 @@ public class CompleteGraphRelationshipGenerator extends BaseRelationshipGenerato
         List<SameTypePair<Integer>> graph = new ArrayList<>();
 
         // Create a completely connected undirected network
-        for (int i = 0; i < getConfiguration().getNumberOfNodes(); ++i)
-            for (int j = i + 1; j < getConfiguration().getNumberOfNodes(); ++j)
+        for (int i = 0; i < getConfiguration().getNumberOfNodes(); i++) {
+            for (int j = i + 1; j < getConfiguration().getNumberOfNodes(); j++) {
                 graph.add(new UnorderedPair<>(i, j));
+            }
+        }
 
         return graph;
     }
