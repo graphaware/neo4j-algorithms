@@ -6,7 +6,6 @@
 
 package com.graphaware.module.algo.generator;
 
-import com.graphaware.module.algo.generator.Neo4jGraphGenerator;
 import com.graphaware.module.algo.generator.config.BasicGeneratorConfiguration;
 import com.graphaware.module.algo.generator.config.GeneratorConfiguration;
 import com.graphaware.module.algo.generator.config.InvalidConfigException;
@@ -39,7 +38,7 @@ public class Neo4jGraphGeneratorTest extends DatabaseIntegrationTest {
         SimpleDegreeDistribution distribution = new SimpleDegreeDistribution(Arrays.asList(2, 2, 2, 2));
         SimpleGraphRelationshipGenerator relationshipGenerator = new SimpleGraphRelationshipGenerator(distribution);
 
-        GeneratorConfiguration config = new BasicGeneratorConfiguration(4, relationshipGenerator, nodeCreator, relationshipCreator);
+        GeneratorConfiguration config = new BasicGeneratorConfiguration(relationshipGenerator, nodeCreator, relationshipCreator);
 
         new Neo4jGraphGenerator(getDatabase()).generateGraph(config);
 
@@ -62,7 +61,7 @@ public class Neo4jGraphGeneratorTest extends DatabaseIntegrationTest {
         SimpleDegreeDistribution distribution = new SimpleDegreeDistribution(Arrays.asList(3, 2, 2, 2));
         SimpleGraphRelationshipGenerator relationshipGenerator = new SimpleGraphRelationshipGenerator(distribution);
 
-        GeneratorConfiguration config = new BasicGeneratorConfiguration(4, relationshipGenerator, nodeCreator, relationshipCreator);
+        GeneratorConfiguration config = new BasicGeneratorConfiguration(relationshipGenerator, nodeCreator, relationshipCreator);
 
         new Neo4jGraphGenerator(getDatabase()).generateGraph(config);
     }

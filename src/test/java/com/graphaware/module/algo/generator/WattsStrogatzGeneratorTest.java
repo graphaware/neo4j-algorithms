@@ -1,11 +1,9 @@
 package com.graphaware.module.algo.generator;
 
 import com.graphaware.module.algo.generator.config.BasicGeneratorConfiguration;
-import com.graphaware.module.algo.generator.config.ErdosRenyiConfig;
 import com.graphaware.module.algo.generator.config.GeneratorConfiguration;
 import com.graphaware.module.algo.generator.config.WattsStrogatzConfig;
 import com.graphaware.module.algo.generator.node.SocialNetworkNodeCreator;
-import com.graphaware.module.algo.generator.relationship.ErdosRenyiRelationshipGenerator;
 import com.graphaware.module.algo.generator.relationship.SocialNetworkRelationshipCreator;
 import com.graphaware.module.algo.generator.relationship.WattsStrogatzRelationshipGenerator;
 import org.junit.Ignore;
@@ -97,7 +95,7 @@ public class WattsStrogatzGeneratorTest {
     }
 
     private GeneratorConfiguration getGeneratorConfiguration(int numberOfNodes, int meanDegree, double beta) {
-        return new BasicGeneratorConfiguration(numberOfNodes,
+        return new BasicGeneratorConfiguration(
                 new WattsStrogatzRelationshipGenerator(new WattsStrogatzConfig(numberOfNodes, meanDegree, beta)),
                 SocialNetworkNodeCreator.getInstance(),
                 SocialNetworkRelationshipCreator.getInstance()

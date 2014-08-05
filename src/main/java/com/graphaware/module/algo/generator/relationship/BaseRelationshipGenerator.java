@@ -1,8 +1,8 @@
 package com.graphaware.module.algo.generator.relationship;
 
 import com.graphaware.common.util.SameTypePair;
-import com.graphaware.module.algo.generator.config.RelationshipGeneratorConfig;
 import com.graphaware.module.algo.generator.config.InvalidConfigException;
+import com.graphaware.module.algo.generator.config.RelationshipGeneratorConfig;
 
 import java.util.List;
 
@@ -22,6 +22,14 @@ public abstract class BaseRelationshipGenerator<T extends RelationshipGeneratorC
      */
     protected BaseRelationshipGenerator(T configuration) {
         this.configuration = configuration;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int getNumberOfNodes() {
+        return configuration.getNumberOfNodes();
     }
 
     /**

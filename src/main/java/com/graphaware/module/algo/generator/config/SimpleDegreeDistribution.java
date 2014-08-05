@@ -22,6 +22,14 @@ public class SimpleDegreeDistribution implements DegreeDistribution {
      * {@inheritDoc}
      */
     @Override
+    public int getNumberOfNodes() {
+        return degrees.size();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public List<Integer> getDegrees() {
         return Collections.unmodifiableList(degrees);
     }

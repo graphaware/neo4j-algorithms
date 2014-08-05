@@ -10,13 +10,11 @@ import com.graphaware.module.algo.generator.relationship.RelationshipGenerator;
  */
 public class BasicGeneratorConfiguration implements GeneratorConfiguration {
 
-    private final int numberOfNodes;
     private final RelationshipGenerator<?> relationshipGenerator;
     private final NodeCreator nodeCreator;
     private final RelationshipCreator relationshipCreator;
 
-    public BasicGeneratorConfiguration(int numberOfNodes, RelationshipGenerator<?> relationshipGenerator, NodeCreator nodeCreator, RelationshipCreator relationshipCreator) {
-        this.numberOfNodes = numberOfNodes;
+    public BasicGeneratorConfiguration(RelationshipGenerator<?> relationshipGenerator, NodeCreator nodeCreator, RelationshipCreator relationshipCreator) {
         this.relationshipGenerator = relationshipGenerator;
         this.nodeCreator = nodeCreator;
         this.relationshipCreator = relationshipCreator;
@@ -27,7 +25,7 @@ public class BasicGeneratorConfiguration implements GeneratorConfiguration {
      */
     @Override
     public int getNumberOfNodes() {
-        return numberOfNodes;
+        return relationshipGenerator.getNumberOfNodes();
     }
 
     /**

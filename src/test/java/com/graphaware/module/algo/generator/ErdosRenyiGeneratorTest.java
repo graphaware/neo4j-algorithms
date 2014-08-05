@@ -96,11 +96,10 @@ public class ErdosRenyiGeneratorTest {
     }
 
     private GeneratorConfiguration getGeneratorConfiguration(int numberOfNodes, int numberOfEdges) {
-        return new BasicGeneratorConfiguration(numberOfNodes,
+        return new BasicGeneratorConfiguration(
                 new ErdosRenyiRelationshipGenerator(new ErdosRenyiConfig(numberOfNodes, numberOfEdges)),
                 SocialNetworkNodeCreator.getInstance(),
                 SocialNetworkRelationshipCreator.getInstance()
         );
     }
-
 }

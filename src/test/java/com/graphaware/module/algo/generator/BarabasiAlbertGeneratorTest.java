@@ -9,7 +9,8 @@ import com.graphaware.module.algo.generator.relationship.SocialNetworkRelationsh
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.neo4j.graphdb.*;
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.test.TestGraphDatabaseFactory;
 import org.neo4j.unsafe.batchinsert.BatchInserter;
@@ -17,9 +18,9 @@ import org.neo4j.unsafe.batchinsert.BatchInserters;
 
 import java.io.IOException;
 
-import static com.graphaware.common.util.IterableUtils.*;
-import static org.junit.Assert.*;
-import static org.neo4j.tooling.GlobalGraphOperations.*;
+import static com.graphaware.common.util.IterableUtils.count;
+import static org.junit.Assert.assertEquals;
+import static org.neo4j.tooling.GlobalGraphOperations.at;
 
 /**
  * Integration test for {@link Neo4jGraphGenerator} and {@link BatchGraphGenerator} with
@@ -94,7 +95,7 @@ public class BarabasiAlbertGeneratorTest {
     }
 
     private GeneratorConfiguration getGeneratorConfiguration(int numberOfNodes, int edgesPerNewNode) {
-        return new BasicGeneratorConfiguration(numberOfNodes,
+        return new BasicGeneratorConfiguration(
                 new BarabasiAlbertRelationshipGenerator(new BarabasiAlbertConfig(numberOfNodes, edgesPerNewNode)),
                 SocialNetworkNodeCreator.getInstance(),
                 SocialNetworkRelationshipCreator.getInstance()

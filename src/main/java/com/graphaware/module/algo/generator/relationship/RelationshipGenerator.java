@@ -29,6 +29,13 @@ import java.util.List;
 public interface RelationshipGenerator<T extends RelationshipGeneratorConfig> {
 
     /**
+     * Get the number of nodes that need to be created before the relationships can be generated and created.
+     *
+     * @return number of nodes this generator needs.
+     */
+    int getNumberOfNodes();
+
+    /**
      * Generate edges (relationships) based on a degree distribution.
      *
      * @return pairs of node IDs representing edges.
