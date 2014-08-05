@@ -3,7 +3,7 @@ package com.graphaware.module.algo.generator.distribution;
 import java.util.Comparator;
 
 /**
- * A distribution of node degrees for {@link com.graphaware.module.algo.generator.relationship.RelationshipGenerator}s.
+ * A mutable {@link DegreeDistribution}.
  */
 public interface MutableDegreeDistribution extends DegreeDistribution {
 

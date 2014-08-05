@@ -8,12 +8,15 @@ import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.unsafe.batchinsert.BatchInserter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A {@link NodeCreator} that assigns every {@link org.neo4j.graphdb.Node} a "Person" {@link org.neo4j.graphdb.Label},
- * a Male/Female {@link Label} (with equal probabilities), and a randomly generated English name under a property key
- * "name".
+ * a Male/Female {@link Label} (with equal probabilities), and a randomly generated English name under the property key
+ * "name". Singleton.
  */
 public class SocialNetworkNodeCreator implements NodeCreator {
 
@@ -31,6 +34,11 @@ public class SocialNetworkNodeCreator implements NodeCreator {
         populateGendersAndNames();
     }
 
+    /**
+     * Get an instance of this node creator.
+     *
+     * @return instance.
+     */
     public static SocialNetworkNodeCreator getInstance() {
         return INSTANCE;
     }
@@ -71,7 +79,7 @@ public class SocialNetworkNodeCreator implements NodeCreator {
     private void populateGendersAndNames() {
         for (String line : FileScanner.produceLines(SocialNetworkNodeCreator.class.getClassLoader().getResourceAsStream("fake_names.csv"), 0)) {
             String[] fields = line.split(",");
-            gendersAndNames.add(new Pair<>("female".equals(fields[0]) ? FEMALE_LABEL : MALE_LABEL, fields[1] +" "+ fields[2]));
+            gendersAndNames.add(new Pair<>("female".equals(fields[0]) ? FEMALE_LABEL : MALE_LABEL, fields[1] + " " + fields[2]));
         }
     }
 }

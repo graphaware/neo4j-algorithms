@@ -7,12 +7,18 @@ import java.util.List;
 import static java.lang.Math.min;
 
 /**
- * Simple {@link com.graphaware.module.algo.generator.distribution.DegreeDistribution} where the distribution can be directly passed into the constructor.
+ * Simple {@link com.graphaware.module.algo.generator.distribution.DegreeDistribution} where the node degrees can be
+ * directly passed into the constructor.
  */
 public class SimpleDegreeDistribution implements DegreeDistribution {
 
     protected final List<Integer> degrees = new ArrayList<>();
 
+    /**
+     * Create a new distribution.
+     *
+     * @param degrees degrees of nodes.
+     */
     public SimpleDegreeDistribution(List<Integer> degrees) {
         this.degrees.addAll(degrees);
     }
@@ -59,14 +65,7 @@ public class SimpleDegreeDistribution implements DegreeDistribution {
      */
     @Override
     public boolean isValid() {
-        int degreeSum = 0;
-        for (int degree : getDegrees()) {
-            degreeSum += degree;
-        }
-
-        //Total has to be even by the handshaking lemma
-        return (degreeSum % 2) == 0
-                && passesErdosGallaiTest();
+       return passesErdosGallaiTest();
     }
 
     /**
@@ -75,8 +74,7 @@ public class SimpleDegreeDistribution implements DegreeDistribution {
      *
      * @return true iff passes.
      */
-    protected final boolean passesErdosGallaiTest() {
-        // Do this in-place instead?
+    private boolean passesErdosGallaiTest() {
         MutableDegreeDistribution copy = new MutableSimpleDegreeDistribution(getDegrees());
 
         int L = copy.size();
@@ -94,6 +92,7 @@ public class SimpleDegreeDistribution implements DegreeDistribution {
         }
 
         copy.sort(Collections.<Integer>reverseOrder());
+
         // Erdos-Gallai test
         for (int k = 1; k < L; ++k) {
             int sum = 0;
@@ -117,15 +116,12 @@ public class SimpleDegreeDistribution implements DegreeDistribution {
     /**
      * Havel-Hakimi is a recursive alternative to the Erdos-Gallai condition
      *
+     * todo does not look recursive
+     * todo remove?
+     *
      * @return true iff passes.
      */
     protected final boolean passesHavelHakimiTest() {
-        /*
-         * The test fails if there are less available
-         * nodes to connect to than the degree of lar-
-         * gest node.
-         */
-
         MutableDegreeDistribution copy = new MutableSimpleDegreeDistribution(getDegrees());
 
         int i = 0;
@@ -152,6 +148,7 @@ public class SimpleDegreeDistribution implements DegreeDistribution {
             copy.set(i, 0);
             copy.sort(Collections.<Integer>reverseOrder());
         }
+
         return true;
     }
 }
