@@ -1,5 +1,6 @@
 package com.graphaware.module.algo.generator;
 
+import com.graphaware.common.util.SameTypePair;
 import com.graphaware.module.algo.generator.config.BasicGeneratorConfig;
 import com.graphaware.module.algo.generator.config.ErdosRenyiConfig;
 import com.graphaware.module.algo.generator.config.GeneratorConfiguration;
@@ -17,6 +18,7 @@ import org.neo4j.unsafe.batchinsert.BatchInserter;
 import org.neo4j.unsafe.batchinsert.BatchInserters;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com.graphaware.common.util.IterableUtils.count;
 import static org.junit.Assert.assertEquals;
@@ -46,10 +48,12 @@ public class ErdosRenyiGeneratorTest {
         new ErdosRenyiRelationshipGenerator(new ErdosRenyiConfig(500_000, 10_000_000)).generateEdges();
     }
 
-    @Test(timeout = 60 * 1000)
-    //@Ignore
+    @Test//(timeout = 60 * 1000)
+    @Ignore
     public void shouldGenerateRelationshipsForLargeGraphInAReasonableAmountOfTime2() {
-        new ErdosRenyiRelationshipGenerator(new ErdosRenyiConfig(1000, 400_000)).generateEdges();
+        long start = System.currentTimeMillis();
+        new ErdosRenyiRelationshipGenerator(new ErdosRenyiConfig(10000, 25_000_000)).generateEdges();
+        System.out.println("TIME: " + (System.currentTimeMillis() - start));
     }
 
     @Test(timeout = 5 * 60 * 1000)   //5 mins

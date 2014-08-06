@@ -59,10 +59,9 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
         long threshold = getConfiguration().getNumberOfEdges() * 4;
         long potentialEdges = getConfiguration().getNumberOfNodes() * (getConfiguration().getNumberOfNodes() - 1);
 
-        //disabled for now - very slow
-//        if (threshold > potentialEdges) {
-//            return doGenerateEdgesWithOmitList(); // Make sure to avoid edges (this takes reasonable time only up till ~ 100k)
-//        }
+        if (threshold > potentialEdges) {
+            return doGenerateEdgesWithOmitList(); // Make sure to avoid edges (this takes reasonable time only up till ~ 100k)
+        }
 
         return doGenerateEdgesSimpler(); // Be more heuristic (pajek implementation using HashSet).
     }
