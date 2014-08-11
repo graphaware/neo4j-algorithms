@@ -16,7 +16,6 @@ import java.util.Set;
  * I needed only first element. The class could be extended to
  * mimick ReservoirSampler easilly though.
  *
- * TODO: merge this more closely to the network (ideally into common.util)
  */
 public class WeightedReservoirSampler /*extends ReservoirSampler<T> ? */{
     private final Random random;

@@ -17,7 +17,6 @@ import static java.util.Collections.sort;
  *       Sampler requires a list of weights to sample from in addition. There may be some nice Java
  *       minded way of composing this into a structure, but I am not sure of any at this stage.
  *
- * TODO: Merge with com.graphaware.common.util such that this is usefull in the whole scope of the framework
  */
 public class ReservoirSampler<T> {
     private final Random random;
@@ -88,10 +87,10 @@ public class ReservoirSampler<T> {
     /**
      * Randomly chooses an rank and returns it, omiting the chosen indices.
      *
-     * TODO: make a variant which guarantees sorted input -> no need to call sort explicitly.
      * @param length length of the rank sequence
      * @return randomly chosen rank, indices omited
      */
+    @Deprecated
     public int randomIndexChoice(int length, List<Integer> omitIndices) {
         double maxRnd = 0.0;
         double rnd;
@@ -107,7 +106,6 @@ public class ReservoirSampler<T> {
                 index = i;
             }
         }
-
         return index;
     }
 
@@ -117,6 +115,7 @@ public class ReservoirSampler<T> {
      * @param omitIndices
      * @return
      */
+    @Deprecated
     public int randomIndexChoice(int length, PriorityQueue<Integer> omitIndices) {
         double maxRnd = 0.0;
         double rnd;

@@ -4,7 +4,7 @@ package com.graphaware.module.algo.generator.config;
  * {@link RelationshipGeneratorConfig} for {@link com.graphaware.module.algo.generator.relationship.WattsStrogatzRelationshipGenerator}.
  * <p/>
  *
- * meanDegree: degree which a node in the graph has on average
+ * meanDegree: degree which a node in the graph has on average (best to choose something < 10)
  * numberOfNodes: # of nodes present in the graph
  * beta: probability an edge will be rewired. Rewiring means that an edge is removed and replaced by another edge
  *       created from a pair choosen at random from a set of unconnected node pairs. Controls the clustering of the graph.
