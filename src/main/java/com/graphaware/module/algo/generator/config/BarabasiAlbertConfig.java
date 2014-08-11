@@ -3,10 +3,19 @@ package com.graphaware.module.algo.generator.config;
 /**
  * {@link RelationshipGeneratorConfig} for {@link com.graphaware.module.algo.generator.relationship.BarabasiAlbertRelationshipGenerator}.
  * <p/>
- * TODO: Document exactly what the values mean, what are their permitted values, and what their recommended values are.
+ *
+ * Permitted values: 0 < edgesPerNode < numberOfNodes
+ * Recommended values: Interested in phenomenological model? Use low edgesPerNode value (2 ~ 3)
+ *                     Real nets can have more than that. Usually choose less than half of a "mean" degree.
+ *                     Precision is not crucial here.
  */
 public class BarabasiAlbertConfig extends NumberOfNodesBasedConfig {
 
+    /**
+     * Number of edges added to the graph when
+     * a new node is connected. The node has this
+     * number of edges at that instant.
+     */
     private final int edgesPerNewNode;
 
     /**
@@ -34,6 +43,6 @@ public class BarabasiAlbertConfig extends NumberOfNodesBasedConfig {
      */
     @Override
     public boolean isValid() {
-        return super.isValid() && !(edgesPerNewNode < 2 || edgesPerNewNode + 1 > getNumberOfNodes());
+        return super.isValid() && !(edgesPerNewNode < 1 || edgesPerNewNode + 1 > getNumberOfNodes());
     }
 }
