@@ -2,14 +2,17 @@ package com.graphaware.module.algo.generator.relationship;
 
 import com.graphaware.module.algo.generator.config.ErdosRenyiConfig;
 import junit.framework.TestCase;
+import org.junit.Ignore;
+import org.junit.Test;
 
 
 public class ErdosRenyiGraphRelationshipGeneratorTest extends TestCase {
 
+    @Test(timeout = 5 * 60 * 1000)   //5 mins
+    @Ignore
     public void testDoGenerateEdges() {
         ErdosRenyiConfig config = new ErdosRenyiConfig(1_000_000, 5_000_000);
         ErdosRenyiRelationshipGenerator er = new ErdosRenyiRelationshipGenerator(config);
-        System.out.println("Number of edges generated: " + er.generateEdges().size());
     }
 
 
