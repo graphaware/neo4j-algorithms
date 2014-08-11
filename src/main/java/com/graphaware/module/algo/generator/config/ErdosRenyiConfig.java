@@ -20,9 +20,6 @@ public class ErdosRenyiConfig extends NumberOfNodesBasedConfig {
     public ErdosRenyiConfig(int numberOfNodes, long numberOfEdges) {
         super(numberOfNodes);
         this.numberOfEdges = numberOfEdges;
-
-        System.out.println("Number of edges: " + this.numberOfEdges);
-
     }
 
     /**

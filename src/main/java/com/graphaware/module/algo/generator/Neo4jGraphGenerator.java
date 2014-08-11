@@ -47,6 +47,7 @@ public class Neo4jGraphGenerator implements GraphGenerator {
     }
 
     private void generateRelationships(final GeneratorConfiguration config) {
+
         RelationshipGenerator<?> relationshipGenerator = config.getRelationshipGenerator();
         List<SameTypePair<Integer>> relationships = relationshipGenerator.generateEdges();
 

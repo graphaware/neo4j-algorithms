@@ -50,19 +50,19 @@ public class WattsStrogatzRelationshipGenerator extends BaseRelationshipGenerato
 
         /** Rewire edges with probability beta.
 
-           TODO: is it possible to somehow avoid the false rewirings withouth the algorithm being stuck?
-                 The false rewirings change the desired probability distribution a little bit, but for
-                 large enough networks do not matter.
+         TODO: is it possible to somehow avoid the false rewirings withouth the algorithm being stuck?
+         The false rewirings change the desired probability distribution a little bit, but for
+         large enough networks do not matter.
 
-           At the moment, I am hacking my way around a bit here, due to constraints
-           enforced by the class structure. There is a room for improvement as this
-           implementation is not the most effective one.
+         At the moment, I am hacking my way around a bit here, due to constraints
+         enforced by the class structure. There is a room for improvement as this
+         implementation is not the most effective one.
 
-           Also, the wiring stops when the algorithm rewires to a non-graphical set of
-           edges. Unconnected components may appear in the graph due to rewiring.
+         Also, the wiring stops when the algorithm rewires to a non-graphical set of
+         edges. Unconnected components may appear in the graph due to rewiring.
 
-           Works, but could be faster.
-        */
+         Works, but could be faster.
+         */
         for (ListIterator<SameTypePair<Integer>> it = ring.listIterator(); it.hasNext(); ) {
             int index = it.nextIndex(); // index
             SameTypePair<Integer> edge = it.next(); // get the edge present in the iterator
