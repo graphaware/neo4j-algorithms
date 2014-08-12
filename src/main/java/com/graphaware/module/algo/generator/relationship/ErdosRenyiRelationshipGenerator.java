@@ -19,24 +19,24 @@ import java.util.*;
  * The switch allows to generate even complete graphs (eg. (V, E) = (20, 190) in a reasonable time. The switch is turned
  * on to dense graph generator for the case when number of edges requested is greater than half of total possible edges
  * that could be generated.
- *
- * TODO: The "faster" way should be made faster, or deleted.
+ * <p/>
+ * LEGACY: The "faster" way should be made faster, or deleted.
  * Vojta: I agree, this is partially an artifact (refractored).
- *        I was hoping to find a
- *        mathematical formula for effectively calculating the
- *        mapping from edge index to unordered pairs  - if I succeeded,
- *        it would be way more faster than the HashSet approach.
- *        The mapping is not trivial though and I was not able
- *        to find the formula yet.
- *
- *        HOWEVER!:
- *        The switch in goGenerateEdges() has its purpose.
- *        Even at the present stage, the second approach is faster
- *        for nets which are almost complete. As a check, try
- *        to generate (20, 190) using both methods.
- *
- *        I will change the test method from PQ to Hash, as you
- *        suggest, that is absolutely true, thanks.
+ * I was hoping to find a
+ * mathematical formula for effectively calculating the
+ * mapping from edge index to unordered pairs  - if I succeeded,
+ * it would be way more faster than the HashSet approach.
+ * The mapping is not trivial though and I was not able
+ * to find the formula yet.
+ * <p/>
+ * HOWEVER!:
+ * The switch in goGenerateEdges() has its purpose.
+ * Even at the present stage, the second approach is faster
+ * for nets which are almost complete. As a check, try
+ * to generate (20, 190) using both methods.
+ * <p/>
+ * I will change the test method from PQ to Hash, as you
+ * suggest, that is absolutely true, thanks.
  */
 public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<ErdosRenyiConfig> {
 
@@ -60,7 +60,7 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
         long potentialEdges = getConfiguration().getNumberOfNodes() * (getConfiguration().getNumberOfNodes() - 1);
 
         if (threshold > potentialEdges) {
-            return doGenerateEdgesWithOmitList(); // Make sure to avoid edges (this takes reasonable time only up till ~ 100k)
+            return doGenerateEdgesWithOmitList(); // Make sure to avoid edges
         }
 
         return doGenerateEdgesSimpler(); // Be more heuristic (pajek implementation using HashSet).
@@ -80,7 +80,7 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
      */
     private List<SameTypePair<Integer>> doGenerateEdgesSimpler() {
         int numberOfNodes = getConfiguration().getNumberOfNodes();
-        int numberOfEdges = getConfiguration().getNumberOfEdges();
+        long numberOfEdges = getConfiguration().getNumberOfEdges();
 
         HashSet<SameTypePair<Integer>> edges = new HashSet<>();
 
@@ -104,15 +104,14 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
      * but is slow with increasing number of edges. Best for denser networks, with
      * a clear giant component.
      * <p/>
-     *
-     * TODO: Remove the bijection iteration and optimise duplicity test?
+     * <p/>
      * (effectivelly hashing)
      *
      * @return edge list
      */
     protected List<SameTypePair<Integer>> doGenerateEdgesWithOmitList() {
-        int numberOfNodes = getConfiguration().getNumberOfNodes();
-        int numberOfEdges = getConfiguration().getNumberOfEdges();
+        long numberOfNodes = getConfiguration().getNumberOfNodes();
+        long numberOfEdges = getConfiguration().getNumberOfEdges();
 
         long maxEdges = numberOfNodes * (numberOfNodes - 1) / 2;
 
@@ -120,7 +119,7 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
         HashSet<Long> omitList = new HashSet<>(); // edges to be omited.
         RandomIndexChoice indexChoice = new RandomIndexChoice(); // Index choices with omits
 
-        for (int e = 0; e < numberOfEdges; ++e) {
+        for (long e = 0; e < numberOfEdges; ++e) {
             long choice = indexChoice.randomIndexChoice(maxEdges, omitList); // must be long to accom. rande of maxEdges
             omitList.add(choice);
             UnorderedPair<Integer> edge = indexToEdgeBijection(choice, numberOfNodes);
@@ -133,30 +132,24 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
 
     /**
      * Maps the edge list to edges.
-     * TODO: The iteration over buckets is not optimal. It would be cool if some simple mathematical formula was behind this.
-     * (at the present stage I wasn't able to find any)
+     * <p/>
      * <p/>
      * Note that long indices have to be used to label the edges, since
-     * there are numberOfNodes*(numberOfNodes-1) indices available. This
+     * there are numberOfNodes*(numberOfNodes-1)/2 indices available. This
      * is beyond range of int for networks of size above ~ 1 000 000
      *
      * @param index
      * @return an edge based on its unique label
      */
-    private UnorderedPair<Integer> indexToEdgeBijection(long index, int numberOfNodes) {
+    private UnorderedPair<Integer> indexToEdgeBijection(long index, long numberOfNodes) {
+        long boundaryL = numberOfNodes * (numberOfNodes - 1) / 1;
 
-        // Bijection from edge label to realisation seems to be the bottleneck!
-        long cumulative = 0;
-        int remainder = 0;
-        int j;
-        for (j = 0; j < numberOfNodes - 1; ++j) { // how to avoid this loop ?
-            cumulative += numberOfNodes - j - 1;
-            if (cumulative > index) {
-                remainder = (int) (index - cumulative + numberOfNodes - j);
-                break; // found the correct j
-            }
+        if (index < 0 || boundaryL <= index) {
+            throw new IndexOutOfBoundsException("Index is greater than number of possible edges: " + index + " " + boundaryL);
         }
+        int i = (int) Math.ceil((Math.sqrt(1 + 8 * (index + 1)) - 1) / 2);   // get the factoradic index (int should suffice - check)
+        int diff = (int) index + 1 - (int) ((long) i * (long) (i - 1)) / 2; // convert to long to avoid overflows. The difference should be int range. Ideally change all generators for <? ext. Number> later
 
-        return new UnorderedPair<>(j, remainder + j);
+        return new UnorderedPair<>(i, diff-1);
     }
 }

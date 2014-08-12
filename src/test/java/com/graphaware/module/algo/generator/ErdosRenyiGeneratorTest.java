@@ -37,7 +37,9 @@ public class ErdosRenyiGeneratorTest {
         assertUsingDatabase(100, 1000);
         assertUsingDatabase(100, 5);
         assertUsingDatabase(10, 11);
+        assertUsingDatabase(10, 23); // 2nd case, generate in the omit list regime
         assertUsingDatabase(20, 190);
+
 
         assertUsingBatchInserter(100, 1000);
     }

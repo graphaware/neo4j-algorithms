@@ -3,7 +3,16 @@ package com.graphaware.module.algo.generator.config;
 /**
  * {@link RelationshipGeneratorConfig} for {@link com.graphaware.module.algo.generator.relationship.WattsStrogatzRelationshipGenerator}.
  * <p/>
- * TODO: Document exactly what the values mean, what are their permitted values, and what their recommended values are.
+ *
+ * meanDegree: degree which a node in the graph has on average (best to choose something < 10)
+ * numberOfNodes: # of nodes present in the graph
+ * beta: probability an edge will be rewired. Rewiring means that an edge is removed and replaced by another edge
+ *       created from a pair choosen at random from a set of unconnected node pairs. Controls the clustering of the graph.
+ *       beta = 1.0: Erdos-Renyi model
+ *       beta = 0.0: Ring graph
+ *       0.0 < beta < 1.0: Fast convergence towards a random graph, but still sufficiently clustered.
+ *
+ * Recommended value of beta to exploit typical (randomness & clustering) properties of the W-S model: 0.4 < beta < 0.6
  */
 public class WattsStrogatzConfig extends NumberOfNodesBasedConfig {
 
