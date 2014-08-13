@@ -40,11 +40,12 @@ public class ErdosRenyiGraphRelationshipGeneratorTest extends TestCase {
 
     /**
      * Checks the length of edgeList and compares to the expected number of edges to be generated
-     * @param numberOfEdges
-     * @param edges
+     *
+     * @param numberOfEdges number of edges in the graph
+     * @param edges list of edges as SameTypePair<Integer>
      */
     private void assertCorrectNumberOfEdgesGenerated(long numberOfEdges, List<SameTypePair<Integer>> edges) {
-         assertEquals(numberOfEdges, edges.size());
+        assertEquals(numberOfEdges, edges.size());
     }
 
 }
