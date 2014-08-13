@@ -40,7 +40,6 @@ public class WattsStrogatzGeneratorTest {
     }
 
     @Test(timeout = 60 * 1000)
-    @Ignore //todo fix this - hotspot is doGenerateEdges
     public void shouldGenerateRelationshipsForLargeGraphInAReasonableAmountOfTime() {
         new WattsStrogatzRelationshipGenerator(new WattsStrogatzConfig(1_000_000, 10, 0.5)).generateEdges();
     }
