@@ -4,10 +4,7 @@ import com.graphaware.common.util.SameTypePair;
 import com.graphaware.common.util.UnorderedPair;
 import com.graphaware.module.algo.generator.config.WattsStrogatzConfig;
 
-import java.util.List;
-import java.util.ListIterator;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Watts-Strogatz model implementation.
@@ -32,13 +29,14 @@ public class WattsStrogatzRelationshipGenerator extends BaseRelationshipGenerato
      */
     @Override
     protected List<SameTypePair<Integer>> doGenerateEdges() {
+
         int numberOfNodes = getConfiguration().getNumberOfNodes();
         int meanDegree = getConfiguration().getMeanDegree();
         double beta = getConfiguration().getBeta();
 
         // Throw warning if no rewiring is possible? Complete graph?
         Random random = new Random();
-        ArrayList<SameTypePair<Integer>> ring = new ArrayList<>(numberOfNodes);
+        HashSet<SameTypePair<Integer>> ring = new HashSet<>(numberOfNodes);
 
         // Create a ring network
         for (int i = 0; i < numberOfNodes; ++i) {
@@ -50,7 +48,6 @@ public class WattsStrogatzRelationshipGenerator extends BaseRelationshipGenerato
 
         /** Rewire edges with probability beta.
 
-         TODO: is it possible to somehow avoid the false rewirings withouth the algorithm being stuck?
          The false rewirings change the desired probability distribution a little bit, but for
          large enough networks do not matter.
 
@@ -63,29 +60,36 @@ public class WattsStrogatzRelationshipGenerator extends BaseRelationshipGenerato
 
          Works, but could be faster.
          */
-        for (ListIterator<SameTypePair<Integer>> it = ring.listIterator(); it.hasNext(); ) {
-            int index = it.nextIndex(); // index
-            SameTypePair<Integer> edge = it.next(); // get the edge present in the iterator
+        HashSet<SameTypePair<Integer>> newEdges = new HashSet<>();
+        Iterator<SameTypePair<Integer>> iterator = ring.iterator();
 
+        while (iterator.hasNext()) {
+            SameTypePair<Integer> edge = iterator.next();
             if (random.nextDouble() <= beta) {
+                int choice = random.nextDouble() > .5 ? edge.first() : edge.second(); // select first/second at random
+
                 while (true) {
-                    // Allow self-rewiring ? (this avoids problems with complete graphs)
-                    int choice = random.nextDouble() > .5 ? edge.first() : edge.second(); // select first/second at random
-                    int trial = (int) Math.floor(random.nextDouble() * (numberOfNodes - 1));       // skip self node
-                    int partner = trial < choice ? trial : trial + 1;                     // avoid self-loops
+                    int trial = random.nextInt(numberOfNodes - 1);
+                    int partner = trial < choice ? trial : trial + 1;  // avoid self loops
 
                     UnorderedPair<Integer> trialPair = new UnorderedPair<>(choice, partner);
 
                     // Allows for self-rewiring to avoid parasitic cases?
                     // check with original definition of the model
-                    if (trialPair.equals(edge) || !ring.contains(trialPair)) {
-                        ring.set(index, trialPair); // replace the pair
+                    if (trialPair.equals(edge))
+                        break;
+
+                    if (!ring.contains(trialPair) && !newEdges.contains(trialPair)) {
+                        iterator.remove();//ring.remove(edge);
+                        newEdges.add(trialPair);
                         break;
                     }
                 }
             }
         }
 
-        return ring;
+        // add newly rewired edges to the ring
+        ring.addAll(newEdges);
+        return new ArrayList<>(ring);
     }
 }
