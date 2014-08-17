@@ -11,12 +11,13 @@ import com.graphaware.tx.executor.batch.UnitOfWork;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * {@link GraphGenerator} for Neo4j.
  */
-public class Neo4jGraphGenerator implements GraphGenerator {
+public class Neo4jGraphGenerator extends BaseGraphGenerator {
 
     private final GraphDatabaseService database;
 
@@ -28,34 +29,36 @@ public class Neo4jGraphGenerator implements GraphGenerator {
      * {@inheritDoc}
      */
     @Override
-    public void generateGraph(GeneratorConfiguration configuration) {
-        generateNodes(configuration);
-        generateRelationships(configuration);
-    }
+    protected List<Long> generateNodes(final GeneratorConfiguration config) {
+        final List<Long> nodes = new ArrayList<>();
 
-    private void generateNodes(final GeneratorConfiguration config) {
         int numberOfNodes = config.getNumberOfNodes();
 
         BatchTransactionExecutor executor = new NoInputBatchTransactionExecutor(database, config.getBatchSize(), numberOfNodes, new UnitOfWork<NullItem>() {
             @Override
             public void execute(GraphDatabaseService database, NullItem input, int batchNumber, int stepNumber) {
-                config.getNodeCreator().createNode(database);
+                nodes.add(config.getNodeCreator().createNode(database).getId());
             }
         });
 
         executor.execute();
+
+        return nodes;
     }
 
-    private void generateRelationships(final GeneratorConfiguration config) {
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void generateRelationships(final GeneratorConfiguration config, final List<Long> nodes) {
         RelationshipGenerator<?> relationshipGenerator = config.getRelationshipGenerator();
         List<SameTypePair<Integer>> relationships = relationshipGenerator.generateEdges();
 
         BatchTransactionExecutor executor = new IterableInputBatchTransactionExecutor<>(database, config.getBatchSize(), relationships, new UnitOfWork<SameTypePair<Integer>>() {
             @Override
             public void execute(GraphDatabaseService database, SameTypePair<Integer> input, int batchNumber, int stepNumber) {
-                Node first = database.getNodeById(input.first());
-                Node second = database.getNodeById(input.second());
+                Node first = database.getNodeById(nodes.get(input.first()));
+                Node second = database.getNodeById(nodes.get(input.second()));
                 config.getRelationshipCreator().createRelationship(first, second);
             }
         });

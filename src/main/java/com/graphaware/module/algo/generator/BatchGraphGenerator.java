@@ -16,12 +16,13 @@ import org.neo4j.unsafe.batchinsert.BatchInserter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * {@link com.graphaware.module.algo.generator.GraphGenerator} for Neo4j using {@link BatchInserter}.
  */
-public class BatchGraphGenerator implements GraphGenerator {
+public class BatchGraphGenerator extends BaseGraphGenerator {
 
     private static final Logger LOG = LoggerFactory.getLogger(BatchGraphGenerator.class);
 
@@ -36,37 +37,47 @@ public class BatchGraphGenerator implements GraphGenerator {
      */
     @Override
     public void generateGraph(GeneratorConfiguration configuration) {
-        generateNodes(configuration);
-        generateRelationships(configuration);
+        super.generateGraph(configuration);
 
         batchInserter.shutdown();
         LOG.info("Inserter shut down");
     }
 
-    private void generateNodes(final GeneratorConfiguration config) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List<Long> generateNodes(final GeneratorConfiguration config) {
+        List<Long> nodes = new ArrayList<>();
+
         int numberOfNodes = config.getNumberOfNodes();
         NodeCreator nodeCreator = config.getNodeCreator();
 
         LOG.info("Creating " + numberOfNodes + " nodes");
 
         for (int i = 0; i < numberOfNodes; i++) {
-            nodeCreator.createNode(batchInserter);
+            nodes.add(nodeCreator.createNode(batchInserter));
         }
 
         LOG.info("Created " + numberOfNodes + " nodes");
+
+        return nodes;
     }
 
-    private void generateRelationships(final GeneratorConfiguration config) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void generateRelationships(GeneratorConfiguration config, List<Long> nodes) {
         LOG.info("Generating relationships");
 
-        RelationshipGenerator<?> relationshipGenerator = config.getRelationshipGenerator();
-        List<SameTypePair<Integer>> relationships = relationshipGenerator.generateEdges();
+        List<SameTypePair<Integer>> relationships = config.getRelationshipGenerator().generateEdges();
 
         LOG.info("Generated relationships, creating them");
 
         RelationshipCreator relationshipCreator = config.getRelationshipCreator();
         for (SameTypePair<Integer> relationship : relationships) {
-            relationshipCreator.createRelationship(relationship.first(), relationship.second(), batchInserter);
+            relationshipCreator.createRelationship(nodes.get(relationship.first()), nodes.get(relationship.second()), batchInserter);
         }
 
         LOG.info("Created relationships, shutting down inserter");
