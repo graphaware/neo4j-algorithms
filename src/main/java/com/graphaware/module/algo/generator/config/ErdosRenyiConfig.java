@@ -5,8 +5,8 @@ import java.math.BigInteger;
 /**
  * {@link RelationshipGeneratorConfig} for {@link com.graphaware.module.algo.generator.relationship.ErdosRenyiRelationshipGenerator}.
  *
- * numberOfNodes: number of nodes in the graph. 0 < numberOfNodes
- * numberOfEdges: number of edges present in the generated graph. Range: 0 < numberOfNodes < (numberOfNodes*(numberOfNodes - 1)/2).
+ * numberOfNodes: number of nodes in the graph. 1 < numberOfNodes
+ * numberOfEdges: number of edges present in the generated graph. Range: 0 < numberOfEdges < (numberOfNodes*(numberOfNodes - 1)/2).
  *                Highly recommended not to exceed ~ 4 000 000 edges.
  *
  */

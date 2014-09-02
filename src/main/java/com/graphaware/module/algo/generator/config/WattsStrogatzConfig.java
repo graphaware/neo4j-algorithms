@@ -5,9 +5,9 @@ package com.graphaware.module.algo.generator.config;
  * <p/>
  *
  * meanDegree: degree which a node in the graph has on average (best to choose something < 10)
- * numberOfNodes: # of nodes present in the graph
+ * numberOfNodes: number of nodes present in the graph
  * beta: probability an edge will be rewired. Rewiring means that an edge is removed and replaced by another edge
- *       created from a pair choosen at random from a set of unconnected node pairs. Controls the clustering of the graph.
+ *       created from a pair chosen at random from a set of unconnected node pairs. Controls the clustering of the graph.
  *       beta = 1.0: Erdos-Renyi model
  *       beta = 0.0: Ring graph
  *       0.0 < beta < 1.0: Fast convergence towards a random graph, but still sufficiently clustered.

@@ -10,7 +10,7 @@ import java.util.List;
  * The sum of all degrees should be an even integer. Moreover, not all distributions
  * correspond to a simple, undirected graph. Only graphs that satisfy Erdos-Gallai condition
  * or equivalently the Havel-Hakimi test are valid. The distribution is tested in
- * SimpleDegreeDistribution class.
+ * {@link SimpleDegreeDistribution} class.
  */
 public class DistributionBasedConfig extends SimpleDegreeDistribution implements RelationshipGeneratorConfig {
 

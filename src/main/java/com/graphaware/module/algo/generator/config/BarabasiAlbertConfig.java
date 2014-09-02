@@ -3,11 +3,10 @@ package com.graphaware.module.algo.generator.config;
 /**
  * {@link RelationshipGeneratorConfig} for {@link com.graphaware.module.algo.generator.relationship.BarabasiAlbertRelationshipGenerator}.
  * <p/>
- *
  * Permitted values: 0 < edgesPerNode < numberOfNodes
  * Recommended values: Interested in phenomenological model? Use low edgesPerNode value (2 ~ 3)
- *                     Real nets can have more than that. Usually choose less than half of a "mean" degree.
- *                     Precision is not crucial here.
+ * Real nets can have more than that. Usually choose less than half of a "mean" degree.
+ * Precision is not crucial here.
  */
 public class BarabasiAlbertConfig extends NumberOfNodesBasedConfig {
 
