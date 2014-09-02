@@ -30,7 +30,6 @@ public class BarabasiAlbertRelationshipGenerator extends BaseRelationshipGenerat
 
     /**
      * {@inheritDoc}
-     * <p/>
      */
     @Override
     protected List<SameTypePair<Integer>> doGenerateEdges() {

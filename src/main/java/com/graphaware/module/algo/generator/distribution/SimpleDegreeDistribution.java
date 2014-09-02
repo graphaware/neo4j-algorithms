@@ -65,7 +65,7 @@ public class SimpleDegreeDistribution implements DegreeDistribution {
      */
     @Override
     public boolean isValid() {
-       return passesErdosGallaiTest();
+        return passesErdosGallaiTest();
     }
 
     /**
@@ -114,15 +114,10 @@ public class SimpleDegreeDistribution implements DegreeDistribution {
     }
 
     /**
-     * Havel-Hakimi is a recursive alternative to the Erdos-Gallai condition
-     *
-     *
-     * M: does not look recursive.
-     * V: it is a looped implementation, the algorithm is recursive in nature, but recursion is slow.
-     *
-     * M: remove?
-     * V: keep this one as a backup. Erdos-Gallai test is essentially implemented as a black-box, but
-     *    this test is nicelly penetrable and might be useful as a replacement for E-G eventually.
+     * Havel-Hakimi is a recursive alternative to the Erdos-Gallai condition. This is a looped implementation, the
+     * algorithm is recursive in nature, but recursion is slower.
+     * <p/>
+     * Kept as a backup, might be useful as a replacement for E-G eventually.
      *
      * @return true iff passes.
      */

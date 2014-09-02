@@ -19,24 +19,6 @@ import java.util.*;
  * The switch allows to generate even complete graphs (eg. (V, E) = (20, 190) in a reasonable time. The switch is turned
  * on to dense graph generator for the case when number of edges requested is greater than half of total possible edges
  * that could be generated.
- * <p/>
- * LEGACY: The "faster" way should be made faster, or deleted.
- * Vojta: I agree, this is partially an artifact (refractored).
- * I was hoping to find a
- * mathematical formula for effectively calculating the
- * mapping from edge index to unordered pairs  - if I succeeded,
- * it would be way more faster than the HashSet approach.
- * The mapping is not trivial though and I was not able
- * to find the formula yet.
- * <p/>
- * HOWEVER!:
- * The switch in goGenerateEdges() has its purpose.
- * Even at the present stage, the second approach is faster
- * for nets which are almost complete. As a check, try
- * to generate (20, 190) using both methods.
- * <p/>
- * I will change the test method from PQ to Hash, as you
- * suggest, that is absolutely true, thanks.
  */
 public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<ErdosRenyiConfig> {
 
@@ -103,9 +85,6 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
      * edge labels to edge realisations. Works very well for large number of nodes,
      * but is slow with increasing number of edges. Best for denser networks, with
      * a clear giant component.
-     * <p/>
-     * <p/>
-     * (effectivelly hashing)
      *
      * @return edge list
      */
@@ -132,7 +111,6 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
 
     /**
      * Maps the edge list to edges.
-     * <p/>
      * <p/>
      * Note that long indices have to be used to label the edges, since
      * there are numberOfNodes*(numberOfNodes-1)/2 indices available. This

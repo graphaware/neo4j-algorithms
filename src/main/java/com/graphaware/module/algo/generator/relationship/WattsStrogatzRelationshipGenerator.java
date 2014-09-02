@@ -11,6 +11,8 @@ import java.util.*;
  */
 public class WattsStrogatzRelationshipGenerator extends BaseRelationshipGenerator<WattsStrogatzConfig> {
 
+    private Random random = new Random();
+
     public WattsStrogatzRelationshipGenerator(WattsStrogatzConfig configuration) {
         super(configuration);
     }
@@ -34,8 +36,6 @@ public class WattsStrogatzRelationshipGenerator extends BaseRelationshipGenerato
         int meanDegree = getConfiguration().getMeanDegree();
         double beta = getConfiguration().getBeta();
 
-        // Throw warning if no rewiring is possible? Complete graph?
-        Random random = new Random();
         HashSet<SameTypePair<Integer>> ring = new HashSet<>(numberOfNodes);
 
         // Create a ring network

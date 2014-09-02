@@ -73,9 +73,6 @@ public class SimpleGraphRelationshipGenerator extends BaseRelationshipGenerator<
                 MutableDegreeDistribution temp = new MutableSimpleDegreeDistribution(distribution.getDegrees());
                 int candidateIndex = sampler.randomIndexChoice(temp.getDegrees(), index);
 
-                // int rnd =  (int) Math.floor(Math.random() * (length - 1)); // choose an rank from one elem. less range. OK
-                // int candidateIndex = rnd >= rank ? rnd + 1 : rnd;         // skip rank.
-
                 SameTypePair<Integer> edgeCandidate = new UnorderedPair<>(candidateIndex, index);
 
                 //  Checks if edge has already been added.
@@ -90,7 +87,6 @@ public class SimpleGraphRelationshipGenerator extends BaseRelationshipGenerator<
                 if (skip) {
                     continue;
                 }
-
 
                 // Prepare the candidate set and test if it is graphical
                 temp.decrease(index);
