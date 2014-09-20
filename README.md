@@ -84,15 +84,15 @@ with types, labels, and properties of your choosing. You can use the provided `S
 For now, the provided REST API allows you to create social networks only with FRIEND_OF relationships and randomly generated
  English names and uniformly assigned genders for people nodes.
 
-* POST to `http://your-server:7474/graphaware/algorithm/generator/social/watts-strogatz/{numberOfNodes}/{meanDegree}/{beta}` will
+* `POST` to `http://your-server:7474/graphaware/algorithm/generator/social/watts-strogatz/{numberOfNodes}/{meanDegree}/{beta}` will
 return a CREATED 201 status when your Watts-Strogatz network has been successfully created. Please refer to [`WattsStrogatzConfig`](http://graphaware.com/site/algorithms/latest/apidocs/com/graphaware/module/algo/generator/config/WattsStrogatzConfig.html) for explanation
 of the parameters you need to provide.
 
-* POST to `http://your-server:7474/graphaware/algorithm/generator/social/erdos-renyi/{numberOfNodes}/{numberOfEdges}` will
+* `POST` to `http://your-server:7474/graphaware/algorithm/generator/social/erdos-renyi/{numberOfNodes}/{numberOfEdges}` will
 return a CREATED 201 status when your Erdos-Renyi network has been successfully created. Please refer to [`ErdosRenyiConfig`](http://graphaware.com/site/algorithms/latest/apidocs/com/graphaware/module/algo/generator/config/ErdosRenyiConfig.html) for explanation
 of the parameters you need to provide.
 
-* POST to `http://your-server:7474/graphaware/algorithm/generator/social/barabasi-albert/{numberOfNodes}/{edgesPerNewNode}` will
+* `POST` to `http://your-server:7474/graphaware/algorithm/generator/social/barabasi-albert/{numberOfNodes}/{edgesPerNewNode}` will
 return a CREATED 201 status when your Barabasi-Albert network has been successfully created. Please refer to [`BarabasiAlberConfig`](http://graphaware.com/site/algorithms/latest/apidocs/com/graphaware/module/algo/generator/config/BarabasiAlbertConfig.html) for explanation
 of the parameters you need to provide.
 
