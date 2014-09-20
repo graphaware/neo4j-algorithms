@@ -65,7 +65,7 @@ generators. For a theoretical introduction, please take a look at the following 
 #### Java
 
 In order to use the graph generators from Java, get the library following the instructions above and have a look at the
-Javadoc and tests. This will give you a really good idea of how the generators can be used. Provided implementations
+[Javadoc](http://graphaware.com/site/algorithms/latest/apidocs) and tests. This will give you a really good idea of how the generators can be used. Provided implementations
 include:
 * Erdos-Renyi Model
 * Barabasi-Albert Model
@@ -75,7 +75,7 @@ include:
 You have to choose two things: the shape of the network (one of the models above) and its contents (what labels will nodes
 get? what properties? what types of relationships will you generate?).
 
-To choose the contents of the network, you can plug in your own implementations of [`NodeCreator`] and [`RelationshipCreator`] to create nodes and relationships
+To choose the contents of the network, you can plug in your own implementations of [`NodeCreator`](http://graphaware.com/site/algorithms/latest/apidocs/com/graphaware/module/algo/generator/node/NodeCreator.html) and [`RelationshipCreator`](http://graphaware.com/site/algorithms/latest/apidocs/com/graphaware/module/algo/generator/relationship/RelationshipCreator.html) to create nodes and relationships
 with types, labels, and properties of your choosing. You can use the provided `SocialNetworkNodeCreator` and
 `SocialNetworkRelationshipCreator` to get started quickly.
 
@@ -85,15 +85,15 @@ For now, the provided REST API allows you to create social networks only with FR
  English names and uniformly assigned genders for people nodes.
 
 * POST to `http://your-server:7474/graphaware/algorithm/generator/social/watts-strogatz/{numberOfNodes}/{meanDegree}/{beta}` will
-return a CREATED 201 status when your Watts-Strogatz network has been successfully created. Please refer to [`WattsStrogatzConfig`] for explanation
+return a CREATED 201 status when your Watts-Strogatz network has been successfully created. Please refer to [`WattsStrogatzConfig`](http://graphaware.com/site/algorithms/latest/apidocs/com/graphaware/module/algo/generator/config/WattsStrogatzConfig.html) for explanation
 of the parameters you need to provide.
 
 * POST to `http://your-server:7474/graphaware/algorithm/generator/social/erdos-renyi/{numberOfNodes}/{numberOfEdges}` will
-return a CREATED 201 status when your Erdos-Renyi network has been successfully created. Please refer to [`ErdosRenyiConfig`] for explanation
+return a CREATED 201 status when your Erdos-Renyi network has been successfully created. Please refer to [`ErdosRenyiConfig`](http://graphaware.com/site/algorithms/latest/apidocs/com/graphaware/module/algo/generator/config/ErdosRenyiConfig.html) for explanation
 of the parameters you need to provide.
 
 * POST to `http://your-server:7474/graphaware/algorithm/generator/social/barabasi-albert/{numberOfNodes}/{edgesPerNewNode}` will
-return a CREATED 201 status when your Barabasi-Albert network has been successfully created. Please refer to [`BarabasiAlberConfig`] for explanation
+return a CREATED 201 status when your Barabasi-Albert network has been successfully created. Please refer to [`BarabasiAlberConfig`](http://graphaware.com/site/algorithms/latest/apidocs/com/graphaware/module/algo/generator/config/BarabasiAlbertConfig.html) for explanation
 of the parameters you need to provide.
 
 <a name="algos"/>
