@@ -3,7 +3,6 @@ package com.graphaware.module.algo.generator.relationship;
 import com.graphaware.common.util.SameTypePair;
 import com.graphaware.common.util.UnorderedPair;
 import com.graphaware.module.algo.generator.config.ErdosRenyiConfig;
-import com.graphaware.module.algo.generator.utils.RandomIndexChoice;
 
 import java.util.*;
 
@@ -55,16 +54,14 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
      * by Vladimir Batagelj and Ulrik Brandes
      * <p/>
      * PHYSICAL REVIEW E 71, 036113, 2005
-     * <p/>
-     * and relies on excellent hashing performance of Java implementation of HashSet.
      *
      * @return edge list
      */
     private List<SameTypePair<Integer>> doGenerateEdgesSimpler() {
-        int numberOfNodes = getConfiguration().getNumberOfNodes();
-        long numberOfEdges = getConfiguration().getNumberOfEdges();
+        final int numberOfNodes = getConfiguration().getNumberOfNodes();
+        final long numberOfEdges = getConfiguration().getNumberOfEdges();
 
-        HashSet<SameTypePair<Integer>> edges = new HashSet<>();
+        final HashSet<SameTypePair<Integer>> edges = new HashSet<>();
 
         while (edges.size() < numberOfEdges) {
             int origin = random.nextInt(numberOfNodes);
@@ -77,7 +74,7 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
             edges.add(new UnorderedPair<>(origin, target));
         }
 
-        return new ArrayList<>(edges);
+        return new LinkedList<>(edges);
     }
 
     /**
@@ -89,45 +86,41 @@ public class ErdosRenyiRelationshipGenerator extends BaseRelationshipGenerator<E
      * @return edge list
      */
     protected List<SameTypePair<Integer>> doGenerateEdgesWithOmitList() {
-        long numberOfNodes = getConfiguration().getNumberOfNodes();
-        long numberOfEdges = getConfiguration().getNumberOfEdges();
+        final int numberOfNodes = getConfiguration().getNumberOfNodes();
+        final int numberOfEdges = getConfiguration().getNumberOfEdges();
+        final long maxEdges = numberOfNodes * (numberOfNodes - 1) / 2;
 
-        long maxEdges = numberOfNodes * (numberOfNodes - 1) / 2;
+        final List<SameTypePair<Integer>> edges = new LinkedList<>();
 
-        List<SameTypePair<Integer>> edges = new LinkedList<>();
-        HashSet<Long> omitList = new HashSet<>(); // edges to be omited.
-        RandomIndexChoice indexChoice = new RandomIndexChoice(); // Index choices with omits
-
-        for (long e = 0; e < numberOfEdges; ++e) {
-            long choice = indexChoice.randomIndexChoice(maxEdges, omitList); // must be long to accom. rande of maxEdges
-            omitList.add(choice);
-            UnorderedPair<Integer> edge = indexToEdgeBijection(choice, numberOfNodes);
-            edges.add(edge); // Add the newly created edge (guaranteed unique)
+        for (Long index : edgeIndices(numberOfEdges, maxEdges)) {
+            edges.add(indexToEdgeBijection(index));
         }
 
         return edges;
     }
 
-
     /**
-     * Maps the edge list to edges.
-     * <p/>
-     * Note that long indices have to be used to label the edges, since
-     * there are numberOfNodes*(numberOfNodes-1)/2 indices available. This
-     * is beyond range of int for networks of size above ~ 1 000 000
+     * Maps an index in a hypothetical list of all edges to the actual edge.
      *
-     * @param index
+     * @param index index
      * @return an edge based on its unique label
      */
-    private UnorderedPair<Integer> indexToEdgeBijection(long index, long numberOfNodes) {
-        long boundaryL = numberOfNodes * (numberOfNodes - 1) / 1;
+    private UnorderedPair<Integer> indexToEdgeBijection(long index) {
+        long i = (long) Math.ceil((Math.sqrt(1 + 8 * (index + 1)) - 1) / 2);
+        long diff = index + 1 - (i * (i - 1)) / 2;
 
-        if (index < 0 || boundaryL <= index) {
-            throw new IndexOutOfBoundsException("Index is greater than number of possible edges: " + index + " " + boundaryL);
+        return new UnorderedPair<>((int) i, (int) diff - 1);
+    }
+
+    private Set<Long> edgeIndices(int numberOfEdges, long maxEdges) {
+        Set<Long> result = new HashSet<>(numberOfEdges);
+        while (result.size() < numberOfEdges) {
+            result.add(nextLong(maxEdges));
         }
-        int i = (int) Math.ceil((Math.sqrt(1 + 8 * (index + 1)) - 1) / 2);   // get the factoradic index (int should suffice - check)
-        int diff = (int) index + 1 - (int) ((long) i * (long) (i - 1)) / 2; // convert to long to avoid overflows. The difference should be int range. Ideally change all generators for <? ext. Number> later
+        return result;
+    }
 
-        return new UnorderedPair<>(i, diff-1);
+    private long nextLong(long length) {
+        return (long) (random.nextDouble() * length);
     }
 }

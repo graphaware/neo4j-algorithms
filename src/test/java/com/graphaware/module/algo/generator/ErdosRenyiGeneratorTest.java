@@ -37,9 +37,8 @@ public class ErdosRenyiGeneratorTest {
         assertUsingDatabase(100, 1000);
         assertUsingDatabase(100, 5);
         assertUsingDatabase(10, 11);
-        assertUsingDatabase(10, 23); // 2nd case, generate in the omit list regime
+        assertUsingDatabase(10, 23);
         assertUsingDatabase(20, 190);
-
 
         assertUsingBatchInserter(100, 1000);
     }
@@ -50,15 +49,13 @@ public class ErdosRenyiGeneratorTest {
         new ErdosRenyiRelationshipGenerator(new ErdosRenyiConfig(500_000, 10_000_000)).generateEdges();
     }
 
-    @Test//(timeout = 60 * 1000)
+    @Test(timeout = 60 * 1000)
     @Ignore
     public void shouldGenerateRelationshipsForLargeGraphInAReasonableAmountOfTime2() {
-        long start = System.currentTimeMillis();
         new ErdosRenyiRelationshipGenerator(new ErdosRenyiConfig(10000, 25_000_000)).generateEdges();
-        System.out.println("TIME: " + (System.currentTimeMillis() - start));
     }
 
-    @Test(timeout = 5 * 60 * 1000)   //5 mins
+    @Test(timeout = 5 * 60 * 1000)
     @Ignore
     public void shouldGenerateLargeGraphInAReasonableAmountOfTime() throws IOException {
         TemporaryFolder folder = new TemporaryFolder();
@@ -66,7 +63,7 @@ public class ErdosRenyiGeneratorTest {
 
         BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot().getAbsolutePath());
 
-        new BatchGraphGenerator(batchInserter).generateGraph(getGeneratorConfiguration(1_000_000, 50_000_000));
+        new BatchGraphGenerator(batchInserter).generateGraph(getGeneratorConfiguration(100_000, 5_000_000));
 
         folder.delete();
     }

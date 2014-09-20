@@ -12,7 +12,7 @@ import java.math.BigInteger;
  */
 public class ErdosRenyiConfig extends NumberOfNodesBasedConfig {
 
-    private final long numberOfEdges;
+    private final int numberOfEdges;
 
     /**
      * Constructs a new config.
@@ -20,7 +20,7 @@ public class ErdosRenyiConfig extends NumberOfNodesBasedConfig {
      * @param numberOfNodes number of nodes present in the network.
      * @param numberOfEdges number of edges present in the network.
      */
-    public ErdosRenyiConfig(int numberOfNodes, long numberOfEdges) {
+    public ErdosRenyiConfig(int numberOfNodes, int numberOfEdges) {
         super(numberOfNodes);
         this.numberOfEdges = numberOfEdges;
     }
@@ -30,7 +30,7 @@ public class ErdosRenyiConfig extends NumberOfNodesBasedConfig {
      *
      * @return number of edges.
      */
-    public long getNumberOfEdges() {
+    public int getNumberOfEdges() {
         return numberOfEdges;
     }
 
