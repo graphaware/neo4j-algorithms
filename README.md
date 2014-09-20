@@ -5,6 +5,10 @@ GraphAware Neo4j Algorithms
 
 GraphAware Algorithms is a library of graph algorithms for Neo4j.
 
+* [Graph Generators](#graph-generators)
+* [Path Finding](#path-finding)
+
+
 Getting the Software
 --------------------
 
@@ -47,7 +51,7 @@ The version number has two parts. The first four numbers indicate compatibility 
  compatible with GraphAware Neo4j Framework 2.1.3.10.
 
 Using the Software
---------------------
+------------------
 
 ### Graph Generators
 
