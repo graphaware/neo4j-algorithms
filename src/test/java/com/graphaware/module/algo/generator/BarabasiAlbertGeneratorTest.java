@@ -69,14 +69,12 @@ public class BarabasiAlbertGeneratorTest {
         database.shutdown();
     }
 
-    @Test(timeout = 20 * 1000)
-    @Ignore
+    @Test(timeout = 10 * 1000)
     public void shouldGenerateRelationshipsForLargeGraphInAReasonableAmountOfTime() {
         new BarabasiAlbertRelationshipGenerator(new BarabasiAlbertConfig(1_000_000, 3)).generateEdges();
     }
 
-    @Test(timeout = 5 * 60 * 1000)   //5 mins
-    @Ignore
+    @Test(timeout = 60 * 1000)
     public void shouldGenerateLargeGraphInAReasonableAmountOfTime() throws IOException {
         TemporaryFolder folder = new TemporaryFolder();
         folder.create();
