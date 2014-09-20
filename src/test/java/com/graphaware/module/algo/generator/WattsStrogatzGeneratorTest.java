@@ -45,14 +45,13 @@ public class WattsStrogatzGeneratorTest {
     }
 
     @Test(timeout = 5 * 60 * 1000)   //5 mins
-    @Ignore
     public void shouldGenerateLargeGraphInAReasonableAmountOfTime() throws IOException {
         TemporaryFolder folder = new TemporaryFolder();
         folder.create();
 
         BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot().getAbsolutePath());
 
-        new BatchGraphGenerator(batchInserter).generateGraph(getGeneratorConfiguration(1_000_000, 50, 0.5));
+        new BatchGraphGenerator(batchInserter).generateGraph(getGeneratorConfiguration(100_000, 50, 0.5));
 
         folder.delete();
     }
