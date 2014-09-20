@@ -3,6 +3,7 @@ package com.graphaware.module.algo.generator.relationship;
 import com.graphaware.common.util.SameTypePair;
 import com.graphaware.module.algo.generator.config.ErdosRenyiConfig;
 import junit.framework.TestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class ErdosRenyiGraphRelationshipGeneratorTest extends TestCase {
 
 
     @Test(timeout = 5 * 60 * 1000)   //5 mins
+    @Ignore
     public void testErdosRenyiGeneratorPerformance() {
         LOG.info("Starting ER performance test (timeout 5 mins)");
         doGenerateEdges(1_000_000, 2_000_000); // Uses simple generator
