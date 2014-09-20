@@ -39,12 +39,14 @@ public class WattsStrogatzGeneratorTest {
         assertUsingBatchInserter(100, 10, 0.2);
     }
 
-    @Test(timeout = 60 * 1000)
+    @Test(timeout = 2 * 60 * 1000)
+    @Ignore
     public void shouldGenerateRelationshipsForLargeGraphInAReasonableAmountOfTime() {
         new WattsStrogatzRelationshipGenerator(new WattsStrogatzConfig(1_000_000, 10, 0.5)).generateEdges();
     }
 
     @Test(timeout = 5 * 60 * 1000)   //5 mins
+    @Ignore
     public void shouldGenerateLargeGraphInAReasonableAmountOfTime() throws IOException {
         TemporaryFolder folder = new TemporaryFolder();
         folder.create();
