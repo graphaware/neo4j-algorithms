@@ -3,6 +3,7 @@ package com.graphaware.module.algo.generator.relationship;
 import com.graphaware.common.util.SameTypePair;
 import com.graphaware.module.algo.generator.config.ErdosRenyiConfig;
 import junit.framework.TestCase;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -10,25 +11,18 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static org.junit.Assert.*;
 
-public class ErdosRenyiGraphRelationshipGeneratorTest extends TestCase {
+
+public class ErdosRenyiGraphRelationshipGeneratorTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(ErdosRenyiGraphRelationshipGeneratorTest.class);
 
     @Test
     public void testErdosRenyiGeneratorValidity() {
-        LOG.info("Starting ER validity check");
-        doGenerateEdges(1000, 2000);   // Uses simple generator
-        doGenerateEdges(1000, 400000); // Uses index <-> edge mapping to avoid already added edges
-    }
-
-
-    @Test(timeout = 5 * 60 * 1000)   //5 mins
-    @Ignore
-    public void testErdosRenyiGeneratorPerformance() {
         LOG.info("Starting ER performance test (timeout 5 mins)");
-        doGenerateEdges(1_000_000, 2_000_000); // Uses simple generator
-        doGenerateEdges(4_000, 4_000_000); // Uses index <-> edge mapping
+        doGenerateEdges(20, 190); // Uses simple generator
+        doGenerateEdges(10, 15); // Uses index <-> edge mapping
     }
 
     public void doGenerateEdges(int numberOfNodes, int numberOfEdges) {
