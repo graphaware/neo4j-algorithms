@@ -1,7 +1,7 @@
-GraphAware Neo4j Algorithms (WIP - not ready for production!)
-============================================================
+GraphAware Neo4j Algorithms
+===========================
 
-[![Build Status](https://travis-ci.org/graphaware/neo4j-algorithms.png)](https://travis-ci.org/graphaware/neo4j-algorithms)
+[![Build Status](https://travis-ci.org/graphaware/neo4j-algorithms.png)](https://travis-ci.org/graphaware/neo4j-algorithms) | <a href="http://graphaware.com/downloads/" target="_blank">Downloads</a> | <a href="http://graphaware.com/site/algorithms/latest/apidocs/" target="_blank">Javadoc</a> | Latest Release: 2.1.4.18.2
 
 GraphAware Algorithms is a library of graph algorithms for Neo4j.
 
@@ -30,7 +30,7 @@ Releases are synced to <a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%
         <dependency>
             <groupId>com.graphaware.neo4j</groupId>
             <artifactId>algorithms</artifactId>
-            <version>2.1.3.10.2</version>
+            <version>2.1.4.18.2</version>
         </dependency>
         ...
     </dependencies>
@@ -38,7 +38,7 @@ Releases are synced to <a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%
 #### Snapshots
 
 To use the latest development version, just clone this repository, run `mvn clean install` and change the version in the
-dependency above to 2.1.3.10.3-SNAPSHOT.
+dependency above to 2.1.4.18.3-SNAPSHOT.
 
 #### Note on Versioning Scheme
 
@@ -50,14 +50,47 @@ Using the Software
 --------------------
 
 ### Graph Generators
-WIP
 
-TODO:
-* get rid of todos in the code
-* make sure the database doesn't have to be empty
-* create a decent library of distributions and pre-configured generators
-* document (and enforce) maximum supported numbers of nodes and relationships
+It is often required for testing and implementation to work with a randomly generated graph. Getting one isn't as simple
+as it sounds - care has to be taken when generating relationships in order to obtain the desired network shape. A lot of
+research has gone into networks in the past decades; we have taken some of it and implemented a number of random graph
+generators. For a theoretical introduction, please take a look at the following blog posts:
+* [Random Graph Models (Part I)](http://graphaware.com/graph/theory/2014/07/16/random-graphs-part-one.html)
+* [Random Graph Models (Part II)](http://graphaware.com/graph/theory/2014/08/06/random-graphs-part-two.html)
 
+#### Java
+
+In order to use the graph generators from Java, get the library following the instructions above and have a look at the
+Javadoc and tests. This will give you a really good idea of how the generators can be used. Provided implementations
+include:
+* Erdos-Renyi Model
+* Barabasi-Albert Model
+* Watts-Strogatz Model
+* Configuration Model
+
+You have to choose two things: the shape of the network (one of the models above) and its contents (what labels will nodes
+get? what properties? what types of relationships will you generate?).
+
+To choose the contents of the network, you can plug in your own implementations of [`NodeCreator`] and [`RelationshipCreator`] to create nodes and relationships
+with types, labels, and properties of your choosing. You can use the provided `SocialNetworkNodeCreator` and
+`SocialNetworkRelationshipCreator` to get started quickly.
+
+#### REST API
+
+For now, the provided REST API allows you to create social networks only with FRIEND_OF relationships and randomly generated
+ English names and uniformly assigned genders for people nodes.
+
+* POST to `http://your-server:7474/graphaware/algorithm/generator/social/watts-strogatz/{numberOfNodes}/{meanDegree}/{beta}` will
+return a CREATED 201 status when your Watts-Strogatz network has been successfully created. Please refer to [`WattsStrogatzConfig`] for explanation
+of the parameters you need to provide.
+
+* POST to `http://your-server:7474/graphaware/algorithm/generator/social/erdos-renyi/{numberOfNodes}/{numberOfEdges}` will
+return a CREATED 201 status when your Erdos-Renyi network has been successfully created. Please refer to [`ErdosRenyiConfig`] for explanation
+of the parameters you need to provide.
+
+* POST to `http://your-server:7474/graphaware/algorithm/generator/social/barabasi-albert/{numberOfNodes}/{edgesPerNewNode}` will
+return a CREATED 201 status when your Barabasi-Albert network has been successfully created. Please refer to [`BarabasiAlberConfig`] for explanation
+of the parameters you need to provide.
 
 <a name="algos"/>
 ### Path Finding
