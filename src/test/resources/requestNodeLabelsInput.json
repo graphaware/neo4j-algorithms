@@ -1,5 +1,7 @@
 {
     "startNode": 0,
     "endNode": 2,
-    "includeNodeLabels": true
+    "includeNodeLabels": true,
+    "nodeProperties": [],
+    "relationshipProperties":[]
 }

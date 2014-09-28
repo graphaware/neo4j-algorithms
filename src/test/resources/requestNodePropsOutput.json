@@ -3,14 +3,17 @@
         "nodes": [
             {
                 "id": 0,
+                "labels": ["L1", "L2"],
                 "name": "one"
             },
             {
                 "id": 1,
+                "labels": ["L2"],
                 "name": "two"
             },
             {
                 "id": 2,
+                "labels": ["L1", "L2"],
                 "name": "three"
             }
         ],
@@ -18,12 +21,14 @@
             {
                 "id": 0,
                 "type": "R1",
-                "direction": "OUTGOING"
+                "direction": "OUTGOING",
+                "cost": 5
             },
             {
                 "id": 1,
                 "type": "R2",
-                "direction": "OUTGOING"
+                "direction": "OUTGOING",
+                "cost": 1
             }
         ]
     },
@@ -31,18 +36,22 @@
         "nodes": [
             {
                 "id": 0,
+                "labels": ["L1", "L2"],
                 "name": "one"
             },
             {
                 "id": 3,
+                "labels": ["L2"],
                 "name": "four"
             },
             {
                 "id": 4,
+                "labels": ["L1"],
                 "name": "five"
             },
             {
                 "id": 2,
+                "labels": ["L1", "L2"],
                 "name": "three"
             }
         ],
@@ -50,17 +59,20 @@
             {
                 "id": 2,
                 "type": "R2",
-                "direction": "OUTGOING"
+                "direction": "OUTGOING",
+                "cost": 1
             },
             {
                 "id": 3,
                 "type": "R1",
-                "direction": "OUTGOING"
+                "direction": "OUTGOING",
+                "cost": 2
             },
             {
                 "id": 4,
                 "type": "R1",
-                "direction": "OUTGOING"
+                "direction": "OUTGOING",
+                "cost": 1
             }
         ]
     },
@@ -68,18 +80,22 @@
         "nodes": [
             {
                 "id": 0,
+                "labels": ["L1", "L2"],
                 "name": "one"
             },
             {
                 "id": 5,
+                "labels": ["L1"],
                 "name": "six"
             },
             {
                 "id": 6,
+                "labels": ["L1"],
                 "name": "seven"
             },
             {
                 "id": 2,
+                "labels": ["L1", "L2"],
                 "name": "three"
             }
         ],
@@ -87,7 +103,8 @@
             {
                 "id": 6,
                 "type": "R1",
-                "direction": "OUTGOING"
+                "direction": "OUTGOING",
+                "cost": 1
             },
             {
                 "id": 7,
@@ -97,7 +114,8 @@
             {
                 "id": 8,
                 "type": "R1",
-                "direction": "INCOMING"
+                "direction": "INCOMING",
+                "cost": 1
             }
         ]
     }

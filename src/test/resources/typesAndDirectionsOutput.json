@@ -2,23 +2,32 @@
     {
         "nodes": [
             {
-                "id": 0
+                "id": 0,
+                "labels": ["L1", "L2"],
+                "name": "one"
             },
             {
-                "id": 5
+                "id": 5,
+                "labels": ["L1"],
+                "name": "six"
             },
             {
-                "id": 6
+                "id": 6,
+                "labels": ["L1"],
+                "name": "seven"
             },
             {
-                "id": 2
+                "id": 2,
+                "labels": ["L1", "L2"],
+                "name": "three"
             }
         ],
         "relationships": [
             {
                 "id": 6,
                 "type": "R1",
-                "direction": "OUTGOING"
+                "direction": "OUTGOING",
+                "cost": 1
             },
             {
                 "id": 7,
@@ -28,7 +37,8 @@
             {
                 "id": 8,
                 "type": "R1",
-                "direction": "INCOMING"
+                "direction": "INCOMING",
+                "cost": 1
             }
         ]
     }

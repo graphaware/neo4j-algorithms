@@ -21,14 +21,12 @@
             {
                 "id": 0,
                 "type": "R1",
-                "direction": "OUTGOING",
-                "cost": 5
+                "direction": "OUTGOING"
             },
             {
                 "id": 1,
                 "type": "R2",
-                "direction": "OUTGOING",
-                "cost": 1
+                "direction": "OUTGOING"
             }
         ]
     },
@@ -59,20 +57,17 @@
             {
                 "id": 2,
                 "type": "R2",
-                "direction": "OUTGOING",
-                "cost": 1
+                "direction": "OUTGOING"
             },
             {
                 "id": 3,
                 "type": "R1",
-                "direction": "OUTGOING",
-                "cost": 2
+                "direction": "OUTGOING"
             },
             {
                 "id": 4,
                 "type": "R1",
-                "direction": "OUTGOING",
-                "cost": 1
+                "direction": "OUTGOING"
             }
         ]
     },
@@ -103,8 +98,7 @@
             {
                 "id": 6,
                 "type": "R1",
-                "direction": "OUTGOING",
-                "cost": 1
+                "direction": "OUTGOING"
             },
             {
                 "id": 7,
@@ -114,8 +108,7 @@
             {
                 "id": 8,
                 "type": "R1",
-                "direction": "INCOMING",
-                "cost": 1
+                "direction": "INCOMING"
             }
         ]
     }

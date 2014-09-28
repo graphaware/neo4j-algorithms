@@ -101,7 +101,7 @@ public class NumberOfShortestPathsFinderApiTest extends GraphAwareApiTest {
 
     @Test
     public void nonExistingNodePropertiesShouldNotBeIncluded() {
-        assertJsonEquals(post(jsonAsString("requestNonExistingNodePropsInput")), jsonAsString("minimalOutput"));
+        assertJsonEquals(post(jsonAsString("requestNonExistingNodePropsInput")), jsonAsString("minimalOutputWithNoNodeProps"));
     }
 
     @Test
@@ -111,12 +111,12 @@ public class NumberOfShortestPathsFinderApiTest extends GraphAwareApiTest {
 
     @Test
     public void nonExistingRelationshipPropertiesShouldNotBeIncluded() {
-        assertJsonEquals(post(jsonAsString("requestNonExistingRelationshipPropsInput")), jsonAsString("minimalOutput"));
+        assertJsonEquals(post(jsonAsString("requestNonExistingRelationshipPropsInput")), jsonAsString("minimalOutputWithNoRelProps"));
     }
 
     @Test
     public void nodeLabelsShouldOnlyBeIncludedWhenRequested() {
-        assertJsonEquals(post(jsonAsString("requestNoNodeLabelsInput")), jsonAsString("minimalOutput"));
+        assertJsonEquals(post(jsonAsString("requestNoNodeLabelsInput")), jsonAsString("minimalOutputWithoutLabels"));
         assertJsonEquals(post(jsonAsString("requestNodeLabelsInput")), jsonAsString("requestNodeLabelsOutput"));
     }
 

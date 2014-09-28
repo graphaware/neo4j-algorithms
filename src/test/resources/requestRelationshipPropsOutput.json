@@ -2,13 +2,19 @@
     {
         "nodes": [
             {
-                "id": 0
+                "id": 0,
+                "labels": ["L1", "L2"],
+                "name": "one"
             },
             {
-                "id": 1
+                "id": 1,
+                "labels": ["L2"],
+                "name": "two"
             },
             {
-                "id": 2
+                "id": 2,
+                "labels": ["L1", "L2"],
+                "name": "three"
             }
         ],
         "relationships": [
@@ -29,16 +35,24 @@
     {
         "nodes": [
             {
-                "id": 0
+                "id": 0,
+                "labels": ["L1", "L2"],
+                "name": "one"
             },
             {
-                "id": 3
+                "id": 3,
+                "labels": ["L2"],
+                "name": "four"
             },
             {
-                "id": 4
+                "id": 4,
+                "labels": ["L1"],
+                "name": "five"
             },
             {
-                "id": 2
+                "id": 2,
+                "labels": ["L1", "L2"],
+                "name": "three"
             }
         ],
         "relationships": [
@@ -65,16 +79,24 @@
     {
         "nodes": [
             {
-                "id": 0
+                "id": 0,
+                "labels": ["L1", "L2"],
+                "name": "one"
             },
             {
-                "id": 5
+                "id": 5,
+                "labels": ["L1"],
+                "name": "six"
             },
             {
-                "id": 6
+                "id": 6,
+                "labels": ["L1"],
+                "name": "seven"
             },
             {
-                "id": 2
+                "id": 2,
+                "labels": ["L1", "L2"],
+                "name": "three"
             }
         ],
         "relationships": [
