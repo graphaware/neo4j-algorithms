@@ -1,7 +1,7 @@
 GraphAware Neo4j Algorithms
 ===========================
 
-[![Build Status](https://travis-ci.org/graphaware/neo4j-algorithms.png)](https://travis-ci.org/graphaware/neo4j-algorithms) | <a href="http://graphaware.com/downloads/" target="_blank">Downloads</a> | <a href="http://graphaware.com/site/algorithms/latest/apidocs/" target="_blank">Javadoc</a> | Latest Release: 2.1.4.18.2
+[![Build Status](https://travis-ci.org/graphaware/neo4j-algorithms.png)](https://travis-ci.org/graphaware/neo4j-algorithms) | <a href="http://graphaware.com/downloads/" target="_blank">Downloads</a> | <a href="http://graphaware.com/site/algorithms/latest/apidocs/" target="_blank">Javadoc</a> | Latest Release: 2.1.4.19.3
 
 GraphAware Algorithms is a library of graph algorithms for Neo4j.
 
@@ -34,7 +34,7 @@ Releases are synced to <a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%
         <dependency>
             <groupId>com.graphaware.neo4j</groupId>
             <artifactId>algorithms</artifactId>
-            <version>2.1.4.18.2</version>
+            <version>2.1.4.19.3</version>
         </dependency>
         ...
     </dependencies>
@@ -42,7 +42,7 @@ Releases are synced to <a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%
 #### Snapshots
 
 To use the latest development version, just clone this repository, run `mvn clean install` and change the version in the
-dependency above to 2.1.4.18.3-SNAPSHOT.
+dependency above to 2.1.4.19.4-SNAPSHOT.
 
 #### Note on Versioning Scheme
 
@@ -140,9 +140,9 @@ You can also optionally specify the following:
     * LENGTH_ASC (By increasing length. Ordering of paths with the same lengths is unspecified. This is the default.)
     * LENGTH_ASC_THEN_COST_ASC (By increasing length, then by increasing cost. The cost property must be specified.)
     * LENGTH_ASC_THEN_COST_DESC (By increasing length, then by decreasing cost. The cost property must be specified.)
-* whether to include node labels in the result (`includeNodeLabels`) set to true or false, default is false
-* which node properties to include in the result (`nodeProperties`) as an array of Strings, default is none
-* which relationship properties to include in the result (`relationshipProperties`) as an array of Strings, default is none
+* whether to include node labels in the result (`includeNodeLabels`) set to true or false, default is true
+* which node properties to include in the result (`nodeProperties`) as an array of Strings, default is all
+* which relationship properties to include in the result (`relationshipProperties`) as an array of Strings, default is all
 * which relationships to traverse by supplying one of the following (default is all relationships in both directions):
     * the direction in which to traverse relationships (`direction`), INCOMING, OUTGOING, or BOTH
     * relationship types and directions for each (`typesAndDirections` array with `type` and optionally `direction`)
@@ -184,33 +184,33 @@ The output depends on the specification, but could look something like this:
     {
         "nodes": [
             {
-                "id": 0
+                "id": 0,
+                "labels": ["L1", "L2"],
+                "name": "one"
             },
             {
-                "id": 5
+                "id": 1,
+                "labels": ["L2"],
+                "name": "two"
             },
             {
-                "id": 6
-            },
-            {
-                "id": 2
+                "id": 2,
+                "labels": ["L1", "L2"],
+                "name": "three"
             }
         ],
         "relationships": [
             {
-                "id": 6,
+                "id": 0,
                 "type": "R1",
-                "direction": "OUTGOING"
+                "direction": "OUTGOING",
+                "cost": 5
             },
             {
-                "id": 7,
-                "type": "R1",
-                "direction": "OUTGOING"
-            },
-            {
-                "id": 8,
-                "type": "R1",
-                "direction": "INCOMING"
+                "id": 1,
+                "type": "R2",
+                "direction": "OUTGOING",
+                "cost": 1
             }
         ]
     }
