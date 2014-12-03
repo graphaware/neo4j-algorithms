@@ -1,7 +1,7 @@
 GraphAware Neo4j Algorithms
 ===========================
 
-[![Build Status](https://travis-ci.org/graphaware/neo4j-algorithms.png)](https://travis-ci.org/graphaware/neo4j-algorithms) | <a href="http://graphaware.com/downloads/" target="_blank">Downloads</a> | <a href="http://graphaware.com/site/algorithms/latest/apidocs/" target="_blank">Javadoc</a> | Latest Release: 2.1.5.25.4
+[![Build Status](https://travis-ci.org/graphaware/neo4j-algorithms.png)](https://travis-ci.org/graphaware/neo4j-algorithms) | <a href="http://graphaware.com/downloads/" target="_blank">Downloads</a> | <a href="http://graphaware.com/site/algorithms/latest/apidocs/" target="_blank">Javadoc</a> | Latest Release: 2.1.6.26.4
 
 GraphAware Algorithms is a library of graph algorithms for Neo4j.
 
@@ -34,7 +34,7 @@ Releases are synced to <a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%
         <dependency>
             <groupId>com.graphaware.neo4j</groupId>
             <artifactId>algorithms</artifactId>
-            <version>2.1.5.25.4</version>
+            <version>2.1.6.26.4</version>
         </dependency>
         ...
     </dependencies>
@@ -42,7 +42,7 @@ Releases are synced to <a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%
 #### Snapshots
 
 To use the latest development version, just clone this repository, run `mvn clean install` and change the version in the
-dependency above to 2.1.5.25.5-SNAPSHOT.
+dependency above to 2.1.6.26.5-SNAPSHOT.
 
 #### Note on Versioning Scheme
 
