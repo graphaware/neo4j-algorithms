@@ -17,18 +17,13 @@
 package com.graphaware.module.algo.generator.api;
 
 import com.graphaware.test.integration.GraphAwareApiTest;
-import com.graphaware.test.util.TestUtils;
 import org.eclipse.jetty.http.HttpStatus;
-import org.junit.Assert;
 import org.junit.Test;
-import org.neo4j.graphdb.*;
+import org.neo4j.graphdb.Transaction;
 import org.neo4j.helpers.collection.Iterables;
 import org.neo4j.tooling.GlobalGraphOperations;
 
-import static com.graphaware.test.util.TestUtils.assertJsonEquals;
-import static com.graphaware.test.util.TestUtils.get;
-import static com.graphaware.test.util.TestUtils.jsonAsString;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Integration test for {@link GeneratorApi}.
@@ -37,7 +32,7 @@ public class GeneratorApiTest extends GraphAwareApiTest {
 
     @Test
     public void shouldGenerateErdosRenyi() {
-        TestUtils.post(getUrl() + "erdos-renyi/1000/10000", HttpStatus.CREATED_201);
+        httpClient.post(getUrl() + "erdos-renyi/1000/10000", HttpStatus.CREATED_201);
 
         try (Transaction tx = getDatabase().beginTx()) {
             assertEquals(1000, Iterables.count(GlobalGraphOperations.at(getDatabase()).getAllNodes()));
@@ -49,7 +44,7 @@ public class GeneratorApiTest extends GraphAwareApiTest {
 
     @Test
     public void shouldGenerateBarabasiAlbert() {
-        TestUtils.post(getUrl() + "barabasi-albert/1000/3", HttpStatus.CREATED_201);
+        httpClient.post(getUrl() + "barabasi-albert/1000/3", HttpStatus.CREATED_201);
 
         try (Transaction tx = getDatabase().beginTx()) {
             assertEquals(1000, Iterables.count(GlobalGraphOperations.at(getDatabase()).getAllNodes()));
@@ -60,7 +55,7 @@ public class GeneratorApiTest extends GraphAwareApiTest {
 
     @Test
     public void shouldGenerateWattsStrogatz() {
-        TestUtils.post(getUrl() + "watts-strogatz/1000/10/0.5", HttpStatus.CREATED_201);
+        httpClient.post(getUrl() + "watts-strogatz/1000/10/0.5", HttpStatus.CREATED_201);
 
         try (Transaction tx = getDatabase().beginTx()) {
             assertEquals(1000, Iterables.count(GlobalGraphOperations.at(getDatabase()).getAllNodes()));

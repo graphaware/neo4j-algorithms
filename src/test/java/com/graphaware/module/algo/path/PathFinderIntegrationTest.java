@@ -31,7 +31,7 @@ public class PathFinderIntegrationTest extends NeoServerIntegrationTest {
 
     @Test
     public void graphAwareApisAreMountedWhenPresentOnClasspath() throws InterruptedException, IOException {
-        executeCypher(baseUrl(),
+        httpClient.executeCypher(baseUrl(),
                 "CREATE (one:L1:L2 {name:'one'}), " +
                         "(two:L2 {name:'two'}), " +
                         "(three:L1:L2 {name:'three'}), " +
@@ -44,7 +44,7 @@ public class PathFinderIntegrationTest extends NeoServerIntegrationTest {
                         "(two)-[:R2 {cost:1}]->(four), " +
                         "(one)-[:R1 {cost:1}]->(six)-[:R1]->(seven)<-[:R1 {cost:1}]-(three)");
 
-        assertJsonEquals(post(baseUrl() + "/graphaware/algorithm/path/increasinglyLongerShortestPath",
+        assertJsonEquals(httpClient.post(baseUrl() + "/graphaware/algorithm/path/increasinglyLongerShortestPath",
                 jsonAsString("minimalInput"), HttpStatus.OK_200),
                 jsonAsString("minimalOutput"));
     }

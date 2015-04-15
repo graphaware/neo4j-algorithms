@@ -17,7 +17,6 @@
 package com.graphaware.module.algo.path;
 
 import com.graphaware.test.integration.GraphAwareApiTest;
-import com.graphaware.test.util.TestUtils;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Test;
 import org.neo4j.graphdb.*;
@@ -171,7 +170,7 @@ public class NumberOfShortestPathsFinderApiTest extends GraphAwareApiTest {
     }
 
     protected final String post(String json, int expectedStatus) {
-        return TestUtils.post(getUrl(), json, expectedStatus);
+        return httpClient.post(getUrl(), json, expectedStatus);
     }
 
     private String getUrl() {
