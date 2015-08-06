@@ -1,45 +1,70 @@
 [
-    {
-        "nodes": [
-            {
-                "id": 0,
-                "labels": ["L1", "L2"],
-                "name": "one"
-            },
-            {
-                "id": 5,
-                "labels": ["L1"],
-                "name": "six"
-            },
-            {
-                "id": 6,
-                "labels": ["L1"],
-                "name": "seven"
-            },
-            {
-                "id": 2,
-                "labels": ["L1", "L2"],
-                "name": "three"
-            }
-        ],
-        "relationships": [
-            {
-                "id": 6,
-                "type": "R1",
-                "direction": "OUTGOING",
-                "cost": 1
-            },
-            {
-                "id": 7,
-                "type": "R1",
-                "direction": "OUTGOING"
-            },
-            {
-                "id": 8,
-                "type": "R1",
-                "direction": "INCOMING",
-                "cost": 1
-            }
+  {
+    "nodes": [
+      {
+        "id": 0,
+        "properties": {
+          "name": "one"
+        },
+        "labels": [
+          "L1",
+          "L2"
         ]
-    }
+      },
+      {
+        "id": 5,
+        "properties": {
+          "name": "six"
+        },
+        "labels": [
+          "L1"
+        ]
+      },
+      {
+        "id": 6,
+        "properties": {
+          "name": "seven"
+        },
+        "labels": [
+          "L1"
+        ]
+      },
+      {
+        "id": 2,
+        "properties": {
+          "name": "three"
+        },
+        "labels": [
+          "L1",
+          "L2"
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "id": 6,
+        "properties": {
+          "cost": 1
+        },
+        "startNodeId": 0,
+        "endNodeId": 5,
+        "type": "R1"
+      },
+      {
+        "id": 7,
+        "startNodeId": 5,
+        "endNodeId": 6,
+        "type": "R1"
+      },
+      {
+        "id": 8,
+        "properties": {
+          "cost": 1
+        },
+        "startNodeId": 2,
+        "endNodeId": 6,
+        "type": "R1"
+      }
+    ]
+  }
 ]

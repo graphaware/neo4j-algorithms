@@ -1,33 +1,49 @@
 [
-    {
-        "nodes": [
-            {
-                "id": 0,
-                "labels": ["L1", "L2"],
-                "name": "one"
-            },
-            {
-                "id": 1,
-                "labels": ["L2"],
-                "name": "two"
-            },
-            {
-                "id": 2,
-                "labels": ["L1", "L2"],
-                "name": "three"
-            }
-        ],
-        "relationships": [
-            {
-                "id": 0,
-                "type": "R1",
-                "direction": "OUTGOING"
-            },
-            {
-                "id": 1,
-                "type": "R2",
-                "direction": "OUTGOING"
-            }
+  {
+    "nodes": [
+      {
+        "id": 0,
+        "properties": {
+          "name": "one"
+        },
+        "labels": [
+          "L1",
+          "L2"
         ]
-    }
+      },
+      {
+        "id": 1,
+        "properties": {
+          "name": "two"
+        },
+        "labels": [
+          "L2"
+        ]
+      },
+      {
+        "id": 2,
+        "properties": {
+          "name": "three"
+        },
+        "labels": [
+          "L1",
+          "L2"
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "id": 0,
+        "startNodeId": 0,
+        "endNodeId": 1,
+        "type": "R1"
+      },
+      {
+        "id": 1,
+        "startNodeId": 1,
+        "endNodeId": 2,
+        "type": "R2"
+      }
+    ]
+  }
 ]

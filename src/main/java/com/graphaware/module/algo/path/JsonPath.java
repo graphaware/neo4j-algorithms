@@ -39,16 +39,13 @@ public class JsonPath {
 
     public JsonPath(Path path, JsonPathFinderInput jsonInput) {
         List<JsonNode> jsonNodes = new LinkedList<>();
-        List<Node> nodes = Iterables.toList(path.nodes());
         for (Node node : path.nodes()) {
             jsonNodes.add(new JsonNode(node, jsonInput));
         }
 
         List<JsonRelationship> jsonRelationships = new LinkedList<>();
-        int i = 0;
         for (Relationship relationship : path.relationships()) {
-            jsonRelationships.add(new JsonRelationship(relationship, jsonInput,  nodes.get(i)));
-            i++;
+            jsonRelationships.add(new JsonRelationship(relationship, jsonInput));
         }
 
         setNodes(jsonNodes.toArray(new JsonNode[jsonNodes.size()]));

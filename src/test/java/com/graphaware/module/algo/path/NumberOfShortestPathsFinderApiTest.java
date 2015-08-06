@@ -114,12 +114,6 @@ public class NumberOfShortestPathsFinderApiTest extends GraphAwareApiTest {
     }
 
     @Test
-    public void nodeLabelsShouldOnlyBeIncludedWhenRequested() {
-        assertJsonEquals(post(jsonAsString("requestNoNodeLabelsInput")), jsonAsString("minimalOutputWithoutLabels"));
-        assertJsonEquals(post(jsonAsString("requestNodeLabelsInput")), jsonAsString("requestNodeLabelsOutput"));
-    }
-
-    @Test
     public void maxDepthAndMaxResultsShouldBeRespected() {
         assertJsonEquals(post(jsonAsString("maxDepthInput")), jsonAsString("maxDepthOutput"));
         assertJsonEquals(post(jsonAsString("maxResultsInput")), jsonAsString("maxResultsOutput"));
