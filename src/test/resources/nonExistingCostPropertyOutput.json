@@ -66,6 +66,75 @@
         ]
       },
       {
+        "id": 5,
+        "properties": {
+          "name": "six"
+        },
+        "labels": [
+          "L1"
+        ]
+      },
+      {
+        "id": 6,
+        "properties": {
+          "name": "seven"
+        },
+        "labels": [
+          "L1"
+        ]
+      },
+      {
+        "id": 2,
+        "properties": {
+          "name": "three"
+        },
+        "labels": [
+          "L1",
+          "L2"
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "id": 6,
+        "properties": {
+          "cost": 1
+        },
+        "startNodeId": 0,
+        "endNodeId": 5,
+        "type": "R1"
+      },
+      {
+        "id": 7,
+        "startNodeId": 5,
+        "endNodeId": 6,
+        "type": "R1"
+      },
+      {
+        "id": 8,
+        "properties": {
+          "cost": 1
+        },
+        "startNodeId": 2,
+        "endNodeId": 6,
+        "type": "R1"
+      }
+    ],
+    "cost": 0
+  },
+  {
+    "nodes": [
+      {
+        "id": 0,
+        "properties": {
+          "name": "one"
+        },
+        "labels": [
+          "L1",
+          "L2"
+        ]
+      },
+      {
         "id": 3,
         "properties": {
           "name": "four"
@@ -138,21 +207,21 @@
         ]
       },
       {
-        "id": 5,
+        "id": 3,
         "properties": {
-          "name": "six"
+          "name": "four"
         },
         "labels": [
-          "L1"
+          "L2"
         ]
       },
       {
-        "id": 6,
+        "id": 1,
         "properties": {
-          "name": "seven"
+          "name": "two"
         },
         "labels": [
-          "L1"
+          "L2"
         ]
       },
       {
@@ -168,28 +237,31 @@
     ],
     "relationships": [
       {
-        "id": 6,
+        "id": 2,
         "properties": {
           "cost": 1
         },
         "startNodeId": 0,
-        "endNodeId": 5,
-        "type": "R1"
+        "endNodeId": 3,
+        "type": "R2"
       },
       {
-        "id": 7,
-        "startNodeId": 5,
-        "endNodeId": 6,
-        "type": "R1"
-      },
-      {
-        "id": 8,
+        "id": 5,
         "properties": {
           "cost": 1
         },
-        "startNodeId": 2,
-        "endNodeId": 6,
-        "type": "R1"
+        "startNodeId": 1,
+        "endNodeId": 3,
+        "type": "R2"
+      },
+      {
+        "id": 1,
+        "properties": {
+          "cost": 1
+        },
+        "startNodeId": 1,
+        "endNodeId": 2,
+        "type": "R2"
       }
     ],
     "cost": 0

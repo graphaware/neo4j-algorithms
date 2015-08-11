@@ -138,6 +138,78 @@
         ]
       },
       {
+        "id": 3,
+        "properties": {
+          "name": "four"
+        },
+        "labels": [
+          "L2"
+        ]
+      },
+      {
+        "id": 1,
+        "properties": {
+          "name": "two"
+        },
+        "labels": [
+          "L2"
+        ]
+      },
+      {
+        "id": 2,
+        "properties": {
+          "name": "three"
+        },
+        "labels": [
+          "L1",
+          "L2"
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "id": 2,
+        "properties": {
+          "cost": 1
+        },
+        "startNodeId": 0,
+        "endNodeId": 3,
+        "type": "R2"
+      },
+      {
+        "id": 5,
+        "properties": {
+          "cost": 1
+        },
+        "startNodeId": 1,
+        "endNodeId": 3,
+        "type": "R2"
+      },
+      {
+        "id": 1,
+        "properties": {
+          "cost": 1
+        },
+        "startNodeId": 1,
+        "endNodeId": 2,
+        "type": "R2"
+      }
+    ],
+    "cost": 3
+  },
+  {
+    "nodes": [
+      {
+        "id": 0,
+        "properties": {
+          "name": "one"
+        },
+        "labels": [
+          "L1",
+          "L2"
+        ]
+      },
+      {
         "id": 5,
         "properties": {
           "name": "six"

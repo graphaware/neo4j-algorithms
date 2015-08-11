@@ -117,10 +117,11 @@ public class NumberOfShortestPathsFinderTest {
 
         try (Transaction tx = database.beginTx()) {
             List<? extends Path> paths = pathFinder.findPaths(input);
-            assertEquals(3, paths.size());
+            assertEquals(4, paths.size());
             assertEquals(2, paths.get(0).length());
             assertEquals(3, paths.get(1).length());
-            assertEquals(3, paths.get(2).length());
+            assertEquals(3, paths.get(1).length());
+            assertEquals(3, paths.get(3).length());
         }
     }
 
@@ -134,10 +135,11 @@ public class NumberOfShortestPathsFinderTest {
 
         try (Transaction tx = database.beginTx()) {
             List<? extends Path> paths = pathFinder.findPaths(input);
-            assertEquals(3, paths.size());
+            assertEquals(4, paths.size());
             assertEquals(2, paths.get(0).length());
             assertEquals(3, paths.get(1).length());
             assertEquals(3, paths.get(2).length());
+            assertEquals(3, paths.get(3).length());
         }
     }
 
@@ -288,16 +290,20 @@ public class NumberOfShortestPathsFinderTest {
 
         try (Transaction tx = database.beginTx()) {
             List<? extends Path> paths = pathFinder.findPaths(input);
-            assertEquals(3, paths.size());
+
+            assertEquals(4, paths.size());
 
             assertEquals(2, paths.get(0).length());
             assertEquals(6, ((WeightedPath) paths.get(0)).getCost());
 
             assertEquals(3, paths.get(1).length());
-            assertEquals(4, ((WeightedPath) paths.get(1)).getCost());
+            assertEquals(3, ((WeightedPath) paths.get(1)).getCost());
 
             assertEquals(3, paths.get(2).length());
-            assertEquals(Long.MAX_VALUE, ((WeightedPath) paths.get(2)).getCost());
+            assertEquals(4, ((WeightedPath) paths.get(2)).getCost());
+
+            assertEquals(3, paths.get(3).length());
+            assertEquals(Long.MAX_VALUE, ((WeightedPath) paths.get(3)).getCost());
         }
     }
 
@@ -309,7 +315,7 @@ public class NumberOfShortestPathsFinderTest {
 
         try (Transaction tx = database.beginTx()) {
             List<? extends Path> paths = pathFinder.findPaths(input);
-            assertEquals(3, paths.size());
+            assertEquals(4, paths.size());
 
             assertEquals(2, paths.get(0).length());
             assertEquals(6, ((WeightedPath) paths.get(0)).getCost());
@@ -318,7 +324,10 @@ public class NumberOfShortestPathsFinderTest {
             assertEquals(4, ((WeightedPath) paths.get(1)).getCost());
 
             assertEquals(3, paths.get(2).length());
-            assertEquals(2, ((WeightedPath) paths.get(2)).getCost());
+            assertEquals(3, ((WeightedPath) paths.get(2)).getCost());
+
+            assertEquals(3, paths.get(3).length());
+            assertEquals(2, ((WeightedPath) paths.get(3)).getCost());
         }
     }
 }

@@ -16,6 +16,7 @@
 
 package com.graphaware.module.algo.path;
 
+import org.neo4j.graphalgo.GraphAlgoFactory;
 import org.neo4j.graphalgo.impl.path.ShortestPath;
 import org.neo4j.graphdb.Path;
 import org.neo4j.helpers.collection.Iterables;
@@ -34,17 +35,6 @@ import java.util.List;
  * If {@link PathFinderInput#getSortOrder()} is {@link com.graphaware.module.algo.path.SortOrder#LENGTH_ASC_THEN_COST_ASC} or
  * {@link com.graphaware.module.algo.path.SortOrder#LENGTH_ASC_THEN_COST_DESC}, then {@link PathFinderInput#getCostProperty()}
  * must also be provided and paths with the same length are ordered by total cost ascending or descending, respectively.
- * <p/>
- * Please note that relationships that are on a path with certain length will not be considered for paths with greater lengths.
- * For example, given the following graph:
- * <p/>
- * (1)->(2)->(3)
- * (1)->(4)->(5)->(3)
- * (4)->(2)
- * <p/>
- * the shortest path from (1) to (3) is (1)->(2)->(3) and has a length of 2. If more paths are needed, the next path
- * returned will be (1)->(4)->(5)->(3) with a length of 3. Note that there is another path of length 3:
- * (1)->(4)->(2)->(3), but it is not returned, since (2)->(3) is contained in a shorter path.
  */
 public class NumberOfShortestPathsFinder {
 
@@ -91,7 +81,7 @@ public class NumberOfShortestPathsFinder {
         List<Path> result = new LinkedList<Path>();
 
         //first attempt: classic shortest path
-        result.addAll(Iterables.toList(new ShortestPath(input.getMaxDepth(), input.getExpander()).findAllPaths(input.getStart(), input.getEnd())));
+        result.addAll(Iterables.toList(GraphAlgoFactory.shortestPath(input.getExpander(), input.getMaxDepth()).findAllPaths(input.getStart(), input.getEnd())));
 
         //If there are no results, there will never be any. If there are enough, then we just return them:
         if (result.isEmpty() || result.size() >= input.getMaxResults()) {
@@ -101,7 +91,7 @@ public class NumberOfShortestPathsFinder {
         //Now, we have some results, but not enough. All the resulting paths so far must have the same length (they are
         //the shortest paths after all). We try with longer path length until we have enough:
         for (int depth = result.get(0).length() + 1; depth <= input.getMaxDepth() && result.size() < input.getMaxResults(); depth++) {
-            result.addAll(Iterables.toList(new ShortestPath(depth, input.getExpander(), Integer.MAX_VALUE, true).findAllPaths(input.getStart(), input.getEnd())));
+            result.addAll(Iterables.toList(GraphAlgoFactory.pathsWithLength(input.getExpander(), depth).findAllPaths(input.getStart(), input.getEnd())));
         }
 
         return result;
