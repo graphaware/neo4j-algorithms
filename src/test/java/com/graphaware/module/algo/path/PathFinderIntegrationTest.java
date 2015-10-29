@@ -16,6 +16,7 @@
 
 package com.graphaware.module.algo.path;
 
+import com.graphaware.test.integration.CommunityNeoServerIntegrationTest;
 import com.graphaware.test.integration.NeoServerIntegrationTest;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Test;
@@ -27,7 +28,7 @@ import static com.graphaware.test.util.TestUtils.*;
 /**
  *
  */
-public class PathFinderIntegrationTest extends NeoServerIntegrationTest {
+public class PathFinderIntegrationTest extends CommunityNeoServerIntegrationTest {
 
     @Test
     public void graphAwareApisAreMountedWhenPresentOnClasspath() throws InterruptedException, IOException {
