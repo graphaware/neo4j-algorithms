@@ -23,17 +23,17 @@ import java.util.Set;
 
 /**
  * Utility to allow for weighted reservoir sampling
- * using A-ES algorithm from:
+ * using A-ES (Algorithm of Efraimidis and Spirakis) algorithm from:
  *
  * Weighted Random Sampling over Data Streams
  * by Pavlos S. Efraimidis
  * (Democritus University of Thrace)
  *
- * I needed only first element. The class could be extended to
- * mimick ReservoirSampler easilly though.
+ * I needed only the first element. The class could easily be extended to
+ * mimic ReservoirSampler.
  *
  */
-public class WeightedReservoirSampler /*extends ReservoirSampler<T> ? */{
+public class WeightedReservoirSampler {
     private final Random random;
 
     /**
@@ -45,8 +45,9 @@ public class WeightedReservoirSampler /*extends ReservoirSampler<T> ? */{
 
 
     /**
-     * Returns an rank of the weight at random, but weighted accordingly
-     * @return result
+     * Returns an integer at random, weighted according to its index
+     * @param weights weights to sample from
+     * @return index chosen according to the weight supplied
      */
     public int randomIndexChoice(List<Integer> weights) {
         int result = 0, index;
@@ -70,11 +71,11 @@ public class WeightedReservoirSampler /*extends ReservoirSampler<T> ? */{
     }
 
     /**
-     * Returns a randomly chosen rank, omitting a given indices.
-     * This is very specific override.
+     * Returns an integer at random, weighted according to its index,
+     * omitting given indices
      * @param weights weights to sample from
      * @param omitIndices indices to omit from sampling
-     * @return rank chosen according to the weight supplied
+     * @return index chosen according to the weight supplied
      */
     public int randomIndexChoice(List<Integer> weights, Set<Integer> omitIndices) {
         int result = 0, index;
@@ -88,7 +89,6 @@ public class WeightedReservoirSampler /*extends ReservoirSampler<T> ? */{
 
             if (omitIndices.contains(index))
                 continue;
-
 
             u = random.nextDouble();
             key = Math.pow(u, (1.0 / weight));
@@ -104,12 +104,13 @@ public class WeightedReservoirSampler /*extends ReservoirSampler<T> ? */{
 
 
     /**
-     * Returns a randomly chosen rank, omitting a given rank.
+     * Returns an integer at random, weighted according to its index,
+     * omitting a single index.
      * This is very specific override used in the Simple graph
      * algorithm.
      * @param weights list of weights to sample from
-     * @param omit list of indices to omit
-     * @return randomly (weighted) chosen rank
+     * @param omit index to omit from sampling
+     * @return index chosen according to the weight supplied
      */
     public int randomIndexChoice(List<Integer> weights, int omit) {
         int result = 0, index;
