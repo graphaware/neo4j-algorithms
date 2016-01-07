@@ -34,12 +34,14 @@
     "relationships": [
       {
         "id": 0,
+        "properties":{},
         "startNodeId": 0,
         "endNodeId": 1,
         "type": "R1"
       },
       {
         "id": 1,
+        "properties":{},
         "startNodeId": 1,
         "endNodeId": 2,
         "type": "R2"

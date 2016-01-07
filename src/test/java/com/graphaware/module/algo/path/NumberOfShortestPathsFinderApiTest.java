@@ -18,11 +18,12 @@ package com.graphaware.module.algo.path;
 
 import com.graphaware.test.integration.GraphAwareApiTest;
 import org.eclipse.jetty.http.HttpStatus;
+import org.json.JSONException;
 import org.junit.Test;
 import org.neo4j.graphdb.*;
 
-import static com.graphaware.test.util.TestUtils.assertJsonEquals;
 import static com.graphaware.test.util.TestUtils.jsonAsString;
+import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 
 /**
  * Integration test for {@link NumberOfShortestPathsFinderApi}.
@@ -89,54 +90,54 @@ public class NumberOfShortestPathsFinderApiTest extends GraphAwareApiTest {
     }
 
     @Test
-    public void minimalOutputShouldBeProducedWithLegalMinimalInput() {
-        assertJsonEquals(post(jsonAsString("minimalInput")), jsonAsString("minimalOutput"));
+    public void minimalOutputShouldBeProducedWithLegalMinimalInput() throws JSONException {
+        assertEquals(post(jsonAsString("minimalInput")), jsonAsString("minimalOutput"), false);
     }
 
     @Test
-    public void nodePropertiesShouldBeIncludedWhenRequested() {
-        assertJsonEquals(post(jsonAsString("requestNodePropsInput")), jsonAsString("requestNodePropsOutput"));
+    public void nodePropertiesShouldBeIncludedWhenRequested() throws JSONException {
+        assertEquals(post(jsonAsString("requestNodePropsInput")), jsonAsString("requestNodePropsOutput"), false);
     }
 
     @Test
-    public void nonExistingNodePropertiesShouldNotBeIncluded() {
-        assertJsonEquals(post(jsonAsString("requestNonExistingNodePropsInput")), jsonAsString("minimalOutputWithNoNodeProps"));
+    public void nonExistingNodePropertiesShouldNotBeIncluded() throws JSONException {
+        assertEquals(post(jsonAsString("requestNonExistingNodePropsInput")), jsonAsString("minimalOutputWithNoNodeProps"), false);
     }
 
     @Test
-    public void relationshipPropertiesShouldBeIncludedWhenRequested() {
-        assertJsonEquals(post(jsonAsString("requestRelationshipPropsInput")), jsonAsString("requestRelationshipPropsOutput"));
+    public void relationshipPropertiesShouldBeIncludedWhenRequested() throws JSONException {
+        assertEquals(post(jsonAsString("requestRelationshipPropsInput")), jsonAsString("requestRelationshipPropsOutput"), false);
     }
 
     @Test
-    public void nonExistingRelationshipPropertiesShouldNotBeIncluded() {
-        assertJsonEquals(post(jsonAsString("requestNonExistingRelationshipPropsInput")), jsonAsString("minimalOutputWithNoRelProps"));
+    public void nonExistingRelationshipPropertiesShouldNotBeIncluded() throws JSONException {
+        assertEquals(post(jsonAsString("requestNonExistingRelationshipPropsInput")), jsonAsString("minimalOutputWithNoRelProps"), false);
     }
 
     @Test
-    public void maxDepthAndMaxResultsShouldBeRespected() {
-        assertJsonEquals(post(jsonAsString("maxDepthInput")), jsonAsString("maxDepthOutput"));
-        assertJsonEquals(post(jsonAsString("maxResultsInput")), jsonAsString("maxResultsOutput"));
+    public void maxDepthAndMaxResultsShouldBeRespected() throws JSONException {
+        assertEquals(post(jsonAsString("maxDepthInput")), jsonAsString("maxDepthOutput"), false);
+        assertEquals(post(jsonAsString("maxResultsInput")), jsonAsString("maxResultsOutput"), false);
     }
 
     @Test
-    public void nonExistingCostPropertyShouldNotChangeOrder() {
-        assertJsonEquals(post(jsonAsString("nonExistingCostPropertyInput")), jsonAsString("nonExistingCostPropertyOutput"));
+    public void nonExistingCostPropertyShouldNotChangeOrder() throws JSONException {
+        assertEquals(post(jsonAsString("nonExistingCostPropertyInput")), jsonAsString("nonExistingCostPropertyOutput"), false);
     }
 
     @Test
-    public void costPropertyShouldBeTakenIntoAccount() {
-        assertJsonEquals(post(jsonAsString("costPropertyInput")), jsonAsString("costPropertyOutput"));
+    public void costPropertyShouldBeTakenIntoAccount() throws JSONException {
+        assertEquals(post(jsonAsString("costPropertyInput")), jsonAsString("costPropertyOutput"), false);
     }
 
     @Test
-    public void directionShouldBeTakenIntoAccount() {
-        assertJsonEquals(post(jsonAsString("singleDirectionInput")), jsonAsString("singleDirectionOutput"));
+    public void directionShouldBeTakenIntoAccount() throws JSONException {
+        assertEquals(post(jsonAsString("singleDirectionInput")), jsonAsString("singleDirectionOutput"), false);
     }
 
     @Test
-    public void relationshipTypesAndDirectionsShouldBeTakenIntoAccount() {
-        assertJsonEquals(post(jsonAsString("typesAndDirectionsInput")), jsonAsString("typesAndDirectionsOutput"));
+    public void relationshipTypesAndDirectionsShouldBeTakenIntoAccount() throws JSONException {
+        assertEquals(post(jsonAsString("typesAndDirectionsInput")), jsonAsString("typesAndDirectionsOutput"), false);
     }
 
     @Test

@@ -250,6 +250,7 @@
       },
       {
         "id": 7,
+        "properties":{},
         "startNodeId": 5,
         "endNodeId": 6,
         "type": "R1"

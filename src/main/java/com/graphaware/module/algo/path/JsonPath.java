@@ -17,8 +17,10 @@
 package com.graphaware.module.algo.path;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.graphaware.api.JsonNode;
-import com.graphaware.api.JsonRelationship;
+import com.graphaware.api.json.JsonNode;
+import com.graphaware.api.json.JsonRelationship;
+import com.graphaware.api.json.LongIdJsonNode;
+import com.graphaware.api.json.LongIdJsonRelationship;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Path;
 import org.neo4j.graphdb.Relationship;
@@ -39,12 +41,12 @@ public class JsonPath {
     public JsonPath(Path path, JsonPathFinderInput jsonInput) {
         List<JsonNode> jsonNodes = new LinkedList<>();
         for (Node node : path.nodes()) {
-            jsonNodes.add(new JsonNode(node, jsonInput));
+            jsonNodes.add(new LongIdJsonNode(node, jsonInput.getNodeProperties()));
         }
 
         List<JsonRelationship> jsonRelationships = new LinkedList<>();
         for (Relationship relationship : path.relationships()) {
-            jsonRelationships.add(new JsonRelationship(relationship, jsonInput));
+            jsonRelationships.add(new LongIdJsonRelationship(relationship, jsonInput.getRelationshipProperties()));
         }
 
         setNodes(jsonNodes.toArray(new JsonNode[jsonNodes.size()]));

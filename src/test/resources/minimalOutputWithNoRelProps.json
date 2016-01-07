@@ -34,12 +34,14 @@
     "relationships": [
       {
         "id": 0,
+        "properties":{},
         "startNodeId": 0,
         "endNodeId": 1,
         "type": "R1"
       },
       {
         "id": 1,
+        "properties":{},
         "startNodeId": 1,
         "endNodeId": 2,
         "type": "R2"
@@ -90,18 +92,21 @@
     "relationships": [
       {
         "id": 6,
+        "properties":{},
         "startNodeId": 0,
         "endNodeId": 5,
         "type": "R1"
       },
       {
         "id": 7,
+        "properties":{},
         "startNodeId": 5,
         "endNodeId": 6,
         "type": "R1"
       },
       {
         "id": 8,
+        "properties":{},
         "startNodeId": 2,
         "endNodeId": 6,
         "type": "R1"
@@ -152,18 +157,21 @@
     "relationships": [
       {
         "id": 2,
+        "properties":{},
         "startNodeId": 0,
         "endNodeId": 3,
         "type": "R2"
       },
       {
         "id": 3,
+        "properties":{},
         "startNodeId": 3,
         "endNodeId": 4,
         "type": "R1"
       },
       {
         "id": 4,
+        "properties":{},
         "startNodeId": 4,
         "endNodeId": 2,
         "type": "R1"
@@ -214,18 +222,21 @@
     "relationships": [
       {
         "id": 2,
+        "properties":{},
         "startNodeId": 0,
         "endNodeId": 3,
         "type": "R2"
       },
       {
         "id": 5,
+        "properties":{},
         "startNodeId": 1,
         "endNodeId": 3,
         "type": "R2"
       },
       {
         "id": 1,
+        "properties":{},
         "startNodeId": 1,
         "endNodeId": 2,
         "type": "R2"

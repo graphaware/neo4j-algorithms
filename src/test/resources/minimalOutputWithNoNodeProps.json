@@ -3,6 +3,7 @@
     "nodes": [
       {
         "id": 0,
+        "properties":{},
         "labels": [
           "L1",
           "L2"
@@ -10,12 +11,14 @@
       },
       {
         "id": 1,
+        "properties":{},
         "labels": [
           "L2"
         ]
       },
       {
         "id": 2,
+        "properties":{},
         "labels": [
           "L1",
           "L2"
@@ -47,6 +50,7 @@
     "nodes": [
       {
         "id": 0,
+        "properties":{},
         "labels": [
           "L1",
           "L2"
@@ -54,18 +58,21 @@
       },
       {
         "id": 5,
+        "properties":{},
         "labels": [
           "L1"
         ]
       },
       {
         "id": 6,
+        "properties":{},
         "labels": [
           "L1"
         ]
       },
       {
         "id": 2,
+        "properties":{},
         "labels": [
           "L1",
           "L2"
@@ -84,6 +91,7 @@
       },
       {
         "id": 7,
+        "properties":{},
         "startNodeId": 5,
         "endNodeId": 6,
         "type": "R1"
@@ -103,6 +111,7 @@
     "nodes": [
       {
         "id": 0,
+        "properties":{},
         "labels": [
           "L1",
           "L2"
@@ -110,18 +119,21 @@
       },
       {
         "id": 3,
+        "properties":{},
         "labels": [
           "L2"
         ]
       },
       {
         "id": 4,
+        "properties":{},
         "labels": [
           "L1"
         ]
       },
       {
         "id": 2,
+        "properties":{},
         "labels": [
           "L1",
           "L2"
@@ -162,6 +174,7 @@
     "nodes": [
       {
         "id": 0,
+        "properties":{},
         "labels": [
           "L1",
           "L2"
@@ -169,18 +182,21 @@
       },
       {
         "id": 3,
+        "properties":{},
         "labels": [
           "L2"
         ]
       },
       {
         "id": 1,
+        "properties":{},
         "labels": [
           "L2"
         ]
       },
       {
         "id": 2,
+        "properties":{},
         "labels": [
           "L1",
           "L2"

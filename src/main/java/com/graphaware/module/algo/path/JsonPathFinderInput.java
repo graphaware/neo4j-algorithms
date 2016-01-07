@@ -16,8 +16,8 @@
 
 package com.graphaware.module.algo.path;
 
-import com.graphaware.api.JsonInput;
-import com.graphaware.api.JsonRelationshipTypeAndDirection;
+import com.graphaware.api.SerializationSpecification;
+import com.graphaware.api.json.JsonRelationshipTypeAndDirection;
 import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * JSON-serializable input to a path finder.
  */
-public class JsonPathFinderInput extends JsonInput {
+public class JsonPathFinderInput extends SerializationSpecification {
 
     private Long startNode;
     private Long endNode;
