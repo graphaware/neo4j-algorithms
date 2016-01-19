@@ -18,11 +18,12 @@ package com.graphaware.module.algo.path;
 
 import com.graphaware.test.integration.NeoServerIntegrationTest;
 import org.eclipse.jetty.http.HttpStatus;
+import org.json.JSONException;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 import java.io.IOException;
 
-import static com.graphaware.test.util.TestUtils.assertJsonEquals;
 import static com.graphaware.test.util.TestUtils.jsonAsString;
 
 /**
@@ -31,7 +32,7 @@ import static com.graphaware.test.util.TestUtils.jsonAsString;
 public class PathFinderIntegrationTest extends NeoServerIntegrationTest {
 
     @Test
-    public void graphAwareApisAreMountedWhenPresentOnClasspath() throws InterruptedException, IOException {
+    public void graphAwareApisAreMountedWhenPresentOnClasspath() throws InterruptedException, IOException, JSONException {
         httpClient.executeCypher(baseUrl(),
                 "CREATE (one:L1:L2 {name:'one'}), " +
                         "(two:L2 {name:'two'}), " +
@@ -45,8 +46,8 @@ public class PathFinderIntegrationTest extends NeoServerIntegrationTest {
                         "(two)-[:R2 {cost:1}]->(four), " +
                         "(one)-[:R1 {cost:1}]->(six)-[:R1]->(seven)<-[:R1 {cost:1}]-(three)");
 
-        assertJsonEquals(httpClient.post(baseUrl() + "/graphaware/algorithm/path/increasinglyLongerShortestPath",
-                jsonAsString("minimalInput"), HttpStatus.OK_200),
-                jsonAsString("minimalOutput"));
+        JSONAssert.assertEquals(httpClient.post(baseUrl() + "/graphaware/algorithm/path/increasinglyLongerShortestPath",
+                        jsonAsString("minimalInput"), HttpStatus.OK_200),
+                jsonAsString("minimalOutput"), false);
     }
 }
