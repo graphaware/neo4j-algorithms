@@ -18,7 +18,6 @@ package com.graphaware.module.algo.generator.node;
 
 import com.graphaware.common.util.FileScanner;
 import com.graphaware.common.util.Pair;
-import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
@@ -36,9 +35,9 @@ import java.util.Random;
  */
 public class SocialNetworkNodeCreator implements NodeCreator {
 
-    private static final Label PERSON_LABEL = DynamicLabel.label("Person");
-    private static final Label MALE_LABEL = DynamicLabel.label("Male");
-    private static final Label FEMALE_LABEL = DynamicLabel.label("Female");
+    private static final Label PERSON_LABEL = Label.label("Person");
+    private static final Label MALE_LABEL = Label.label("Male");
+    private static final Label FEMALE_LABEL = Label.label("Female");
     private static final String NAME = "name";
 
     private static final SocialNetworkNodeCreator INSTANCE = new SocialNetworkNodeCreator();

@@ -16,7 +16,6 @@
 
 package com.graphaware.module.algo.generator.relationship;
 
-import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipType;
@@ -30,7 +29,7 @@ import java.util.Collections;
  */
 public class SocialNetworkRelationshipCreator implements RelationshipCreator {
 
-    private static final RelationshipType FRIEND_OF = DynamicRelationshipType.withName("FRIEND_OF");
+    private static final RelationshipType FRIEND_OF = RelationshipType.withName("FRIEND_OF");
 
     private static final SocialNetworkRelationshipCreator INSTANCE = new SocialNetworkRelationshipCreator();
 
