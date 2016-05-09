@@ -1,7 +1,7 @@
 GraphAware Neo4j Algorithms
 ===========================
 
-[![Build Status](https://travis-ci.org/graphaware/neo4j-algorithms.png)](https://travis-ci.org/graphaware/neo4j-algorithms) | <a href="http://graphaware.com/downloads/" target="_blank">Downloads</a> | <a href="http://graphaware.com/site/algorithms/latest/apidocs/" target="_blank">Javadoc</a> | Latest Release: 2.3.3.37.5
+[![Build Status](https://travis-ci.org/graphaware/neo4j-algorithms.png)](https://travis-ci.org/graphaware/neo4j-algorithms) | <a href="http://graphaware.com/downloads/" target="_blank">Downloads</a> | <a href="http://graphaware.com/site/algorithms/latest/apidocs/" target="_blank">Javadoc</a> | Latest Release: 3.0.1.38.5
 
 GraphAware Algorithms is a library of graph algorithms for Neo4j.
 
@@ -34,7 +34,7 @@ Releases are synced to <a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%
         <dependency>
             <groupId>com.graphaware.neo4j</groupId>
             <artifactId>algorithms</artifactId>
-            <version>2.3.3.37.5</version>
+            <version>3.0.1.38.5</version>
         </dependency>
         ...
     </dependencies>
@@ -42,7 +42,7 @@ Releases are synced to <a href="http://search.maven.org/#search%7Cga%7C1%7Ca%3A%
 #### Snapshots
 
 To use the latest development version, just clone this repository, run `mvn clean install` and change the version in the
-dependency above to 2.3.3.37.6-SNAPSHOT.
+dependency above to 3.0.1.38.6-SNAPSHOT.
 
 #### Note on Versioning Scheme
 
@@ -78,6 +78,10 @@ get? what properties? what types of relationships will you generate?).
 To choose the contents of the network, you can plug in your own implementations of [`NodeCreator`](http://graphaware.com/site/algorithms/latest/apidocs/com/graphaware/module/algo/generator/node/NodeCreator.html) and [`RelationshipCreator`](http://graphaware.com/site/algorithms/latest/apidocs/com/graphaware/module/algo/generator/relationship/RelationshipCreator.html) to create nodes and relationships
 with types, labels, and properties of your choosing. You can use the provided `SocialNetworkNodeCreator` and
 `SocialNetworkRelationshipCreator` to get started quickly.
+
+#### Cypher
+
+coming soon
 
 #### REST API
 
@@ -117,6 +121,10 @@ For example, given the following graph:
 the shortest path from (1) to (3) is (1)->(2)->(3) and has a length of 2. If more paths are needed, the next path
 returned will be (1)->(4)->(5)->(3) with a length of 3. Note that there is another path of length 3:
 (1)->(4)->(2)->(3), but it is not returned, since (2)->(3) is contained in a shorter path.
+
+#### Cypher
+
+coming soon
 
 ##### REST API
 
@@ -225,7 +233,7 @@ For the Java API, please refer to the Javadoc of `NumberOfShortestPathsFinder` a
 License
 -------
 
-Copyright (c) 2014 GraphAware
+Copyright (c) 2014-2016 GraphAware
 
 GraphAware is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.

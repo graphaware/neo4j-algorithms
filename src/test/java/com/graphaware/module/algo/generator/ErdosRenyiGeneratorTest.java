@@ -36,7 +36,6 @@ import java.io.IOException;
 
 import static com.graphaware.common.util.IterableUtils.count;
 import static org.junit.Assert.assertEquals;
-import static org.neo4j.tooling.GlobalGraphOperations.at;
 
 /**
  * Integration test for {@link com.graphaware.module.algo.generator.Neo4jGraphGenerator} and {@link com.graphaware.module.algo.generator.BatchGraphGenerator} with
@@ -75,7 +74,7 @@ public class ErdosRenyiGeneratorTest {
         TemporaryFolder folder = new TemporaryFolder();
         folder.create();
 
-        BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot().getAbsolutePath());
+        BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot());
 
         new BatchGraphGenerator(batchInserter).generateGraph(getGeneratorConfiguration(100_000, 5_000_000));
 
@@ -96,11 +95,11 @@ public class ErdosRenyiGeneratorTest {
         TemporaryFolder folder = new TemporaryFolder();
         folder.create();
 
-        BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot().getAbsolutePath());
+        BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot());
 
         new BatchGraphGenerator(batchInserter).generateGraph(getGeneratorConfiguration(numberOfNodes, numberOfEdges));
 
-        GraphDatabaseService database = new GraphDatabaseFactory().newEmbeddedDatabase(folder.getRoot().getAbsolutePath());
+        GraphDatabaseService database = new GraphDatabaseFactory().newEmbeddedDatabase(folder.getRoot());
 
         assertCorrectNumberOfNodesAndRelationships(database, numberOfNodes, numberOfEdges);
 
@@ -111,8 +110,8 @@ public class ErdosRenyiGeneratorTest {
 
     private void assertCorrectNumberOfNodesAndRelationships(GraphDatabaseService database, int numberOfNodes, int numberOfEdges) {
         try (Transaction tx = database.beginTx()) {
-            assertEquals(numberOfNodes, count(at(database).getAllNodes()));
-            assertEquals(numberOfEdges, count(at(database).getAllRelationships()));
+            assertEquals(numberOfNodes, count(database.getAllNodes()));
+            assertEquals(numberOfEdges, count(database.getAllRelationships()));
 
             tx.success();
         }

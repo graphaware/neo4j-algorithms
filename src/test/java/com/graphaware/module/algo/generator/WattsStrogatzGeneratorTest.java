@@ -36,7 +36,6 @@ import java.io.IOException;
 
 import static com.graphaware.common.util.IterableUtils.count;
 import static org.junit.Assert.assertEquals;
-import static org.neo4j.tooling.GlobalGraphOperations.at;
 
 /**
  * Integration test for {@link Neo4jGraphGenerator} and {@link BatchGraphGenerator} with
@@ -67,7 +66,7 @@ public class WattsStrogatzGeneratorTest {
         TemporaryFolder folder = new TemporaryFolder();
         folder.create();
 
-        BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot().getAbsolutePath());
+        BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot());
 
         new BatchGraphGenerator(batchInserter).generateGraph(getGeneratorConfiguration(100_000, 50, 0.5));
 
@@ -88,11 +87,11 @@ public class WattsStrogatzGeneratorTest {
         TemporaryFolder folder = new TemporaryFolder();
         folder.create();
 
-        BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot().getAbsolutePath());
+        BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot());
 
         new BatchGraphGenerator(batchInserter).generateGraph(getGeneratorConfiguration(numberOfNodes, meanDegree, beta));
 
-        GraphDatabaseService database = new GraphDatabaseFactory().newEmbeddedDatabase(folder.getRoot().getAbsolutePath());
+        GraphDatabaseService database = new GraphDatabaseFactory().newEmbeddedDatabase(folder.getRoot());
 
         assertCorrectNumberOfNodesAndRelationships(database, numberOfNodes, meanDegree);
 
@@ -103,8 +102,8 @@ public class WattsStrogatzGeneratorTest {
 
     private void assertCorrectNumberOfNodesAndRelationships(GraphDatabaseService database, int numberOfNodes, int meanDegree) {
         try (Transaction tx = database.beginTx()) {
-            assertEquals(numberOfNodes, count(at(database).getAllNodes()));
-            assertEquals((meanDegree * numberOfNodes) / 2, count(at(database).getAllRelationships()));
+            assertEquals(numberOfNodes, count(database.getAllNodes()));
+            assertEquals((meanDegree * numberOfNodes) / 2, count(database.getAllRelationships()));
 
             tx.success();
         }

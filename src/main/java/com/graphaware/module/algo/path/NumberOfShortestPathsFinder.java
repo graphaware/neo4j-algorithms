@@ -80,7 +80,7 @@ public class NumberOfShortestPathsFinder {
         List<Path> result = new LinkedList<Path>();
 
         //first attempt: classic shortest path
-        result.addAll(Iterables.toList(GraphAlgoFactory.shortestPath(input.getExpander(), input.getMaxDepth()).findAllPaths(input.getStart(), input.getEnd())));
+        result.addAll(Iterables.asList(GraphAlgoFactory.shortestPath(input.getExpander(), input.getMaxDepth()).findAllPaths(input.getStart(), input.getEnd())));
 
         //If there are no results, there will never be any. If there are enough, then we just return them:
         if (result.isEmpty() || result.size() >= input.getMaxResults()) {
@@ -90,7 +90,7 @@ public class NumberOfShortestPathsFinder {
         //Now, we have some results, but not enough. All the resulting paths so far must have the same length (they are
         //the shortest paths after all). We try with longer path length until we have enough:
         for (int depth = result.get(0).length() + 1; depth <= input.getMaxDepth() && result.size() < input.getMaxResults(); depth++) {
-            result.addAll(Iterables.toList(GraphAlgoFactory.pathsWithLength(input.getExpander(), depth).findAllPaths(input.getStart(), input.getEnd())));
+            result.addAll(Iterables.asList(GraphAlgoFactory.pathsWithLength(input.getExpander(), depth).findAllPaths(input.getStart(), input.getEnd())));
         }
 
         return result;

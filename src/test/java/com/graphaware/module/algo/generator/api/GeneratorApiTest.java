@@ -16,27 +16,26 @@
 
 package com.graphaware.module.algo.generator.api;
 
-import com.graphaware.test.integration.GraphAwareApiTest;
+import com.graphaware.test.integration.GraphAwareIntegrationTest;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.Test;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.helpers.collection.Iterables;
-import org.neo4j.tooling.GlobalGraphOperations;
 
 import static org.junit.Assert.assertEquals;
 
 /**
  * Integration test for {@link GeneratorApi}.
  */
-public class GeneratorApiTest extends GraphAwareApiTest {
+public class GeneratorApiTest extends GraphAwareIntegrationTest {
 
     @Test
     public void shouldGenerateErdosRenyi() {
         httpClient.post(getUrl() + "erdos-renyi/1000/10000", HttpStatus.CREATED_201);
 
         try (Transaction tx = getDatabase().beginTx()) {
-            assertEquals(1000, Iterables.count(GlobalGraphOperations.at(getDatabase()).getAllNodes()));
-            assertEquals(10000, Iterables.count(GlobalGraphOperations.at(getDatabase()).getAllRelationships()));
+            assertEquals(1000, Iterables.count(getDatabase().getAllNodes()));
+            assertEquals(10000, Iterables.count(getDatabase().getAllRelationships()));
 
             tx.success();
         }
@@ -47,8 +46,8 @@ public class GeneratorApiTest extends GraphAwareApiTest {
         httpClient.post(getUrl() + "barabasi-albert/1000/3", HttpStatus.CREATED_201);
 
         try (Transaction tx = getDatabase().beginTx()) {
-            assertEquals(1000, Iterables.count(GlobalGraphOperations.at(getDatabase()).getAllNodes()));
-            assertEquals(2994, Iterables.count(GlobalGraphOperations.at(getDatabase()).getAllRelationships()));
+            assertEquals(1000, Iterables.count(getDatabase().getAllNodes()));
+            assertEquals(2994, Iterables.count(getDatabase().getAllRelationships()));
             tx.success();
         }
     }
@@ -58,8 +57,8 @@ public class GeneratorApiTest extends GraphAwareApiTest {
         httpClient.post(getUrl() + "watts-strogatz/1000/10/0.5", HttpStatus.CREATED_201);
 
         try (Transaction tx = getDatabase().beginTx()) {
-            assertEquals(1000, Iterables.count(GlobalGraphOperations.at(getDatabase()).getAllNodes()));
-            assertEquals(5000, Iterables.count(GlobalGraphOperations.at(getDatabase()).getAllRelationships()));
+            assertEquals(1000, Iterables.count(getDatabase().getAllNodes()));
+            assertEquals(5000, Iterables.count(getDatabase().getAllRelationships()));
             tx.success();
         }
     }

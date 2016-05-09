@@ -16,7 +16,7 @@
 
 package com.graphaware.module.algo.path;
 
-import com.graphaware.test.integration.GraphAwareApiTest;
+import com.graphaware.test.integration.GraphAwareIntegrationTest;
 import org.eclipse.jetty.http.HttpStatus;
 import org.json.JSONException;
 import org.junit.Test;
@@ -28,7 +28,7 @@ import static org.skyscreamer.jsonassert.JSONAssert.assertEquals;
 /**
  * Integration test for {@link NumberOfShortestPathsFinderApi}.
  */
-public class NumberOfShortestPathsFinderApiTest extends GraphAwareApiTest {
+public class NumberOfShortestPathsFinderApiTest extends GraphAwareIntegrationTest {
 
     private static final String NAME = "name";
     private static final String COST = "cost";

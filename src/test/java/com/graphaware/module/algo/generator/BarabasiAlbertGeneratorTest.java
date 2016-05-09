@@ -31,7 +31,6 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.test.TestGraphDatabaseFactory;
-import org.neo4j.tooling.GlobalGraphOperations;
 import org.neo4j.unsafe.batchinsert.BatchInserter;
 import org.neo4j.unsafe.batchinsert.BatchInserters;
 
@@ -42,7 +41,6 @@ import java.util.List;
 
 import static com.graphaware.common.util.IterableUtils.count;
 import static org.junit.Assert.assertEquals;
-import static org.neo4j.tooling.GlobalGraphOperations.at;
 
 /**
  * Integration test for {@link Neo4jGraphGenerator} and {@link BatchGraphGenerator} with
@@ -71,7 +69,7 @@ public class BarabasiAlbertGeneratorTest {
         List<Integer> degrees = new LinkedList<>();
 
         try (Transaction tx = database.beginTx()) {
-            for (Node node : GlobalGraphOperations.at(database).getAllNodes()) {
+            for (Node node : database.getAllNodes()) {
                 degrees.add(node.getDegree());
             }
             tx.success();
@@ -97,7 +95,7 @@ public class BarabasiAlbertGeneratorTest {
         TemporaryFolder folder = new TemporaryFolder();
         folder.create();
 
-        BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot().getAbsolutePath());
+        BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot());
 
         new BatchGraphGenerator(batchInserter).generateGraph(getGeneratorConfiguration(1_000_000, 3));
 
@@ -118,11 +116,11 @@ public class BarabasiAlbertGeneratorTest {
         TemporaryFolder folder = new TemporaryFolder();
         folder.create();
 
-        BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot().getAbsolutePath());
+        BatchInserter batchInserter = BatchInserters.inserter(folder.getRoot());
 
         new BatchGraphGenerator(batchInserter).generateGraph(getGeneratorConfiguration(numberOfNodes, edgesPerNewNode));
 
-        GraphDatabaseService database = new GraphDatabaseFactory().newEmbeddedDatabase(folder.getRoot().getAbsolutePath());
+        GraphDatabaseService database = new GraphDatabaseFactory().newEmbeddedDatabase(folder.getRoot());
 
         assertCorrectNumberOfNodesAndRelationships(database, numberOfNodes, edgesPerNewNode);
 
@@ -133,8 +131,8 @@ public class BarabasiAlbertGeneratorTest {
 
     private void assertCorrectNumberOfNodesAndRelationships(GraphDatabaseService database, int numberOfNodes, int edgesPerNewNode) {
         try (Transaction tx = database.beginTx()) {
-            assertEquals(numberOfNodes, count(at(database).getAllNodes()));
-            assertEquals(numberOfNodes * edgesPerNewNode - (edgesPerNewNode * (edgesPerNewNode + 1) / 2), count(at(database).getAllRelationships()));
+            assertEquals(numberOfNodes, count(database.getAllNodes()));
+            assertEquals(numberOfNodes * edgesPerNewNode - (edgesPerNewNode * (edgesPerNewNode + 1) / 2), count(database.getAllRelationships()));
 
             tx.success();
         }

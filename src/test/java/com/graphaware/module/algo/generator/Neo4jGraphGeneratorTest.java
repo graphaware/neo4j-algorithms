@@ -32,6 +32,7 @@ import com.graphaware.module.algo.generator.relationship.RelationshipCreator;
 import com.graphaware.module.algo.generator.relationship.SimpleGraphRelationshipGenerator;
 import com.graphaware.module.algo.generator.relationship.SocialNetworkRelationshipCreator;
 import com.graphaware.test.integration.DatabaseIntegrationTest;
+import com.graphaware.test.integration.EmbeddedDatabaseIntegrationTest;
 import org.junit.Test;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
@@ -40,12 +41,11 @@ import java.util.Arrays;
 
 import static com.graphaware.common.util.IterableUtils.count;
 import static org.junit.Assert.assertEquals;
-import static org.neo4j.tooling.GlobalGraphOperations.at;
 
 /**
  * Smoke test for {@link com.graphaware.module.algo.generator.Neo4jGraphGenerator}.
  */
-public class Neo4jGraphGeneratorTest extends DatabaseIntegrationTest {
+public class Neo4jGraphGeneratorTest extends EmbeddedDatabaseIntegrationTest {
 
     @Test
     public void validDistributionShouldGenerateGraph() {
@@ -59,10 +59,10 @@ public class Neo4jGraphGeneratorTest extends DatabaseIntegrationTest {
         new Neo4jGraphGenerator(getDatabase()).generateGraph(config);
 
         try (Transaction tx = getDatabase().beginTx()) {
-            assertEquals(4, count(at(getDatabase()).getAllNodes()));
-            assertEquals(4, count(at(getDatabase()).getAllRelationships()));
+            assertEquals(4, count(getDatabase().getAllNodes()));
+            assertEquals(4, count(getDatabase().getAllRelationships()));
 
-            for (Node node : at(getDatabase()).getAllNodes()) {
+            for (Node node : getDatabase().getAllNodes()) {
                 assertEquals(2, node.getDegree());
             }
 

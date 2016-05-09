@@ -170,7 +170,7 @@ public class NumberOfShortestPathsFinderTest {
             List<? extends Path> paths = pathFinder.findPaths(input);
             assertEquals(1, paths.size());
             assertEquals(3, paths.get(0).length());
-            assertEquals(6, Iterables.toList(paths.get(0).nodes()).get(1).getId());
+            assertEquals(6, Iterables.asList(paths.get(0).nodes()).get(1).getId());
         }
     }
 
@@ -185,7 +185,7 @@ public class NumberOfShortestPathsFinderTest {
             List<? extends Path> paths = pathFinder.findPaths(input);
             assertEquals(1, paths.size());
             assertEquals(3, paths.get(0).length());
-            assertEquals(4, Iterables.toList(paths.get(0).nodes()).get(1).getId());
+            assertEquals(4, Iterables.asList(paths.get(0).nodes()).get(1).getId());
         }
     }
 
@@ -226,7 +226,7 @@ public class NumberOfShortestPathsFinderTest {
             List<? extends Path> paths = pathFinder.findPaths(input);
             assertEquals(1, paths.size());
             assertEquals(3, paths.get(0).length());
-            assertEquals(4, Iterables.toList(paths.get(0).nodes()).get(1).getId());
+            assertEquals(4, Iterables.asList(paths.get(0).nodes()).get(1).getId());
         }
     }
 
