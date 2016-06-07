@@ -16,11 +16,11 @@
 
 package com.graphaware.module.algo.generator.relationship;
 
+import com.graphaware.common.log.LoggerFactory;
 import com.graphaware.common.util.SameTypePair;
 import com.graphaware.module.algo.generator.config.ErdosRenyiConfig;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.neo4j.logging.Log;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ErdosRenyiGraphRelationshipGeneratorTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ErdosRenyiGraphRelationshipGeneratorTest.class);
+    private static final Log LOG = LoggerFactory.getLogger(ErdosRenyiGraphRelationshipGeneratorTest.class);
 
     @Test
     public void testErdosRenyiGeneratorValidity() {

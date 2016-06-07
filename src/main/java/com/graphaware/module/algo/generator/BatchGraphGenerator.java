@@ -16,13 +16,13 @@
 
 package com.graphaware.module.algo.generator;
 
+import com.graphaware.common.log.LoggerFactory;
 import com.graphaware.common.util.SameTypePair;
 import com.graphaware.module.algo.generator.config.GeneratorConfiguration;
 import com.graphaware.module.algo.generator.node.NodeCreator;
 import com.graphaware.module.algo.generator.relationship.RelationshipCreator;
+import org.neo4j.logging.Log;
 import org.neo4j.unsafe.batchinsert.BatchInserter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ import java.util.List;
  */
 public class BatchGraphGenerator extends BaseGraphGenerator {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BatchGraphGenerator.class);
+    private static final Log LOG = LoggerFactory.getLogger(BatchGraphGenerator.class);
 
     private final BatchInserter batchInserter;
 

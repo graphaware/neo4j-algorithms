@@ -16,13 +16,13 @@
 
 package com.graphaware.module.algo.generator.relationship;
 
+import com.graphaware.common.log.LoggerFactory;
 import com.graphaware.common.util.SameTypePair;
 import com.graphaware.common.util.UnorderedPair;
 import com.graphaware.module.algo.generator.config.NumberOfNodesBasedConfig;
 import junit.framework.Assert;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.neo4j.logging.Log;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ import static org.junit.Assert.assertTrue;
 
 public class CompleteGraphRelationshipGeneratorTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(CompleteGraphRelationshipGeneratorTest.class);
+    private static final Log LOG = LoggerFactory.getLogger(CompleteGraphRelationshipGeneratorTest.class);
 
     @Test
     public void testCompleteGraphGenerator() {
