@@ -1,5 +1,19 @@
-GraphAware Neo4j Algorithms
-===========================
+GraphAware Neo4j Algorithms - RETIRED
+=====================================
+
+Algorithms Have Been Retired
+----------------------------
+
+As of August 14th 2016, this module is retiring. This means it will no longer be maintained and released together with
+new versions of the GraphAware Framework and Neo4j. The last compatible Neo4j version is 3.0.4.
+
+If you're interested in Graph Generators, please use [APOC](https://github.com/neo4j-contrib/neo4j-apoc-procedures#generating-graphs) instead. Unlike many other GraphAware modules, nobody is
+using Algorithms in production, to the best of our knowledge.
+
+This repository will remain public. Please <a href="http://graphaware.com/contact/">get in touch</a> if you've been using Algorithms (especially the Path Finding part which hasn't been carried over to APOC) and APOC isn't good enough for you.
+
+Introduction
+============
 
 [![Build Status](https://travis-ci.org/graphaware/neo4j-algorithms.png)](https://travis-ci.org/graphaware/neo4j-algorithms) | <a href="http://graphaware.com/downloads/" target="_blank">Downloads</a> | <a href="http://graphaware.com/site/algorithms/latest/apidocs/" target="_blank">Javadoc</a> | Latest Release: 3.0.4.43.5
 
